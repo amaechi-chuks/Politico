@@ -997,3 +997,50 @@ td .form-element {
     width: 25%;
   }
 }
+
+@media only screen and (max-width: 660px) {
+	.section2 .col3 {
+		width: 100%;
+		float: none !important;
+		margin-bottom: 10px;
+	}
+	.section1 .col2.first {
+		text-align: center;
+	}
+	.section1 .col2.first img {
+		display: inline-block;
+		float: none;
+	}
+	.section1 .col2.first span {
+		position: relative;
+		right: 0;
+	}
+  .section1 .col2.last {
+    margin-top:25px;
+  }
+  hr {
+      width: 25%;
+  }
+}
+@media only screen and (max-width: 450px) {
+	
+	.section1 .col2.last .col3 span {
+		font-size: 10px;
+	}
+	.section1 .col2.last .col3 h1 {
+		font-size: 18px;
+    }
+    hr {
+        width: 25%
+    }
+
+  /* Adjust container size for (width > 500 and width < 769px) */
+  @media screen and (min-width: 500px) and (max-width: 768px) {
+    section {
+      padding: 20px 60px;
+    }
+  }
+  hr {
+      width: 25%
+  }
+}
