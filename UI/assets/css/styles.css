@@ -297,3 +297,140 @@ main {
   flex-direction: column;
   padding: 40px 80px;
 }
+
+.hero-title, .hero-paragraph {
+  margin-bottom: 40px;
+}
+
+.hero-title {
+  font-size: 3em;
+  text-transform: uppercase;
+}
+
+.hero-paragraph {
+  font-size: 1.5em;
+}
+
+.hero-cta {
+  display: flex;
+  width: 26%;
+  justify-content: space-between;
+}
+
+/* Homepage Sections */
+
+section {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+section .how-to {
+  padding-top: 0px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-left: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+section>.btn {
+  align-self: center;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+}
+
+.column.step {
+  flex-basis: 50%;
+  flex-direction: column;
+  padding: 20px 50px;
+}
+
+.column .circle-icon {
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.column .circle-icon-2 {
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.section-title, .section-text {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 60px;
+  border: 1.5px solid #0facf3;
+}
+
+/* Featured Reports */
+
+.featured {
+  margin-top: -35px;
+  background: #bcc6d9;
+  padding-top: 10px;
+}
+
+.featured-cards {
+  justify-content: space-between;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.featured-cards .report-card {
+  flex-basis: 23.5%;
+  background: #fffffa;
+  margin-bottom: 20px;
+}
+
+.report-user {
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.report-media, .report-user {
+  color: #0facf3;
+  text-decoration: underline;
+}
+
+.rejected, .rejected, .resolved {
+  width: 40%;
+}
+
+.reports-container {
+  clip-path: polygon(0 0%, 100% 0, 100% 100%, 0% 100%);
+}
+
+.report-status::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  z-index: -1;
+  top: 25px;
+  right: 0px;
+  transform: skewY(-45deg);
+}
+
+.rejected::after {
+  background: #ef271b;
+}
+
+.investigating::after {
+  background: #0facf3;
+}
+
+.resolved::after {
+  background: #6cbf1b;
+}
