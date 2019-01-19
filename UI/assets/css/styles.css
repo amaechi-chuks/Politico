@@ -779,3 +779,223 @@ tr>td:last-child {
     padding: 40px 20px;
   }
 }
+
+.form-container {
+  padding: 40px 0 65px;
+}
+
+.hero {
+  padding: 40px 25px;
+  height: auto;
+}
+
+.hero-title {
+  font-size: 2em;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.hero-paragraph {
+  font-size: 1.3em;
+}
+
+.hero-cta {
+  width: 65%;
+}
+
+.hero-cta>a:first-child {
+  margin-right: 0;
+  margin-bottom: 10px;
+}
+
+.hero-cta, .steps, .featured-cards, .profile {
+  flex-direction: column;
+}
+
+section {
+  padding: 40px 20px;
+}
+
+.navbar-logo {
+  font-size: 1.5em;
+  padding: 20px;
+}
+
+.column.step {
+  padding: 20px;
+}
+
+.featured {
+  margin-top: -40px;
+  padding-top: 15px;
+}
+
+.report-card:last-child {
+  margin-bottom: 0;
+}
+
+.form-card {
+  width: 90%;
+  padding: 50px 25px;
+}
+
+.profile-card {
+  width: 100%;
+}
+
+.profile-table, .admin-table {
+  overflow-x: auto;
+  width: 100%;
+}
+
+td .report-user {
+  text-align: left;
+}
+
+td .form-element {
+  margin-bottom: 15px;
+}
+
+.user-reports>.featured-cards>.report-card {
+  margin-right: 0;
+}
+
+.modal {
+  width: 90%;
+  padding: 10px 15px 20px;
+}
+
+.modal-header {
+  padding: 10px 25px;
+  margin: 0 -15px;
+}
+
+.forgot--reset {
+  margin-bottom: 10px;
+}
+
+.modal-images {
+  display: block;
+}
+
+.admin-report {
+  flex-direction: column;
+}
+
+.report-stat {
+  margin-bottom: 15px;
+}
+
+}
+
+.partition {
+  border-bottom: 2px solid black;
+  margin-left: -20px;
+  margin-bottom: 5px;
+}
+
+.title-voting {
+  padding: 20px;
+}
+
+.voting-rules {
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+.message-voting {
+  margin: 5px;
+}
+
+.notice {
+  color: red;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.section1 {
+  background: #fff;
+  position: relative;
+  border-radius: 2px;
+  height: 10px;
+  margin-left: -60px;
+  margin-bottom: 10px;
+  width: 50%;
+  float: right;
+}
+
+.section1 .col2.last {
+  padding: 8px 0;
+  width: -90%
+}
+
+.section1 .col2.last .col3 span {
+  color: #a2a2a2;
+  font-size: 14px;
+}
+
+.section1 .col2.last .col3 h1 {
+  color: #FB4C22;
+}
+
+.section1 .col2.last {
+  text-align: center;
+  line-height: 20px;
+  /* border-right: 1px solid #ccc; */
+}
+
+.section1 .col2.last .col3.last {
+  border-right: 0;
+}
+
+.grid .col2.first {
+  float: left;
+}
+
+.grid .col2.last {
+  float: right;
+}
+
+.grid .col3 {
+  width: 35%;
+  float: right;
+  margin-right: 11px;
+  margin-bottom: 5px;
+}
+
+.grid .col3.first {
+  margin-left: 0;
+  float: left;
+}
+
+.grid .col3.last {
+  margin-right: 0;
+  float: right;
+}
+
+.party-logo {
+  width: 35px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .section2 .col3 {
+    margin-right: 5%;
+  }
+  .section1 .grid .col3 {
+    margin-right: 2%;
+  }
+  .section1 .col2.last .col3.last {
+    margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 1060px) {
+  .section1 .col2 {
+    width: 100%;
+    border-right: 0 !important;
+    padding: 0;
+  }
+  hr {
+    width: 25%;
+  }
+}
