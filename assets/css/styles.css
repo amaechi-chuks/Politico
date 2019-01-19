@@ -118,3 +118,7 @@
   .card p {
     margin-bottom: 15px;
   }
+  .column {
+    display: flex;
+    justify-content: space-between;
+  }
