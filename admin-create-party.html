@@ -34,6 +34,23 @@
         </nav>
     </header>
     <!-- End Header -->
+    <main>
+        <section class="container form-container">
+            <h2 class="section-title">Admin Dashboard</h2>
+            <form class="form-card"  onsubmit="return submitFormAdmin()" method="post">
+                <h2 class="create-party">Create A political Party</h2>
+                <label for="name">Enter name <span>*</span></label>
+                <input type="text" class="form-element" name="name" id="name" required>
+                <label for="headQ">Enter HeadQuarter <span>*</span></label>
+                <input type="text" class="form-element" name="HeadQuarter" id="HeadQuarter" required>
+                <label for="name">Enter office <span>*</span></label>
+                <input type="text" class="form-element" name="office" id="office" required>
+                <label for="attachment">Attach political logo</label>
+                <input type="file" accept="image/*,  id=" attachment" name="attachment" class="form-element" required>
+                <button type="submit" class="btn btn-primary2">Create Party</button>
+            </form>
+        </section>
+    </main>
 </body>
 <script src="./assets/js/main.js"></script>
 
