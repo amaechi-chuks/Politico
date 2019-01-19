@@ -398,3 +398,39 @@ section>.btn {
   font-size: 1.2em;
   margin-bottom: 15px;
 }
+
+.report-media, .report-user {
+  color: #0facf3;
+  text-decoration: underline;
+}
+
+.rejected, .rejected, .resolved {
+  width: 40%;
+}
+
+.reports-container {
+  clip-path: polygon(0 0%, 100% 0, 100% 100%, 0% 100%);
+}
+
+.report-status::after {
+  content: "";
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  z-index: -1;
+  top: 25px;
+  right: 0px;
+  transform: skewY(-45deg);
+}
+
+.rejected::after {
+  background: #ef271b;
+}
+
+.investigating::after {
+  background: #0facf3;
+}
+
+.resolved::after {
+  background: #6cbf1b;
+}
