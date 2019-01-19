@@ -122,3 +122,59 @@
     display: flex;
     justify-content: space-between;
   }
+  
+  .circle-icon {
+    width: 65px;
+    height: 78px;
+    border-radius: 5px;
+    background: #0facf3;
+    color: #fffffa;
+    display: block;
+    line-height: 60px;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+  .circle-icon-2 {
+    width: 65px;
+    height: 67px;
+    border-radius: 5px;
+    background: #0facf3;
+    color: #fffffa;
+    display: block;
+    line-height: 60px;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 600;
+  }
+  .sticky-top {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    background: #fffffa;
+    z-index: 1;
+  }
+  .margin--top--10 {
+    margin-top: 10px;
+    margin-left: -70px;
+  }
+  .margin--below {
+    padding-top: 0px;
+  }
+  .text--color--grey {
+    color: #828282;
+  }
+  .text--primary1{
+    color: #0facf3;
+    margin-left: 4.5rem;
+  }
+  .container {
+    background: #bcc6d9;
+    padding: 50px 40px 130px;
+    position: relative;
+  }
+  .container-flip {
+    background: #bcc6d9;
+    padding: 0px 4px 1px;
+    position: relative;
+  }
