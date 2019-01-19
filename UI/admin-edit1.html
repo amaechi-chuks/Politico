@@ -20,7 +20,7 @@
             <button class="hamburger-menu"><a class="hamburger"></a></button>
             <ul class="navbar-menu">
                 <li class="navbar-link"><a href="./index.html">Home</a></li>
-                <li class="navbar-link active"><a href="./admin-edit.html"> Update Party
+                <li class="navbar-link active"><a href="./admin-edit.html"> Update
                         <hr>
                     </a>
                 </li>
@@ -37,7 +37,7 @@
         <section class="container form-container">
             <h2 class="section-title">Admin Dashboard</h2>
             <form class="form-card" onsubmit="return submitFormAdmin()" method="post">
-                <h2 class="create-party">Create A political Party</h2>
+                <h2 class="create-party">Update Party/Office</h2>
                 <label for="name">Enter name <span>*</span></label>
                 <input type="text" class="form-element" name="name" id="name" required>
                 <label for="headQ">Enter HeadQuarter <span>*</span></label>
@@ -46,10 +46,13 @@
                 <input type="text" class="form-element" name="office" id="office" required>
                 <label for="attachment">Attach political logo</label>
                 <input type="file" accept="image/*,  id=" attachment" name="attachment" class="form-element" required>
-                <button type="submit" class="btn btn-primary2">Create Party</button>
+                <button type="submit" class="btn btn-primary2">Update</button>
             </form>
         </section>
     </main>
+    <footer>
+        <p class="credits">Politico | Copyright &copy; Andela 2019</p>
+    </footer>
 </body>
 <script src="./assets/js/main.js"></script>
 
