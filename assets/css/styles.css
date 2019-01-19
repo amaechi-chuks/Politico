@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "PT Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    background-color: #fffffa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #3c4859;
+  }
+  
+  body.modal-open {
+    overflow: hidden;
+  }
+  
+  /* Global/Custom Components */
+  a {
+    text-decoration: none;
+  }
+  
+  button,
+  input,
+  textarea,
+  select {
+    border: none;
+    font-family: "PT Sans", sans-serif;
+    font-size: 1em;
+    margin: 0;
+    text-decoration: none;
+    text-align: center;
+    outline: none;
+  }
