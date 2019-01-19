@@ -79,3 +79,42 @@
       text-decoration: none;
       margin-bottom: 10px;
   }
+  .btn-warning {
+    color: #fffffa;
+    background: #ef271b;
+  }
+  .btn-warning1 {
+    color: #fffffa;
+    background: #0facf3;
+  }
+  .forgot--reset{
+    margin-bottom: 10px;
+    
+}
+  
+  .btn-primary {
+    background: #0facf3;
+    color: white;
+  }
+  .btn-primary2 {
+    background: #0facf3;
+    color: #fffffa;
+  }
+  
+  .btn-white {
+    background: #fffffa;
+    color: #0facf3;
+    border: 2px solid #fffffa;
+  }
+  
+  .card {
+    padding: 20px;
+    border-left: 3px solid #0facf3;
+    border-bottom: 3px solid #0facf3;
+    position: relative;
+    box-shadow: 0 10px 15px #cecaca;
+  }
+  
+  .card p {
+    margin-bottom: 15px;
+  }
