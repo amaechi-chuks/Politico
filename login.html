@@ -28,6 +28,27 @@
         </ul>
     </nav >
 </header> <!-- End Header -->
+<main>
+    <section class="container form-container">
+        <h2 class="section-title">Login</h2>
+        <form class="form-card" onsubmit="return submitForm()" action="" method="post">
+            <label for="email">Enter Email<span>*</span></label>
+            <input type="email" name="email" id="email" class="form-element" placeholder="Enter Email" required />
+            <label for="password">Enter Password<span>*</span></label>
+            <input type="password" name="password" id="password" class="form-element" placeholder="Enter Password"
+                required />
+            <div class="forgot--reset">
+                <a href="./password-reset.html" class="text--color--grey">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary user-form">Login</button>
+            <div class="margin--top--10 margin--below ">
+                <p class="text--primary1">Dont have an account?
+                    <a href="login.html" class="text--color--grey">signup</a>
+                </p>
+            </div>
+        </form>
+    </section>
+</main>
 </body>
 <script src="./assets/js/main.js"></script>
 
