@@ -434,3 +434,156 @@ section>.btn {
 .resolved::after {
   background: #6cbf1b;
 }
+
+ /* Footer */
+ footer {
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+}
+
+.credits {
+  font-weight: 600;
+}
+ .participant {
+  padding-top: 10px;
+}
+
+/* Form Card */
+.form-card {
+  width: 45%;
+  background: #fffffa;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 40px;
+  margin-top: 25px;
+}
+
+/* Modals */
+.modal {
+  background: #fffffa;
+  position: absolute;
+  width: 520px;
+  padding: 10px 25px 20px;
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%);
+  z-index: -20;
+  opacity: 0;
+  transition: opacity .5s ease-in;
+}
+
+.modal-toggle.modal-open {
+  background: rgba(50, 41, 47, 0.76);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 170;
+}
+
+.modal.modal-open {
+  opacity: 1;
+  position: fixed;
+  z-index: 200;
+}
+
+.modal-title {
+  display: inline-block;
+}
+
+.modal-header {
+  font-weight: 600;
+  font-size: 1.5em;
+  border-bottom: 2px solid #0facf3;
+  margin: 0 -25px;
+  padding: 10px 25px;
+}
+
+.modal-body {
+  margin-top: 20px;
+}
+
+.modal-message {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.modal-group {
+  margin: 25px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.modal-images {
+  display: inline-block;
+}
+
+.modal-close {
+  float: right;
+  cursor: pointer;
+}
+
+.message-box {
+  font-size: 1.2em;
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Profile Card */
+.profile,
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.profile-card {
+  background: #fffffa;
+  display: flex;
+  flex-basis: 25%;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.profile-stats {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+}
+
+.stats {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.stats:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  height: 50px;
+  right: -25px;
+  top: 5px;
+  border-right: 2px solid rgba(173, 176, 183, 0.7);
+}
+
+p.stat-value {
+  margin-bottom: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
