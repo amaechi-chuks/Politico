@@ -178,3 +178,37 @@
     padding: 0px 4px 1px;
     position: relative;
   }
+   
+  .form-container > .section-title,
+  .form-card {
+    align-self: center;
+    position: inline-block;
+    margin: 60px;
+  }
+  
+  label {
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+  
+  label span {
+    color: #ef271b;
+    font-size: 18px;
+  }
+  
+  table {
+    background: transparent;
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-top: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+  }
+  
+  tr {
+    border-left: 3px solid #0facf3;
+  }
+  
+  td .form-element {
+    margin-bottom: 0;
+  }
+  
