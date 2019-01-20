@@ -1,8 +1,6 @@
 language: node_js
 node_js:
   - "10.15.0"
-services:
-  - postgresql
 env:
     global:
     - CC_TEST_REPORTER_ID=752b820991057a553688cb0876e647bbb1ffe854a5d9bc8d20e4dbdb93242747   
@@ -10,9 +8,10 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - psql -c 'create database ireporter;' -U postgres
 cache:
   directories:
     - "node_modules"  
 after_success:
   - npm run coverage
+  - npm run report-coverage
+  - npm run coveralls
