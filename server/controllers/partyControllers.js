@@ -29,7 +29,6 @@ class PartiesController {
       parties.push(newParty);
       return res.status(201).json({
         status: 201,
-        message: 'Party successfully created',
         data: [
           newParty,
         ],
@@ -51,10 +50,27 @@ class PartiesController {
   static getAllParties(req, res) {
     return res.status(200).json({
       status: 200,
-      message: 'All parties successfully retrieved',
       data: parties,
     });
   }
+
+  /**
+   * @description Get a registered Political party by id
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} {object} JSON object representing ddata object
+   * @memberof getPartyById
+   */
+  static getPartyById(req, res) {
+    const data = parties.filter(
+      partyObj => Number(req.params.id) === partyObj.id,
+    );
+    res.status(200).json({
+      status: 200,
+      data,
+    });
+  }
 }
+
 
 export default PartiesController;
