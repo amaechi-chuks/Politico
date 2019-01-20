@@ -1,0 +1,34 @@
+{
+  "name": "politico",
+  "version": "1.0.0",
+  "description": "Politico is a platform that enables citizens give their mandate to politicians running different government offices while building trust in the process through transparency.",
+  "main": "app.js",
+  "scripts": {
+    "start": "NODE_ENV=production babel-node ./server/app.js",
+    "start:dev": "nodemon --watch server --exec babel-node -- ./server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amaechi-chuks/Politico.git"
+  },
+  "keywords": [
+    "express",
+    "nodejs",
+    "javaScript",
+    "es6",
+    "babel"
+  ],
+  "author": "Amaechi chuks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/amaechi-chuks/Politico/issues"
+  },
+  "homepage": "https://github.com/amaechi-chuks/Politico#readme",
+  "dependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "nodemon": "^1.18.9"
+  }
+}
