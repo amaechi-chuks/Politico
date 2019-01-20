@@ -4,23 +4,23 @@ import parties from '../models/partyModels';
  * Class representing partiesController
  * @class partiesController
  */
-class partiesController {
+class PartiesController {
   /**
        * Create new product record
        * @static
        * @param {object} req - The request object
        * @param {object} res - The response object
        * @return {object} JSON representing success message
-       * @memberof partiesController
+       * @memberof PartiesController
        */
-  static createparties(req, res) {
+  static createParties(req, res) {
     const {
       name, hdAddress, logoUrl,
     } = req.body;
     const id = parties[parties.length - 1].id + 1;
     const registerdAt = new Date();
     const updatedAt = new Date();
-    const newparties = {
+    const newParties = {
       id,
       name,
       hdAddress,
@@ -28,13 +28,13 @@ class partiesController {
       registerdAt,
       updatedAt,
     };
-    if (newparties) {
-      parties.push(newparties);
+    if (newParties) {
+      parties.push(newParties);
       return res.status(201).json({
         status: 201,
         data: [{
           message: 'parties successfully created',
-          newparties,
+          newParties,
         }],
       });
     }
@@ -45,4 +45,4 @@ class partiesController {
   }
 }
 
-export default partiesController;
+export default PartiesController;

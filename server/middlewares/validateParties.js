@@ -4,7 +4,7 @@ import parties from '../models/partyModels';
 
 /**
  * @class ValidateParties
- * @description Intercepts and validates a given request for record endpoints
+ * @description Intercepts and validates a given request for parties endpoints
  * @exports ValidateParties
  */
 
@@ -15,9 +15,9 @@ class ValidateParties {
      * @param {object} res - The response object
      * @param {function} next - Calls the next function
      * @returns {object} JSON representing the failure message
-     * @memberof ProductValidator
+     * @memberof ValidateParties
      */
-  static findOneProduct(req, res, next) {
+  static findPartiesById(req, res, next) {
     const { id } = req.params;
     if (!Number(id)) {
       return res.status(400).json({
