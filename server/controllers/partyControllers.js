@@ -19,7 +19,7 @@ class PartiesController {
     const id = parties[parties.length - 1].id + 1;
     const registerdAt = new Date();
     const updatedAt = new Date();
-    const newParties = {
+    const newParty = {
       id,
       name,
       hdAddress,
@@ -27,13 +27,13 @@ class PartiesController {
       registerdAt,
       updatedAt,
     };
-    if (newParties) {
-      parties.push(newParties);
+    if (newParty) {
+      parties.push(newParty);
       return res.status(201).json({
         status: 201,
+        message: 'Party successfully created',
         data: [{
-          message: 'parties successfully created',
-          newParties,
+          newParty,
         }],
       });
     }

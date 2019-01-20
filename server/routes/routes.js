@@ -9,3 +9,7 @@ router.post('/parties',
   ValidateParties.validateLogoUrl,
   ValidateParties.validateName,
   PartiesController.createParties);
+
+router.get('/parties', PartiesController.getAllParties);
+
+export default router;

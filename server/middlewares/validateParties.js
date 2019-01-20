@@ -72,13 +72,14 @@ class ValidateParties {
    * @returns {object} JSON API Response
    */
   static validateHqAddress(req, res, next) {
+    const validate = HelperUtils.validate();
     let error = '';
     const { hqAddress } = req.body;
 
-    if (!hqAddress || hqAddress === undefined) {
-      error = 'A hqAddress must be specified';
-    } else if (hqAddress.length < 10) {
-      error = 'Your hdAddress must be 10 characters above';
+    if (!validate.hqAddress.test(hqAddress)) {
+      error = 'Invalid hqAddress format';
+    } else if (!hqAddress || hqAddress === undefined) {
+      error = 'hdAddress must be specified';
     }
     if (error) {
       return res.status(400).json({ status: 400, error });
