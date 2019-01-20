@@ -1,0 +1,16 @@
+{
+    "extends": "airbnb-base",
+    
+    "env": {
+		"node": true,
+		"es6": true,
+		"browser": true,
+		"mocha": true,
+		"jquery": true
+	},
+	"rules": {
+        "no-shadow": ["error", {
+            "allow": ["req", "res", "err", "next", "dbRes"]
+        }]
+    } 
+}
