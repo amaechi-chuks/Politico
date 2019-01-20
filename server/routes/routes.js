@@ -4,15 +4,14 @@ import ValidateParties from '../middlewares/validateParties';
 
 const router = express.Router();
 
-router.post('/parties',
-  ValidateParties.validateHqAddress,
-  ValidateParties.validateLogoUrl,
-  ValidateParties.validateName,
-  PartiesController.createParties);
+// Handle all Post request
+router.post('/parties', ValidateParties.validateHqAddress, ValidateParties.validateLogoUrl, ValidateParties.validateName, PartiesController.createParties);
 
+//  Handle all Get request
 router.get('/parties', PartiesController.getAllParties);
+router.get('/parties/:id', ValidateParties.findPartiesById, PartiesController.getPartyById);
 
-router.get('/parties/:id', ValidateParties.findPartiesById,
-  PartiesController.getPartyById);
+//  Handle all Patch request
+router.patch('/parties/:id/name', ValidateParties.validateName, PartiesController.updateName);
 
 export default router;
