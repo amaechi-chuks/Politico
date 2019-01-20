@@ -1,4 +1,5 @@
 import HelperUtils from '../utility/helperUltis';
+import parties from '../models/partyModels';
 
 
 /**
@@ -8,6 +9,33 @@ import HelperUtils from '../utility/helperUltis';
  */
 
 class ValidateParties {
+/**
+     * Get a specific party
+     * @param {object} req - The request object
+     * @param {object} res - The response object
+     * @param {function} next - Calls the next function
+     * @returns {object} JSON representing the failure message
+     * @memberof ProductValidator
+     */
+  static findOneProduct(req, res, next) {
+    const { id } = req.params;
+    if (!Number(id)) {
+      return res.status(400).json({
+        status: 400,
+        error: 'Such endpoint doe not exist',
+      });
+    }
+    const foundParties = parties.find(party => party.id === Number(id));
+    if (!foundParties) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Party Id does not exist',
+      });
+    }
+    req.body.foundParties = foundParties;
+    return next();
+  }
+
   /**
     * @method validateName
     * @description Validates the set of name passed in the request body
