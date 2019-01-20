@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 6000;
 app.listen(port, () => {
-  console.log(`Server is live on PORT: ${port}`);
+  console.log(`Server is live on PORT👍 : ${port}`);
 });
 
 export default app;
