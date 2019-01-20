@@ -6,12 +6,11 @@ import parties from '../models/partyModels';
  */
 class PartiesController {
   /**
-       * Create new product record
-       * @static
+       * @description Create a new political party
        * @param {object} req - The request object
        * @param {object} res - The response object
        * @return {object} JSON representing data object
-       * @memberof PartiesController
+       * @memberof createParties
        */
   static createParties(req, res) {
     const {
@@ -45,12 +44,11 @@ class PartiesController {
   }
 
   /**
-   * Get all parties from mockDb
-   * @static
+   * @description Get all registered Political parties
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} JSON object representing data object
-   * @memberof PartiesController
+   * @memberof getAllParties
    */
   static getAllParties(req, res) {
     return res.status(200).json({

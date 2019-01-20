@@ -10,7 +10,7 @@ import parties from '../models/partyModels';
 
 class ValidateParties {
 /**
-     * Get a specific party
+     * @description Get a specific party by id
      * @param {object} req - The request object
      * @param {object} res - The response object
      * @param {function} next - Calls the next function
@@ -93,7 +93,7 @@ class ValidateParties {
   * @param {object} res - The Response Object
   * @returns {object} JSON API Response
   */
-  static logoUrl(req, res, next) {
+  static validateLogoUrl(req, res, next) {
     const validate = HelperUtils.validate();
     let error = '';
     const { logoUrl } = req.body;
