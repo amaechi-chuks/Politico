@@ -4,20 +4,20 @@ import parties from '../models/partyModels';
 
 /**
  * @class ValidateParties
- * @description Intercepts and validates a given request for record endpoints
+ * @description Intercepts and validates a given request for parties endpoints
  * @exports ValidateParties
  */
 
 class ValidateParties {
 /**
-     * Get a specific party
+     * @description Get a specific party by id
      * @param {object} req - The request object
      * @param {object} res - The response object
      * @param {function} next - Calls the next function
      * @returns {object} JSON representing the failure message
-     * @memberof ProductValidator
+     * @memberof ValidateParties
      */
-  static findOneProduct(req, res, next) {
+  static findPartiesById(req, res, next) {
     const { id } = req.params;
     if (!Number(id)) {
       return res.status(400).json({
@@ -72,13 +72,14 @@ class ValidateParties {
    * @returns {object} JSON API Response
    */
   static validateHqAddress(req, res, next) {
+    const validate = HelperUtils.validate();
     let error = '';
     const { hqAddress } = req.body;
 
-    if (!hqAddress || hqAddress === undefined) {
-      error = 'A hqAddress must be specified';
-    } else if (hqAddress.length < 10) {
-      error = 'Your hdAddress must be 10 characters above';
+    if (!validate.hqAddress.test(hqAddress)) {
+      error = 'Invalid hqAddress format';
+    } else if (!hqAddress || hqAddress === undefined) {
+      error = 'hdAddress must be specified';
     }
     if (error) {
       return res.status(400).json({ status: 400, error });
@@ -93,7 +94,7 @@ class ValidateParties {
   * @param {object} res - The Response Object
   * @returns {object} JSON API Response
   */
-  static logoUrl(req, res, next) {
+  static validateLogoUrl(req, res, next) {
     const validate = HelperUtils.validate();
     let error = '';
     const { logoUrl } = req.body;
