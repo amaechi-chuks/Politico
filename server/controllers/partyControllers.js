@@ -70,6 +70,26 @@ class PartiesController {
       data,
     });
   }
+
+  /**
+   * @description PATCH a registered Political party by name
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} {object} JSON object representing ddata object
+   * @memberof getPartyById
+   */
+  static updateName(req, res) {
+    const partyRecord = parties.filter(partyObj => partyObj.id === Number(req.params.id));
+    const { name } = req.body;
+    const id = Number(req.params.id);
+
+    Object.assign({}, partyRecord[0], { name: `${name}` });
+
+    res.status(200).json({
+      status: 200,
+      data: [{ id, name }],
+    });
+  }
 }
 
 
