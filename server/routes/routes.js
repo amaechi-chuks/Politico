@@ -12,4 +12,7 @@ router.post('/parties',
 
 router.get('/parties', PartiesController.getAllParties);
 
+router.get('/parties/:id', ValidateParties.findPartiesById,
+  PartiesController.getPartyById);
+
 export default router;
