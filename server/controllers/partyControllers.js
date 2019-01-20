@@ -10,7 +10,7 @@ class PartiesController {
        * @static
        * @param {object} req - The request object
        * @param {object} res - The response object
-       * @return {object} JSON representing success message
+       * @return {object} JSON representing data object
        * @memberof PartiesController
        */
   static createParties(req, res) {
@@ -41,6 +41,24 @@ class PartiesController {
     return res.status(400).json({
       status: 400,
       error: 'Bad request',
+    });
+  }
+
+  /**
+   * Get all parties from mockDb
+   * @static
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} JSON object representing data object
+   * @memberof PartiesController
+   */
+  static getAllParties(req, res) {
+    return res.status(200).json({
+      status: 200,
+      message: 'All parties successfully retrieved',
+      data: [{
+        parties,
+      }],
     });
   }
 }
