@@ -22,7 +22,7 @@ class ValidateParties {
     if (!Number(id)) {
       return res.status(400).json({
         status: 400,
-        error: 'Such endpoint doe not exist',
+        error: 'Such endpoint does not exist',
       });
     }
     const foundParties = parties.find(party => party.id === Number(id));
