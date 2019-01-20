@@ -18,23 +18,21 @@ class PartiesController {
     } = req.body;
     const id = parties[parties.length - 1].id + 1;
     const registerdAt = new Date();
-    const updatedAt = new Date();
     const newParty = {
       id,
       name,
       hdAddress,
       logoUrl,
       registerdAt,
-      updatedAt,
     };
     if (newParty) {
       parties.push(newParty);
       return res.status(201).json({
         status: 201,
         message: 'Party successfully created',
-        data: [{
+        data: [
           newParty,
-        }],
+        ],
       });
     }
     return res.status(400).json({
@@ -54,9 +52,7 @@ class PartiesController {
     return res.status(200).json({
       status: 200,
       message: 'All parties successfully retrieved',
-      data: [{
-        parties,
-      }],
+      data: parties,
     });
   }
 }
