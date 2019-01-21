@@ -1,4 +1,4 @@
-import parties from '../models/partyModels';
+import partiesDb from '../models/partyModels';
 
 /**
  * Class representing partiesController
@@ -16,7 +16,7 @@ class PartiesController {
     const {
       name, hdAddress, logoUrl,
     } = req.body;
-    const id = parties[parties.length - 1].id + 1;
+    const id = partiesDb[partiesDb.length - 1].id + 1;
     const registerdAt = new Date();
     const newParty = {
       id,
@@ -26,7 +26,7 @@ class PartiesController {
       registerdAt,
     };
     if (newParty) {
-      parties.push(newParty);
+      partiesDb.push(newParty);
       return res.status(201).json({
         status: 201,
         data: [
@@ -50,7 +50,7 @@ class PartiesController {
   static getAllParties(req, res) {
     return res.status(200).json({
       status: 200,
-      data: parties,
+      data: partiesDb,
     });
   }
 
@@ -58,11 +58,11 @@ class PartiesController {
    * @description Get a registered Political party by id
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @returns {object} {object} JSON object representing ddata object
+   * @returns {object} {object} JSON object representing data object
    * @memberof getPartyById
    */
   static getPartyById(req, res) {
-    const data = parties.filter(
+    const data = partiesDb.filter(
       partyObj => Number(req.params.id) === partyObj.id,
     );
     res.status(200).json({
@@ -75,22 +75,48 @@ class PartiesController {
    * @description PATCH a registered Political party by name
    * @param {object} req - The request object
    * @param {object} res - The response object
-   * @returns {object} {object} JSON object representing ddata object
+   * @returns {object} {object} JSON object representing data object
    * @memberof getPartyById
    */
   static updateName(req, res) {
-    const partyRecord = parties.filter(partyObj => partyObj.id === Number(req.params.id));
+    const partyRecord = partiesDb.filter(partyObj => partyObj.id === Number(req.params.id));
     const { name } = req.body;
     const id = Number(req.params.id);
 
-    Object.assign({}, partyRecord[0], { name: `${name}` });
+    if (name) {
+      Object.assign({}, partyRecord[0], { name: `${name}` });
+      return res.status(200).json({
+        status: 200,
+        data: [{ id, name }],
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      error: 'Invalid name',
+    });
+  }
 
-    res.status(200).json({
-      status: 200,
-      data: [{ id, name }],
+  /**
+   * @description Delete a registered Political party by id
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} {object} JSON object representing data object
+   * @memberof deletePartyById
+   */
+  static deletePartyById(req, res) {
+    const data = partiesDb.filter(
+      partyObj => Number(req.params.id) === partyObj.id,
+    );
+    if (data) {
+      return res.status(200).json({
+        status: 200,
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      error: 'Party id not found!',
     });
   }
 }
-
 
 export default PartiesController;
