@@ -14,4 +14,7 @@ router.get('/parties/:id', ValidateParties.findPartiesById, PartiesController.ge
 //  Handle all Patch request
 router.patch('/parties/:id/name', ValidateParties.validateName, PartiesController.updateName);
 
+//  Handles all delete request
+router.delete('/parties/:id', ValidateParties.findPartiesById, PartiesController.deletePartyById);
+
 export default router;
