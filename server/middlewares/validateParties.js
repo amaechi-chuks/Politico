@@ -1,5 +1,5 @@
 import HelperUtils from '../utility/helperUltis';
-import parties from '../models/partyModels';
+import partiesDb from '../models/partyModels';
 
 
 /**
@@ -25,7 +25,7 @@ class ValidateParties {
         error: 'Such endpoint does not exist',
       });
     }
-    const foundParties = parties.find(party => party.id === Number(id));
+    const foundParties = partiesDb.find(party => party.id === Number(id));
     if (!foundParties) {
       return res.status(404).json({
         status: 404,
