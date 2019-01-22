@@ -69,6 +69,13 @@ button {
   min-width: 110px;
   text-align: center;
 }
+.btn1 {
+  padding: 12px 25px;
+  border-radius: 4px;
+  display: inline-block;
+  min-width: 110px;
+  text-align: center;
+}
 
 .btn-hollow {
   border: 2px solid #fffffa;
@@ -84,10 +91,7 @@ button {
   color: #fffffa;
   background: #ef271b;
 }
-.btn-warning1 {
-  color: #fffffa;
-  background: #0facf3;
-}
+
 .forgot--reset{
   margin-bottom: 10px;
   
@@ -356,6 +360,9 @@ section .how-to {
 }
 
 section > .btn {
+  align-self: center;
+}
+section > .btn1 {
   align-self: center;
 }
 .steps {
