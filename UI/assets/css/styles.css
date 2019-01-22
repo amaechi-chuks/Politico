@@ -61,7 +61,6 @@ textarea {
 button {
   cursor: pointer;
 }
-
 .btn {
   padding: 12px 25px;
   border-radius: 4px;
@@ -76,7 +75,15 @@ button {
   min-width: 110px;
   text-align: center;
 }
+.text-party{
+  text-align: center;
+  position: relative;
+  margin: -16px;
 
+}
+.admin-office-file{
+  margin: 40px 10px;
+}
 .btn-hollow {
   border: 2px solid #fffffa;
   color: #fffffa;
@@ -247,6 +254,11 @@ td .form-element {
 td,
 th {
   padding: 20px 10px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.office-table {
+  padding: 20px 36px;
   border-bottom: 1px solid #dddddd;
 }
 
@@ -454,7 +466,6 @@ section > .btn1 {
 .reports-container {
   clip-path: polygon(0 0%, 100% 0, 100% 100%, 0% 100%);
 }
-
 .report-status::after {
   content: "";
   position: absolute;
@@ -667,7 +678,7 @@ p.stat-value {
 }
 
 .profile-table {
-  z-index: 100;
+  /* z-index: 100; */
   flex-basis: 73%;
   border-bottom: 3px #0facf3 solid;
 }
@@ -753,6 +764,9 @@ tr > td:last-child {
   }
   .fas {
     margin-left: 100px;
+  }
+  .text-party {
+    margin-top: -5px
   }
   .navbar-menu.menu-open {
     max-height: 380px;
@@ -903,6 +917,11 @@ tr > td:last-child {
     overflow-x: auto;
     width: 100%;
   }
+  .profile-table1,
+  .admin-table {
+    overflow-x: auto;
+    width: 100%;
+  }
 
   td .report-user {
     text-align: left;
@@ -1027,6 +1046,9 @@ float: right;
 .section1 .col2.last .col3.last {
   margin-right: 0;
 }
+.text-party {
+  margin-top: -5px
+}
 }
 
 @media only screen and (max-width: 1060px) {
@@ -1038,6 +1060,9 @@ float: right;
   hr {
       width: 25%;
   }
+  .text-party {
+    margin-top: -5px
+  }
 }
 
 @media only screen and (max-width: 660px) {
@@ -1048,6 +1073,9 @@ float: right;
 }
 .fas {
   margin-left: 100px;
+}
+.text-party {
+  margin-top: -5px
 }
 .section1 .col2.first {
   text-align: center;
@@ -1075,6 +1103,9 @@ hr {
 .fas {
   margin-left: 100px;
 }
+.text-party {
+  margin-top: -5px
+}
 .section1 .col2.last .col3 h1 {
   font-size: 18px;
   }
@@ -1093,5 +1124,8 @@ hr {
 }
 .fas {
   margin-left: 100px;
+}
+.text-party {
+  margin-top: -5px
 }
 }
