@@ -1,8 +1,8 @@
 import partiesDb from '../models/partyModels';
 
 /**
- * Class representing partiesController
- * @class partiesController
+ * Class representing PartiesController
+ * @class PartiesController
  */
 class PartiesController {
   /**
