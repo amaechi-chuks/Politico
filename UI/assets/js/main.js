@@ -60,27 +60,29 @@ if (closeModal) {
     toggleModal(evt);
   });
 }
-
-const submitBtn = document.querySelector('.update');
-if (submitBtn) {
-  submitBtn.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    let message = '';
-
-    if (evt.target.id === 'record') {
-      message = 'Record Updated Successfully';
-    } else if (evt.target.id === 'profile') {
-      message = 'Profile Updated Successfully';
-    } else if (evt.target.id === 'voted') {
-      message = 'Voted Successfully';
-    } else if (evt.target.id === 'records') {
-      message = 'Updated Successfully';
-    } else if (evt.target.id === 'signup') {
-      message = 'Signup Successful, Please Log In to continue';
-    }
-
-    document.querySelector('.message-box').textContent = message;
-  });
+function submitModals() {
+  const submitBtn = document.querySelector('.update');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      let message = '';
+      if (evt.target.id === 'record') {
+        message = 'Record Updated Successfully';
+      } else if (evt.target.id === 'profile') {
+        message = 'Profile Updated Successfully';
+      } else if (evt.target.id === 'voted') {
+        message = 'Voted Successfully';
+      } else if (evt.target.id === 'records') {
+        message = 'Updated Successfully';
+      } else if (evt.target.id === 'signup') {
+        message = 'Signup Successful, Please Log In to continue';
+      }
+      else if (evt.target.id === 'apply') {
+        message = 'Application Successful!';
+      }
+      document.querySelector('.message-box').textContent = message;
+    });
+  }
 }
 
 const mediaLinks = document.querySelectorAll('.report-media');
@@ -94,10 +96,10 @@ function submitForm() {
   window.location.href = './user-profile.html';
   return false;
 }
-submitForm();
+
 
 function submitFormAdmin() {
   window.location.href = './admin-profile.html';
   return false;
 }
-submitFormAdmin();
+
