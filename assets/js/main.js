@@ -76,9 +76,10 @@ function submitModals() {
         message = 'Updated Successfully';
       } else if (evt.target.id === 'signup') {
         message = 'Signup Successful, Please Log In to continue';
-      }
-      else if (evt.target.id === 'apply') {
+      } else if (evt.target.id === 'apply') {
         message = 'Application Successful!';
+      } else if (evt.target.id === 'reset') {
+        message = 'Check your email and follow the link';
       }
       document.querySelector('.message-box').textContent = message;
     });
@@ -102,4 +103,3 @@ function submitFormAdmin() {
   window.location.href = './admin-profile.html';
   return false;
 }
-

@@ -14,7 +14,7 @@
 
 <body>
     <!-- Begin Header -->
-    <header>
+    <header class="sticky-top">
         <nav class="navbar">
             <a href="./index.html" class="navbar-logo"><img src="./assets/img/Image-logo.png" alt="image logo" /></a>
             <button class="hamburger-menu"><a class="hamburger"></a></button>
@@ -36,7 +36,7 @@
     <main>
         <section class="container form-container">
             <h2 class="section-title">Vote</h2>
-            <form class="form-card" method="post">
+            <form class="form-card" method="post" onsubmit="submitModals(); return false;">
                 <label for="issue-type">Select Political Party<span>*</span></label>
                 <select type="text" id="issue-type" name="issue-type" class="form-element" required>
                     <option default>-- Select Political Party --</option>
