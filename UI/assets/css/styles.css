@@ -140,7 +140,7 @@ button {
 .circle-icon-2 {
   width: 65px;
   height: 67px;
-  border-radius: 5px;
+  border-radius: 50px;
   background: #0facf3;
   color: #fffffa;
   display: block;
@@ -148,6 +148,19 @@ button {
   text-align: center;
   font-size: 1.5em;
   font-weight: 600;
+}
+.fas {
+  width: 65px;
+  height: 67px;
+  border-radius: 5px;
+  /* background: #0facf3; */
+  color: #0facf3;
+  display: block;
+  line-height: 60px;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-left: 150px;
 }
 .sticky-top {
   position: -webkit-sticky; /* Safari */
@@ -164,15 +177,22 @@ button {
   padding-top: 0px;
 }
 .text--color--grey {
-  color: #828282;
+  color: #0facf3;
+  text-align: center;
 }
 .text--primary1{
-  color: #0facf3;
+  color: #828282;
   margin-left: 4.5rem;
 }
+
 .container {
   background: #bcc6d9;
   padding: 50px 40px 130px;
+  position: relative;
+}
+.container1 {
+  background: #bcc6d9;
+  padding: 40px 11px 258px;
   position: relative;
 }
 .container-flip {
@@ -185,7 +205,13 @@ button {
 .form-card {
   align-self: center;
   position: inline-block;
-  margin: 60px;
+  margin: 30px;
+}
+.form-container > .section-title1,
+.form-card {
+  align-self: center;
+  position: inline-block;
+  margin: 0 auto;
 }
 
 label {
@@ -352,13 +378,29 @@ section > .btn {
   margin-bottom: 20px;
 }
 
-.section-title,
-.section-text {
+.section-title {
   position: relative;
   margin-bottom: 15px;
 }
+.section-title1 {
+  position: relative;
+  margin-bottom: 15px;
+}
+.section-text1 {
+  position: relative;
+  margin-bottom: 15px;
+  text-align: center;
+}
 
 .section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 60px;
+  border: 1.5px solid #0facf3;
+}
+.section-title1::after {
   content: "";
   position: absolute;
   bottom: -3px;
@@ -702,7 +744,9 @@ tr > td:last-child {
     transition: all 250ms ease-in;
     z-index: 1000;
   }
-
+  .fas {
+    margin-left: 100px;
+  }
   .navbar-menu.menu-open {
     max-height: 380px;
     width: 50%;
@@ -995,6 +1039,9 @@ float: right;
   float: none !important;
   margin-bottom: 10px;
 }
+.fas {
+  margin-left: 100px;
+}
 .section1 .col2.first {
   text-align: center;
 }
@@ -1018,20 +1065,26 @@ hr {
 .section1 .col2.last .col3 span {
   font-size: 10px;
 }
+.fas {
+  margin-left: 100px;
+}
 .section1 .col2.last .col3 h1 {
   font-size: 18px;
   }
   hr {
       width: 25%
   }
-
+}
 /* Adjust container size for (width > 500 and width < 769px) */
 @media screen and (min-width: 500px) and (max-width: 768px) {
   section {
     padding: 20px 60px;
   }
-}
+
 hr {
     width: 25%
+}
+.fas {
+  margin-left: 100px;
 }
 }
