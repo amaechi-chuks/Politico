@@ -103,3 +103,8 @@ function submitFormAdmin() {
   window.location.href = './admin-profile.html';
   return false;
 }
+// eslint-disable-next-line no-unused-vars
+function submitFormAdminProfile() {
+  window.location.href = './admin-profile-page.html';
+  return false;
+}
