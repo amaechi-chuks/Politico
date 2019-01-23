@@ -14,7 +14,7 @@
 
 <body>
     <!-- Begin Header -->
-    <header>
+    <header class="sticky-top">
         <nav class="navbar">
             <a href="./index.html" class="navbar-logo"><img src="./assets/img/Image-logo.png" alt="image logo" /></a>
             <button class="hamburger-menu"><a class="hamburger"></a></button>
@@ -36,7 +36,7 @@
     <main>
         <section class="container form-container">
             <h2 class="section-title">Vote</h2>
-            <form class="form-card" method="post">
+            <form class="form-card" method="post" onsubmit="submitModals(); return false;">
                 <label for="issue-type">Select Political Party<span>*</span></label>
                 <select type="text" id="issue-type" name="issue-type" class="form-element" required>
                     <option default>-- Select Political Party --</option>
@@ -51,7 +51,6 @@
                     <option value="DA">Democratic Alternative (DA)</option>
                     <option value="CPN">Communist Party of Nigeria (CPN)</option>
                 </select>
-
                 <label for="issue-type">Select Candidate<span>*</span></label>
                 <select type="text" id="issue-type" name="issue-type" class="form-element" required>
                     <option default>-- Select Candidate --</option>
@@ -66,7 +65,6 @@
                     <option value="okonji">Jimi Agbaje</option>
                     <option value="chuks">Amaechi Chuks</option>
                 </select>
-
                 <label for="issue-type">Office Type<span>*</span></label>
                 <select type="text" id="issue-type" name="issue-type" class="form-element" required>
                     <option default>-- Select Office Type --</option>
@@ -75,7 +73,6 @@
                     <option value="Peter">State</option>
                     <option value="rotimi">Local Goverment</option>
                 </select>
-
                 <label for="issue-type">Office Name<span>*</span></label>
                 <select type="text" id="issue-type" name="issue-type" class="form-element" required>
                     <option default>-- Select Office Name --</option>
@@ -89,9 +86,6 @@
                     <option value="okonji">Deputy Governor</option>
                     <option value="chuks">Minister of finance</option>
                 </select>
-
-                <label for="Location">Enter Location <span>*</span></label>
-                <input type="text" class="form-element" name="location" id="location" required>
                 <button type="submit" id="voted" class="btn btn-primary2 update">Submit Vote</button>
                 <div class="message-box"></div>
             </form>

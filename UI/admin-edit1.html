@@ -14,7 +14,7 @@
 
 <body>
     <!-- Begin Header -->
-    <header>
+    <header class="sticky-top">
         <nav class="navbar">
             <a href="./index.html" class="navbar-logo"><img src="./assets/img/Image-logo.png" alt="image logo" /></a>
             <button class="hamburger-menu"><a class="hamburger"></a></button>
@@ -37,15 +37,24 @@
         <section class="container form-container">
             <h2 class="section-title">Admin Dashboard</h2>
             <form class="form-card" onsubmit="return submitFormAdmin()" method="post">
-                <h2 class="create-party">Update Party/Office</h2>
-                <label for="name">Enter name <span>*</span></label>
-                <input type="text" class="form-element" name="name" id="name" required>
-                <label for="headQ">Enter HeadQuarter <span>*</span></label>
-                <input type="text" class="form-element" name="HeadQuarter" id="HeadQuarter" required>
-                <label for="name">Enter office <span>*</span></label>
-                <input type="text" class="form-element" name="office" id="office" required>
-                <label for="name">Enter Chairman <span>*</span></label>
-                <input type="text" class="form-element" name="Chairman" id="Chairman" required>
+                <h2 class="create-party">Update Party</h2>
+                <label for="issue-type">Select Political Party<span>*</span></label>
+                <select type="text" id="issue-type" name="issue-type" class="form-element" required>
+                    <option default>-- Select Political Party --</option>
+                    <option value="APC">All Progressives Congress (APC)</option>
+                    <option value="pdp">People's Democratic Party (PDP)</option>
+                    <option value="ACC">African Action Congress (AAC)</option>
+                    <option value="intervention">Abundant Nigeria Renewal Party (ANRP)</option>
+                    <option value="AD">Alliance for Democracy (AD)</option>
+                    <option value="ADP">Action Democratic Party (ADP)</option>
+                    <option value="ADC">African Democratic Congress (ADC)</option>
+                    <option value="APP">All People's Party (APP)</option>
+                    <option value="DA">Democratic Alternative (DA)</option>
+                    <option value="CPN">Communist Party of Nigeria (CPN)</option>
+                </select>
+                <label for="headQ">hdAddress <span>*</span></label>
+                <input type="text" class="form-element" name="hdAddress" id="hdAddress" placeholder="Enter hdAddress"
+                    required>
                 <label for="attachment">Attach political logo</label>
                 <input type="file" accept="image/*,  id=" attachment" name="attachment" class="form-element" required>
                 <button type="submit" class="btn btn-primary2">Update</button>

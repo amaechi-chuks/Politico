@@ -14,7 +14,7 @@
 
 <body>
     <!-- Begin Header -->
-    <header>
+    <header class="sticky-top">
         <nav class="navbar">
             <a href="./index.html" class="navbar-logo"><img src="./assets/img/Image-logo.png" alt="image logo" /></a>
             <button class="hamburger-menu"><a class="hamburger"></a></button>
@@ -36,7 +36,7 @@
     <main>
         <section class="container form-container">
             <h2 class="section-title">Update Profile</h2>
-            <form class="form-card" action="" method="post">
+            <form class="form-card" action="" method="post" onsubmit="submitModals(); return false;">
                 <label for="firstname">First Name</label>
                 <input type="text" id="firstname" name="firstname" class="form-element" placeholder="Update First Name"
                     required />
