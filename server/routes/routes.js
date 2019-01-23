@@ -13,6 +13,7 @@ router.post('/offices', ValidateParties.validateName, ValidateParties.validateOf
 //  Handle all Get request
 router.get('/parties', PartiesController.getAllParties);
 router.get('/parties/:id', ValidateParties.findPartiesById, PartiesController.getPartyById);
+router.get('/offices', OfficesController.getAllOffices);
 
 //  Handle all Patch request
 router.patch('/parties/:id/name', ValidateParties.validateName, PartiesController.updateName);

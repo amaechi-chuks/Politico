@@ -4,7 +4,7 @@ import officesDb from '../models/officeModels';
  * Class representing OfficeController
  * @class OfficeController
  */
-class OfficesController {
+export default class OfficesController {
   /**
          * @description Create a new political party
          * @param {object} req - The request object
@@ -36,5 +36,18 @@ class OfficesController {
       error: 'Bad request',
     });
   }
+
+  /**
+   * @description Get all registered Political Offices
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} JSON object representing data object
+   * @memberof getAllOffices
+   */
+  static getAllOffices(req, res) {
+    return res.status(200).json({
+      status: 200,
+      data: officesDb,
+    });
+  }
 }
-export default OfficesController;
