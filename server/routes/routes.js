@@ -2,16 +2,21 @@ import express from 'express';
 import PartiesController from '../controllers/partyControllers';
 import ValidateParties from '../middlewares/validateParties';
 import OfficesController from '../controllers/officeControllers';
+import UserController from '../controllers/userControllers';
 
 const router = express.Router();
 
 // Handle all Post request
 router.post('/parties', ValidateParties.validateHqAddress, ValidateParties.validateLogoUrl, ValidateParties.validateName, PartiesController.createParties);
+
 router.post('/offices', ValidateParties.validateName, ValidateParties.validateOfficeType,
   OfficesController.createOffice);
 
+router.post('/signup', ValidateParties.validateNames, ValidateParties.validatePhoneNumber, ValidateParties.validatePassportUrl, UserController.signUp);
+
 //  Handle all Get request
 router.get('/parties', PartiesController.getAllParties);
+
 router.get('/parties/:id', ValidateParties.findPartiesById, PartiesController.getPartyById);
 
 //  Handle all Patch request
