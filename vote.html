@@ -37,6 +37,7 @@
         <section class="container form-container">
             <h2 class="section-title">Vote</h2>
             <form class="form-card" method="post" onsubmit="submitModals(); return false;">
+                    <div class="message-box"></div>
                 <label for="issue-type">Select Political Party<span>*</span></label>
                 <select type="text" id="issue-type" name="issue-type" class="form-element" required>
                     <option default>-- Select Political Party --</option>
@@ -87,7 +88,6 @@
                     <option value="chuks">Minister of finance</option>
                 </select>
                 <button type="submit" id="voted" class="btn btn-primary2 update">Submit Vote</button>
-                <div class="message-box"></div>
             </form>
         </section>
     </main>
