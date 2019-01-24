@@ -76,6 +76,7 @@ button {
   padding: 104px;
   font-size: 29px;
 }
+
 .btn {
   padding: 12px 25px;
   border-radius: 4px;
@@ -294,7 +295,6 @@ th {
  padding: 26px 46px;
   border-bottom: 1px solid #dddddd;
 }
-
 
 td.issue {
   width: 30px;
@@ -1112,8 +1112,8 @@ float: right;
 .btn-primary3 {
   margin: 30px;
 }
-}
 
+}
 @media only screen and (max-width: 1060px) {
 .section1 .col2 {
   width: 100%;
