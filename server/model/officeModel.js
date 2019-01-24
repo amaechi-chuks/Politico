@@ -1,4 +1,4 @@
-const officesDb = [
+const officeDb = [
   {
     id: 1,
     type: 'federal',
@@ -23,4 +23,4 @@ const officesDb = [
 
 ];
 
-export default officesDb;
+export default officeDb;

@@ -1,5 +1,5 @@
 import HelperUtils from '../utility/helperUltis';
-import partiesDb from '../model/PartyModel';
+import partyDb from '../model/partyModel';
 
 
 /**
@@ -25,7 +25,7 @@ export default class ValidateParty {
         error: 'Such endpoint does not exist',
       });
     }
-    const foundParties = partiesDb.find(party => party.id === Number(id));
+    const foundParties = partyDb.find(party => party.id === Number(id));
     if (!foundParties) {
       return res.status(404).json({
         status: 404,
@@ -55,8 +55,8 @@ export default class ValidateParty {
       error = 'Party name must be specified';
     }
     if (error) {
-      return res.status(400).json({
-        status: 400, error,
+      return res.status(404).json({
+        status: 404, error,
       });
     }
 
@@ -80,9 +80,11 @@ export default class ValidateParty {
       error = 'Invalid hqAddress format';
     } else if (!hqAddress || hqAddress === undefined) {
       error = 'hdAddress must be specified';
-    }
-    if (error) {
-      return res.status(400).json({ status: 400, error });
+    } else if (error) {
+      res.status(404).json({
+        status: 404,
+        error,
+      });
     }
     return next();
   }
@@ -101,13 +103,11 @@ export default class ValidateParty {
 
     if (!validate.logoUrl.test(logoUrl)) {
       error = 'Invalid party logo';
-    }
-    if (!logoUrl || logoUrl === undefined) {
-      error = 'Party  must be specified';
-    }
-    if (error) {
-      return res.status(400).json({
-        status: 400, error,
+    } else if (!logoUrl || logoUrl === undefined) {
+      error = 'Logo must be specified';
+    } else if (error) {
+      res.status(404).json({
+        status: 404, error,
       });
     }
 
@@ -132,8 +132,8 @@ export default class ValidateParty {
       error = 'Type must be specified';
     }
     if (error) {
-      return res.status(400).json({
-        status: 400, error,
+      return res.status(404).json({
+        status: 404, error,
       });
     }
     return next();

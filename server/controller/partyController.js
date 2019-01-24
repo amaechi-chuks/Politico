@@ -1,4 +1,4 @@
-import partiesDb from '../model/PartyModel';
+import partyDb from '../model/partyModel';
 
 /**
  * Class representing PartyController
@@ -16,7 +16,7 @@ export default class PartyController {
     const {
       name, hdAddress, logoUrl,
     } = req.body;
-    const id = partiesDb[partiesDb.length - 1].id + 1;
+    const id = partyDb[partyDb.length - 1].id + 1;
     const registerdAt = new Date();
     const newParty = {
       id,
@@ -26,7 +26,7 @@ export default class PartyController {
       registerdAt,
     };
     if (newParty) {
-      partiesDb.push(newParty);
+      partyDb.push(newParty);
       return res.status(201).json({
         status: 201,
         data: [
@@ -50,7 +50,7 @@ export default class PartyController {
   static getAllParty(req, res) {
     return res.status(200).json({
       status: 200,
-      data: partiesDb,
+      data: partyDb,
     });
   }
 
@@ -62,7 +62,7 @@ export default class PartyController {
    * @memberof getPartyById
    */
   static getPartyById(req, res) {
-    const data = partiesDb.filter(
+    const data = partyDb.filter(
       partyObj => Number(req.params.id) === partyObj.id,
     );
     res.status(200).json({
@@ -79,7 +79,7 @@ export default class PartyController {
    * @memberof getPartyById
    */
   static updateName(req, res) {
-    const partyRecord = partiesDb.filter(partyObj => partyObj.id === Number(req.params.id));
+    const partyRecord = partyDb.filter(partyObj => partyObj.id === Number(req.params.id));
     const { name } = req.body;
     const id = Number(req.params.id);
 
@@ -101,7 +101,7 @@ export default class PartyController {
   static deletePartyById(req, res) {
     const id = Number(req.params.id);
     // Use filter so as not to mutate array
-    partiesDb.filter(partyObj => partyObj.id !== Number(id));
+    partyDb.filter(partyObj => partyObj.id !== Number(id));
     res.status(200).json({
       status: 200,
       data: [{
