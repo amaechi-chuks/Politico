@@ -138,6 +138,31 @@ class ValidateParties {
     }
     return next();
   }
+
+  /**
+    * @method validateEmail
+    * @description Validates Office type passed in the request body
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    * @returns {object} JSON API Response
+    */
+  static validateEmail(req, res, next) {
+    const validate = HelperUtils.validate();
+    let error = '';
+    const { email } = req.body;
+    if (!validate.email.test(email)) {
+      error = 'Invalid email format';
+    }
+    if (!email || email === undefined) {
+      error = 'Email must be specified';
+    }
+    if (error) {
+      return res.status(400).json({
+        status: 400, error,
+      });
+    }
+    return next();
+  }
 }
 
 export default ValidateParties;
