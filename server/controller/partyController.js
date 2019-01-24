@@ -1,18 +1,18 @@
-import partiesDb from '../models/partyModels';
+import partiesDb from '../model/PartyModel';
 
 /**
- * Class representing PartiesController
- * @class PartiesController
+ * Class representing PartyController
+ * @class PartyController
  */
-class PartiesController {
+export default class PartyController {
   /**
        * @description Create a new political party
        * @param {object} req - The request object
        * @param {object} res - The response object
        * @return {object} JSON representing data object
-       * @memberof createParties
+       * @memberof createParty
        */
-  static createParties(req, res) {
+  static createParty(req, res) {
     const {
       name, hdAddress, logoUrl,
     } = req.body;
@@ -45,9 +45,9 @@ class PartiesController {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} JSON object representing data object
-   * @memberof getAllParties
+   * @memberof getAllParty
    */
-  static getAllParties(req, res) {
+  static getAllParty(req, res) {
     return res.status(200).json({
       status: 200,
       data: partiesDb,
@@ -111,5 +111,3 @@ class PartiesController {
     });
   }
 }
-
-export default PartiesController;

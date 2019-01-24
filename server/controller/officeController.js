@@ -1,10 +1,10 @@
-import officesDb from '../models/officeModels';
+import officesDb from '../model/OfficeModel';
 
 /**
  * Class representing OfficeController
  * @class OfficeController
  */
-export default class OfficesController {
+export default class OfficeController {
   /**
          * @description Create a new political party
          * @param {object} req - The request object
@@ -38,13 +38,13 @@ export default class OfficesController {
   }
 
   /**
-   * @description Get all registered Political Offices
+   * @description Get all registered Political Office
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} JSON object representing data object
-   * @memberof getAllOffices
+   * @memberof getAllOffice
    */
-  static getAllOffices(req, res) {
+  static getAllOffice(req, res) {
     return res.status(200).json({
       status: 200,
       data: officesDb,
