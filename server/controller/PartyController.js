@@ -1,32 +1,32 @@
-import partiesDb from '../models/partyModels';
+import partyDb from '../model/PartyModel';
 
 /**
- * Class representing PartiesController
- * @class PartiesController
+ * Class representing PartyController
+ * @class PartyController
  */
-class PartiesController {
+export default class PartyController {
   /**
        * @description Create a new political party
        * @param {object} req - The request object
        * @param {object} res - The response object
        * @return {object} JSON representing data object
-       * @memberof createParties
+       * @memberof createParty
        */
-  static createParties(req, res) {
+  static createParty(req, res) {
     const {
-      name, hdAddress, logoUrl,
+      name, hqAddress, logoUrl,
     } = req.body;
-    const id = partiesDb[partiesDb.length - 1].id + 1;
+    const id = partyDb[partyDb.length - 1].id + 1;
     const registerdAt = new Date();
     const newParty = {
       id,
       name,
-      hdAddress,
+      hqAddress,
       logoUrl,
       registerdAt,
     };
     if (newParty) {
-      partiesDb.push(newParty);
+      partyDb.push(newParty);
       return res.status(201).json({
         status: 201,
         data: [
@@ -41,16 +41,16 @@ class PartiesController {
   }
 
   /**
-   * @description Get all registered Political parties
+   * @description Get all registered Political party
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} JSON object representing data object
    * @memberof getAllParties
    */
-  static getAllParties(req, res) {
+  static getAllParty(req, res) {
     return res.status(200).json({
       status: 200,
-      data: partiesDb,
+      data: partyDb,
     });
   }
 
@@ -62,7 +62,7 @@ class PartiesController {
    * @memberof getPartyById
    */
   static getPartyById(req, res) {
-    const data = partiesDb.filter(
+    const data = partyDb.filter(
       partyObj => Number(req.params.id) === partyObj.id,
     );
     res.status(200).json({
@@ -79,12 +79,12 @@ class PartiesController {
    * @memberof getPartyById
    */
   static updateName(req, res) {
-    const partyRecord = partiesDb.filter(partyObj => partyObj.id === Number(req.params.id));
-    const { name } = req.body;
     const id = Number(req.params.id);
-
-    Object.assign({}, partyRecord[0], { name: `${name}` });
-
+    const { name } = req.body;
+    const partyToUpdate = partyDb.find(partyObj => partyObj.id === id);
+    const partyIndex = partyDb.indexOf(partyToUpdate);
+    partyToUpdate.name = name;
+    partyDb[partyIndex] = partyToUpdate;
     res.status(200).json({
       status: 200,
       data: [{ id, name }],
@@ -100,8 +100,12 @@ class PartiesController {
    */
   static deletePartyById(req, res) {
     const id = Number(req.params.id);
-    // Use filter so as not to mutate array
-    partiesDb.filter(partyObj => partyObj.id !== Number(id));
+    // Use find to get object to delete
+    const partyToDelete = partyDb.find(party => party.id === id);
+    // Get the index of the object to delete
+    const objId = partyDb.indexOf(partyToDelete);
+    // Using the object index, splice the object out of the partiesDb
+    partyDb.splice(objId, 1);
     res.status(200).json({
       status: 200,
       data: [{
@@ -111,5 +115,3 @@ class PartiesController {
     });
   }
 }
-
-export default PartiesController;
