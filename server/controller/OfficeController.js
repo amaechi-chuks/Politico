@@ -1,10 +1,10 @@
-import officesDb from '../models/officeModels';
+import officeDb from '../model/OfficeModel';
 
 /**
  * Class representing OfficeController
  * @class OfficeController
  */
-class OfficesController {
+export default class OfficeController {
   /**
          * @description Create a new political party
          * @param {object} req - The request object
@@ -16,14 +16,14 @@ class OfficesController {
     const {
       type, name,
     } = req.body;
-    const id = officesDb[officesDb.length - 1].id + 1;
+    const id = officeDb[officeDb.length - 1].id + 1;
     const registerdAt = new Date();
     const updatedAlt = new Date();
     const newOffice = {
       id, type, name, registerdAt, updatedAlt,
     };
     if (newOffice) {
-      officesDb.push(newOffice);
+      officeDb.push(newOffice);
       return res.status(201).json({
         status: 201,
         data: [
@@ -37,4 +37,3 @@ class OfficesController {
     });
   }
 }
-export default OfficesController;

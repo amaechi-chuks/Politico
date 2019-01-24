@@ -1,23 +1,23 @@
 import HelperUtils from '../utility/helperUltis';
-import partiesDb from '../models/partyModels';
+import partyDb from '../model/PartyModel';
 
 
 /**
- * @class ValidateParties
+ * @class ValidateParty
  * @description Intercepts and validates a given request for parties endpoints
- * @exports ValidateParties
+ * @exports ValidateParty
  */
 
-class ValidateParties {
+export default class ValidateParty {
   /**
          * @description Get a specific party by id
          * @param {object} req - The request object
          * @param {object} res - The response object
          * @param {function} next - Calls the next function
          * @returns {object} JSON representing the failure message
-         * @memberof ValidateParties
+         * @memberof ValidateParty
          */
-  static findPartiesById(req, res, next) {
+  static findPartyById(req, res, next) {
     const { id } = req.params;
     if (!Number(id)) {
       return res.status(400).json({
@@ -25,14 +25,14 @@ class ValidateParties {
         error: 'Such endpoint does not exist',
       });
     }
-    const foundParties = partiesDb.find(party => party.id === Number(id));
-    if (!foundParties) {
+    const foundParty = partyDb.find(party => party.id === Number(id));
+    if (!foundParty) {
       return res.status(404).json({
         status: 404,
         error: 'Party Id does not exist',
       });
     }
-    req.body.foundParties = foundParties;
+    req.body.foundParty = foundParty;
     return next();
   }
 
@@ -139,5 +139,3 @@ class ValidateParties {
     return next();
   }
 }
-
-export default ValidateParties;
