@@ -873,6 +873,11 @@ tr>td:last-child {
     transition: all 250ms ease-in;
     z-index: 1000;
   }
+  .party-logo1 {
+    width: 30px;
+    float: right;
+    margin-right: 30px
+  }
   .btn-primary3 {
     margin: 30px;
   }
@@ -954,10 +959,6 @@ tr>td:last-child {
   .container2 {
     padding: 40px 20px;
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> bg-lfa-UI-#163375971
   .hero {
     padding: 40px 25px;
     height: auto;
@@ -1169,6 +1170,11 @@ tr>td:last-child {
   .section1 .grid .col3 {
     margin-right: 2%;
   }
+  .party-logo1 {
+    width: 30px;
+    float: right;
+    margin-right: 30px
+  }
   .section1 .col2.last .col3.last {
     margin-right: 0;
   }
@@ -1195,6 +1201,11 @@ tr>td:last-child {
   .featured-cards .report-card1 {
     margin-bottom: 20px;
   }
+  .party-logo1 {
+    width: 30px;
+    float: right;
+    margin-right: 30px
+  }
   hr {
     width: 25%;
   }
@@ -1217,6 +1228,11 @@ tr>td:last-child {
 }
 .featured-cards .report-card1 {
   margin-bottom: 20px;
+}
+.party-logo1 {
+  width: 30px;
+  float: right;
+  margin-right: 30px
 }
 .btn-primary3 {
   margin: 30px;
@@ -1308,6 +1324,11 @@ tr>td:last-child {
   .fas {
     margin-left: 100px;
   }
+  .party-logo1 {
+    width: 30px;
+    float: right;
+    margin-right: 30px
+  }
   .text-party {
     margin-top: -5px
   }
@@ -1339,5 +1360,10 @@ tr>td:last-child {
   }
   .text-party {
     margin-top: -5px
+  }
+  .party-logo1 {
+    width: 30px;
+    float: right;
+    margin-right: 30px
   }
 }
