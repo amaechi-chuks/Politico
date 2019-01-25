@@ -3,7 +3,7 @@ import partyDb from '../model/partyModel';
 
 
 /**
- * @class ValidateParty
+ * @class Validate
  * @description Intercepts and validates a given request for parties endpoints
  * @exports ValidateParty
  */
@@ -110,6 +110,7 @@ export default class Validate {
     }
     return next();
   }
+  
   /**
     * @method validateNames
     * @description Validates firstName passed in the request body
