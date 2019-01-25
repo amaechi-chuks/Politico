@@ -15,7 +15,7 @@ export default class Validate {
          * @param {object} res - The response object
          * @param {function} next - Calls the next function
          * @returns {object} JSON representing the failure message
-         * @memberof findById
+         * @memberof ValidateById
          */
   static findById(req, res, next) {
     const { id } = req.params;
@@ -25,16 +25,44 @@ export default class Validate {
         error: 'Such endpoint does not exist',
       });
     }
-    const foundParty = partyDb.find(party => party.id === Number(id));
-    if (!foundParty) {
+    const foundId = partyDb.find(party => party.id === Number(id));
+    if (!foundId) {
       return res.status(404).json({
         status: 404,
-        error: 'Party Id does not exist',
+        error: 'Such Id does not exist',
       });
     }
-    req.body.foundParty = foundParty;
+    req.body.foundId = foundId;
     return next();
   }
+
+  /**
+      * @method validateName
+      * @description Validates the set of name passed in the request body
+      * @param {object} req - The Request Object
+      * @param {object} res - The Response Object
+      * @returns {object} JSON API Response
+      */
+  static validateName(req, res, next) {
+    const validate = HelperUtils.validate();
+    let error = '';
+    const { name } = req.body;
+
+    if (!validate.name.test(name)) {
+      error = 'Part name must be valid';
+    }
+    if (!name || name === undefined) {
+      error = 'Party name must be specified';
+    }
+    if (error) {
+      return res.status(400).json({
+        status: 400, error,
+      });
+    }
+
+    return next();
+  }
+
 
   /**
      * @method validateHqAddress
@@ -52,11 +80,9 @@ export default class Validate {
       error = 'Invalid hqAddress format';
     } else if (!hqAddress || hqAddress === undefined) {
       error = 'hdAddress must be specified';
-    } else if (error) {
-      res.status(404).json({
-        status: 404,
-        error,
-      });
+    }
+    if (error) {
+      return res.status(400).json({ status: 400, error });
     }
     return next();
   }
@@ -75,11 +101,13 @@ export default class Validate {
 
     if (!validate.logoUrl.test(logoUrl)) {
       error = 'Invalid party logo';
-    } else if (!logoUrl || logoUrl === undefined) {
-      error = 'Logo must be specified';
-    } else if (error) {
-      res.status(404).json({
-        status: 404, error,
+    }
+    if (!logoUrl || logoUrl === undefined) {
+      error = 'Party  must be specified';
+    }
+    if (error) {
+      return res.status(400).json({
+        status: 400, error,
       });
     }
 
@@ -104,12 +132,14 @@ export default class Validate {
       error = 'Type must be specified';
     }
     if (error) {
-      return res.status(404).json({
-        status: 404, error,
+      return res.status(400).json({
+        status: 400, error,
       });
     }
     return next();
   }
+
+
   /**
     * @method validateNames
     * @description Validates firstName passed in the request body
