@@ -1,4 +1,4 @@
-const partiesDb = [
+const partyDb = [
   {
     id: 1,
     name: 'Advanced Congress of Democrats (ACD)',
@@ -26,4 +26,4 @@ const partiesDb = [
 
 ];
 
-export default partiesDb;
+export default partyDb;
