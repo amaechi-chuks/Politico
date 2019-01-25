@@ -10,8 +10,6 @@ router.post('/parties', Validate.validateHqAddress, Validate.validateLogoUrl, Va
 router.post('/offices', Validate.validateName, Validate.validateOfficeType,
   OfficeController.createOffice);
 
-router.post('/signup', ValidateParties.validateNames, ValidateParties.validatePhoneNumber, ValidateParties.validatePassportUrl, UserController.signUp);
-
 //  Handle all Get request
 router.get('/parties', PartyController.getAllParty);
 router.get('/parties/:id', Validate.findById, PartyController.getPartyById);
