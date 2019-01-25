@@ -5,7 +5,7 @@ import partyDb from '../model/partyModel';
 /**
  * @class Validate
  * @description Intercepts and validates a given request for parties endpoints
- * @exports ValidateParty
+ * @exports Validate
  */
 
 export default class Validate {
@@ -15,7 +15,7 @@ export default class Validate {
          * @param {object} res - The response object
          * @param {function} next - Calls the next function
          * @returns {object} JSON representing the failure message
-         * @memberof ValidateParty
+         * @memberof findById
          */
   static findById(req, res, next) {
     const { id } = req.params;
@@ -110,7 +110,7 @@ export default class Validate {
     }
     return next();
   }
-  
+
   /**
     * @method validateNames
     * @description Validates firstName passed in the request body
