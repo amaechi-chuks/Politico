@@ -1,22 +1,22 @@
-import partiesDb from '../models/partyModels';
+import partyDb from '../model/partyModel';
 
 /**
- * Class representing PartiesController
- * @class PartiesController
+ * Class representing PartyController
+ * @class PartyController
  */
-class PartiesController {
+export default class PartyController {
   /**
        * @description Create a new political party
        * @param {object} req - The request object
        * @param {object} res - The response object
        * @return {object} JSON representing data object
-       * @memberof createParties
+       * @memberof createParty
        */
-  static createParties(req, res) {
+  static createParty(req, res) {
     const {
       name, hdAddress, logoUrl,
     } = req.body;
-    const id = partiesDb[partiesDb.length - 1].id + 1;
+    const id = partyDb[partyDb.length - 1].id + 1;
     const registerdAt = new Date();
     const newParty = {
       id,
@@ -26,7 +26,7 @@ class PartiesController {
       registerdAt,
     };
     if (newParty) {
-      partiesDb.push(newParty);
+      partyDb.push(newParty);
       return res.status(201).json({
         status: 201,
         data: [
@@ -45,12 +45,12 @@ class PartiesController {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} JSON object representing data object
-   * @memberof getAllParties
+   * @memberof getAllParty
    */
-  static getAllParties(req, res) {
+  static getAllParty(req, res) {
     return res.status(200).json({
       status: 200,
-      data: partiesDb,
+      data: partyDb,
     });
   }
 
@@ -62,7 +62,7 @@ class PartiesController {
    * @memberof getPartyById
    */
   static getPartyById(req, res) {
-    const data = partiesDb.filter(
+    const data = partyDb.filter(
       partyObj => Number(req.params.id) === partyObj.id,
     );
     res.status(200).json({
@@ -79,7 +79,7 @@ class PartiesController {
    * @memberof getPartyById
    */
   static updateName(req, res) {
-    const partyRecord = partiesDb.filter(partyObj => partyObj.id === Number(req.params.id));
+    const partyRecord = partyDb.filter(partyObj => partyObj.id === Number(req.params.id));
     const { name } = req.body;
     const id = Number(req.params.id);
 
@@ -101,7 +101,7 @@ class PartiesController {
   static deletePartyById(req, res) {
     const id = Number(req.params.id);
     // Use filter so as not to mutate array
-    partiesDb.filter(partyObj => partyObj.id !== Number(id));
+    partyDb.filter(partyObj => partyObj.id !== Number(id));
     res.status(200).json({
       status: 200,
       data: [{
@@ -111,5 +111,3 @@ class PartiesController {
     });
   }
 }
-
-export default PartiesController;

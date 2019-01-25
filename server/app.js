@@ -2,7 +2,7 @@ import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import winston from 'winston';
-import routes from './routes/routes';
+import routes from './route/route';
 
 
 // Create a top level instance of express
@@ -16,10 +16,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 6000;
 
+app.get('/', (req, res) => res.status(200).json({
+  status: 200,
+  error: 'Welcome to Politico',
+}));
+
 app.use('/api/v1/', routes);
 
 app.all('*', (req, res) => res.status(404).json({
-  message: 'Wrong endpoint. Such endpoint does not exist',
+  status: 404,
+  error: 'Wrong endpoint. Such endpoint does not exist',
 }));
 
 app.listen(port, () => {
