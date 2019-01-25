@@ -2,7 +2,7 @@ import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import winston from 'winston';
-import routes from './routes/routes';
+import routes from './route/routes';
 
 
 // Create a top level instance of express
@@ -18,7 +18,7 @@ const port = process.env.PORT || 6000;
 
 app.get('/', (req, res) => res.status(200).json({
   status: 200,
-  error: 'Welcome to Politico',
+  message: 'Welcome to Politico',
 }));
 
 app.use('/api/v1/', routes);

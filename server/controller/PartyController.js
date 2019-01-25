@@ -14,14 +14,14 @@ export default class PartyController {
        */
   static createParty(req, res) {
     const {
-      name, hdAddress, logoUrl,
+      name, hqAddress, logoUrl,
     } = req.body;
     const id = partyDb[partyDb.length - 1].id + 1;
     const registerdAt = new Date();
     const newParty = {
       id,
       name,
-      hdAddress,
+      hqAddress,
       logoUrl,
       registerdAt,
     };
@@ -41,12 +41,13 @@ export default class PartyController {
   }
 
   /**
-   * @description Get all registered Political parties
+   * @description Get all registered Political party
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} JSON object representing data object
    * @memberof getAllParty
    */
+
   static getAllParty(req, res) {
     return res.status(200).json({
       status: 200,
@@ -78,14 +79,21 @@ export default class PartyController {
    * @returns {object} {object} JSON object representing data object
    * @memberof updateName
    */
+
   static updateName(req, res) {
-    const partyRecord = partyDb.filter(partyObj => partyObj.id === Number(req.params.id));
-    const { name } = req.body;
     const id = Number(req.params.id);
-
-    Object.assign({}, partyRecord[0], { name: `${name}` });
-
-    res.status(200).json({
+    const { name } = req.body;
+    const partyToUpdate = partyDb.find(partyObj => partyObj.id === id);
+    if (req.body.name === undefined) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Party name must be specified',
+      });
+    }
+    const partyIndex = partyDb.indexOf(partyToUpdate);
+    partyToUpdate.name = name;
+    partyDb[partyIndex] = partyToUpdate;
+    return res.status(200).json({
       status: 200,
       data: [{ id, name }],
     });
@@ -98,14 +106,19 @@ export default class PartyController {
    * @returns {object} {object} JSON object representing data object
    * @memberof deletePartyById
    */
+
   static deletePartyById(req, res) {
     const id = Number(req.params.id);
-    // Use filter so as not to mutate array
-    const findId = partyDb.filter(partyObj => partyObj.id !== Number(id));
-    if (findId) {
+    const partyToDelete = partyDb.find(party => party.id === id);
+    // Get the index of the object to delete
+    const objId = partyDb.indexOf(partyToDelete);
+    // Using the object index, splice the object out of the partiesDb
+    partyDb.splice(objId, 1);
+    if (objId) {
       return res.status(200).json({
         status: 200,
         data: [{
+          id,
           message: 'Party record has been deleted',
         }],
       });
