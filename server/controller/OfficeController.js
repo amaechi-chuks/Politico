@@ -72,7 +72,7 @@ export default class OfficeController {
       error: 'id does not exist',
     });
   }
-
+  
   /**
    * @description Delete a registered Political office by id
    * @param {object} req - The request object
