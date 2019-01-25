@@ -1,23 +1,23 @@
 import HelperUtils from '../utility/helperUltis';
-import partyDb from '../model/PartyModel';
+import partyDb from '../model/partyModel';
 
 
 /**
- * @class ValidateParty
+ * @class Validate
  * @description Intercepts and validates a given request for parties endpoints
- * @exports ValidateParty
+ * @exports Validate
  */
 
-export default class ValidateParty {
+export default class Validate {
   /**
          * @description Get a specific party by id
          * @param {object} req - The request object
          * @param {object} res - The response object
          * @param {function} next - Calls the next function
          * @returns {object} JSON representing the failure message
-         * @memberof ValidateParty
+         * @memberof findById
          */
-  static findPartyById(req, res, next) {
+  static findById(req, res, next) {
     const { id } = req.params;
     if (!Number(id)) {
       return res.status(400).json({
@@ -55,8 +55,8 @@ export default class ValidateParty {
       error = 'Party name must be specified';
     }
     if (error) {
-      return res.status(400).json({
-        status: 400, error,
+      return res.status(404).json({
+        status: 404, error,
       });
     }
 
@@ -80,9 +80,11 @@ export default class ValidateParty {
       error = 'Invalid hqAddress format';
     } else if (!hqAddress || hqAddress === undefined) {
       error = 'hdAddress must be specified';
-    }
-    if (error) {
-      return res.status(400).json({ status: 400, error });
+    } else if (error) {
+      res.status(404).json({
+        status: 404,
+        error,
+      });
     }
     return next();
   }
@@ -101,13 +103,11 @@ export default class ValidateParty {
 
     if (!validate.logoUrl.test(logoUrl)) {
       error = 'Invalid party logo';
-    }
-    if (!logoUrl || logoUrl === undefined) {
-      error = 'Party  must be specified';
-    }
-    if (error) {
-      return res.status(400).json({
-        status: 400, error,
+    } else if (!logoUrl || logoUrl === undefined) {
+      error = 'Logo must be specified';
+    } else if (error) {
+      res.status(404).json({
+        status: 404, error,
       });
     }
 
@@ -132,8 +132,8 @@ export default class ValidateParty {
       error = 'Type must be specified';
     }
     if (error) {
-      return res.status(400).json({
-        status: 400, error,
+      return res.status(404).json({
+        status: 404, error,
       });
     }
     return next();

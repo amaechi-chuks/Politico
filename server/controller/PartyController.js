@@ -1,4 +1,4 @@
-import partyDb from '../model/PartyModel';
+import partyDb from '../model/partyModel';
 
 /**
  * Class representing PartyController
@@ -76,7 +76,7 @@ export default class PartyController {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} {object} JSON object representing data object
-   * @memberof getPartyById
+   * @memberof updateName
    */
   static updateName(req, res) {
     const id = Number(req.params.id);
@@ -98,8 +98,17 @@ export default class PartyController {
    * @returns {object} {object} JSON object representing data object
    * @memberof deletePartyById
    */
+
+  /**
+   * @description Delete a registered Political party by id
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} {object} JSON object representing data object
+   * @memberof deletePartyById
+   */
   static deletePartyById(req, res) {
     const id = Number(req.params.id);
+    // Use find to get object to delete
     const partyToDelete = partyDb.find(party => party.id === id);
     // Get the index of the object to delete
     const objId = partyDb.indexOf(partyToDelete);
