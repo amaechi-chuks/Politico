@@ -653,7 +653,7 @@ footer {
 .modal-header {
   font-weight: 600;
   font-size: 1.5em;
-  border-bottom: 2px solid #0facf3;
+  border-bottom: 2px solid;
   margin: 0 -25px;
   padding: 10px 25px;
 }
@@ -863,7 +863,7 @@ tr>td:last-child {
     flex-direction: column;
     position: absolute;
     max-height: 0;
-    top: 73px;
+    top: 90px;
     left: 0;
     right: 0;
     padding: 0;
@@ -876,7 +876,7 @@ tr>td:last-child {
   .party-logo1 {
     width: 30px;
     float: right;
-    margin-right: 30px
+    margin: -42px 73px 100px;
   }
   .btn-primary3 {
     margin: 30px;
@@ -901,10 +901,10 @@ tr>td:last-child {
     color: #fffffa;
     padding: 20px;
   }
-  .active a {
+  /* .active a {
     color: #0facf3;
     background: #fffffa;
-  }
+  } */
   .hamburger-menu {
     position: absolute;
     padding: 37px;
@@ -1327,7 +1327,7 @@ tr>td:last-child {
   .party-logo1 {
     width: 30px;
     float: right;
-    margin-right: 30px
+    margin-right: -45px 33px 125px;
   }
   .text-party {
     margin-top: -5px
