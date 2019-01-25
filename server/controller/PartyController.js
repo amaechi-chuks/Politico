@@ -1,4 +1,4 @@
-import partyDb from '../model/partyModel';
+import partyDb from '../model/PartyModel';
 
 /**
  * Class representing PartyController
@@ -14,14 +14,14 @@ export default class PartyController {
        */
   static createParty(req, res) {
     const {
-      name, hdAddress, logoUrl,
+      name, hqAddress, logoUrl,
     } = req.body;
     const id = partyDb[partyDb.length - 1].id + 1;
     const registerdAt = new Date();
     const newParty = {
       id,
       name,
-      hdAddress,
+      hqAddress,
       logoUrl,
       registerdAt,
     };
@@ -108,7 +108,6 @@ export default class PartyController {
    */
   static deletePartyById(req, res) {
     const id = Number(req.params.id);
-    // Use find to get object to delete
     const partyToDelete = partyDb.find(party => party.id === id);
     // Get the index of the object to delete
     const objId = partyDb.indexOf(partyToDelete);

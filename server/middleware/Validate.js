@@ -110,6 +110,7 @@ export default class Validate {
     }
     return next();
   }
+
   /**
     * @method validateNames
     * @description Validates firstName passed in the request body

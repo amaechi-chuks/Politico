@@ -1,4 +1,4 @@
-import officeDb from '../model/officeModel';
+import officeDb from '../model/OfficeModel';
 
 /**
  * Class representing OfficeController
