@@ -76,7 +76,7 @@ export default class PartyController {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} {object} JSON object representing data object
-   * @memberof getPartyById
+   * @memberof updateName
    */
   static updateName(req, res) {
     const partyRecord = partyDb.filter(partyObj => partyObj.id === Number(req.params.id));
@@ -101,13 +101,18 @@ export default class PartyController {
   static deletePartyById(req, res) {
     const id = Number(req.params.id);
     // Use filter so as not to mutate array
-    partyDb.filter(partyObj => partyObj.id !== Number(id));
-    res.status(200).json({
-      status: 200,
-      data: [{
-        id,
-        message: 'Party record has been deleted',
-      }],
+    const findId = partyDb.filter(partyObj => partyObj.id !== Number(id));
+    if (findId) {
+      return res.status(200).json({
+        status: 200,
+        data: [{
+          message: 'Party record has been deleted',
+        }],
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      error: 'Such id does not exist',
     });
   }
 }
