@@ -1,28 +1,25 @@
 import express from 'express';
-import PartiesController from '../controllers/partyControllers';
-import ValidateParties from '../middlewares/validateParties';
-import OfficesController from '../controllers/officeControllers';
-import UserController from '../controllers/userControllers';
+import PartyController from '../controller/PartyController';
+import Validate from '../middlewares/validate';
+import OfficeController from '../controller/OfficeController';
 
 const router = express.Router();
 
 // Handle all Post request
-router.post('/parties', ValidateParties.validateHqAddress, ValidateParties.validateLogoUrl, ValidateParties.validateName, PartiesController.createParties);
-
-router.post('/offices', ValidateParties.validateName, ValidateParties.validateOfficeType,
-  OfficesController.createOffice);
-
-router.post('/signup', ValidateParties.validateNames, ValidateParties.validatePhoneNumber, ValidateParties.validatePassportUrl, UserController.signUp);
+router.post('/parties', Validate.validateHqAddress, Validate.validateLogoUrl, Validate.validateName, PartyController.createParty);
+router.post('/offices', Validate.validateName, Validate.validateOfficeType,
+  OfficeController.createOffice);
 
 //  Handle all Get request
-router.get('/parties', PartiesController.getAllParties);
-
-router.get('/parties/:id', ValidateParties.findPartiesById, PartiesController.getPartyById);
+router.get('/parties', PartyController.getAllParty);
+router.get('/parties/:id', Validate.findById, PartyController.getPartyById);
+router.get('/offices', OfficeController.getAllOffice);
+router.get('/offices/:id', Validate.findById, OfficeController.getOfficeById);
 
 //  Handle all Patch request
-router.patch('/parties/:id/name', ValidateParties.validateName, PartiesController.updateName);
+router.patch('/parties/:id/name', Validate.validateName, PartyController.updateName);
 
 //  Handles all delete request
-router.delete('/parties/:id', ValidateParties.findPartiesById, PartiesController.deletePartyById);
+router.delete('/parties/:id', Validate.findById, PartyController.deletePartyById);
 
 export default router;
