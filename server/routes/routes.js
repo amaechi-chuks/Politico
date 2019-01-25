@@ -1,6 +1,6 @@
 import express from 'express';
 import PartyController from '../controller/PartyController';
-import Validate from '../middlewares/validate';
+import Validate from '../middleware/Validate';
 import OfficeController from '../controller/OfficeController';
 
 const router = express.Router();
@@ -9,6 +9,8 @@ const router = express.Router();
 router.post('/parties', Validate.validateHqAddress, Validate.validateLogoUrl, Validate.validateName, PartyController.createParty);
 router.post('/offices', Validate.validateName, Validate.validateOfficeType,
   OfficeController.createOffice);
+
+router.post('/signup', ValidateParties.validateNames, ValidateParties.validatePhoneNumber, ValidateParties.validatePassportUrl, UserController.signUp);
 
 //  Handle all Get request
 router.get('/parties', PartyController.getAllParty);
