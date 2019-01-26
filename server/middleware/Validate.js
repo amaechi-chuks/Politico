@@ -32,7 +32,6 @@ export default class Validate {
         error: 'Party Id does not exist',
       });
     }
-    req.body.foundParty = foundParty;
     return next();
   }
 
@@ -50,10 +49,12 @@ export default class Validate {
 
     if (!validate.hqAddress.test(hqAddress)) {
       error = 'Invalid hqAddress format';
-    } else if (!hqAddress || hqAddress === undefined) {
-      error = 'hdAddress must be specified';
-    } else if (error) {
-      res.status(404).json({
+    }
+    if (!hqAddress || hqAddress === undefined) {
+      error = 'hqAddress must be specified';
+    }
+    if (error) {
+      return res.status(404).json({
         status: 404,
         error,
       });
@@ -75,10 +76,12 @@ export default class Validate {
 
     if (!validate.logoUrl.test(logoUrl)) {
       error = 'Invalid party logo';
-    } else if (!logoUrl || logoUrl === undefined) {
+    }
+    if (!logoUrl || logoUrl === undefined) {
       error = 'Logo must be specified';
-    } else if (error) {
-      res.status(404).json({
+    }
+    if (error) {
+      return res.status(404).json({
         status: 404, error,
       });
     }
@@ -112,6 +115,31 @@ export default class Validate {
   }
 
   /**
+    * @method validateName
+    * @description Validates firstName passed in the request body
+    * @param {object} req - The Request Object
+    * @param {object} res - The Response Object
+    * @returns {object} JSON API Response
+    */
+  static validateName(req, res, next) {
+    const validate = HelperUtils.validate();
+    let error = '';
+    const { name } = req.body;
+    if (!validate.name.test(name)) {
+      error = 'Invalid name';
+    }
+    if (!name || name === undefined) {
+      error = 'Party name must be specified';
+    }
+    if (error) {
+      return res.status(404).json({
+        status: 404, error,
+      });
+    }
+    return next();
+  }
+
+  /**
     * @method validateNames
     * @description Validates firstName passed in the request body
     * @param {object} req - The Request Object
@@ -128,21 +156,15 @@ export default class Validate {
     if (!firstName || firstName === undefined) {
       error = 'Firstname must be specified';
     }
-    if (firstName.length < 1 || firstName.length > 20) {
-      error = 'Firstname is between 1 to 20 characters ';
-    }
     if (!validate.name.test(lastName)) {
       error = 'Invalid name';
     }
     if (!lastName || lastName === undefined) {
       error = 'Firstname must be specified';
     }
-    if (lastName.length < 1 || lastName.length > 20) {
-      error = 'Firstname is between 1 to 20 characters ';
-    }
     if (error) {
-      return res.status(400).json({
-        status: 400, error,
+      return res.status(404).json({
+        status: 404, error,
       });
     }
     return next();

@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Handle all Post request
 router.post('/parties', Validate.validateHqAddress, Validate.validateLogoUrl, Validate.validateName, PartyController.createParty);
-router.post('/offices', Validate.validateName, Validate.validateOfficeType,
+router.post('/offices', Validate.validateOfficeType, Validate.validateName,
   OfficeController.createOffice);
 
 //  Handle all Get request
@@ -17,7 +17,7 @@ router.get('/offices', OfficeController.getAllOffice);
 router.get('/offices/:id', Validate.findById, OfficeController.getOfficeById);
 
 //  Handle all Patch request
-router.patch('/parties/:id/name', Validate.validateName, PartyController.updateName);
+router.patch('/parties/:id/name', Validate.findById, PartyController.updateName);
 
 //  Handles all delete request
 router.delete('/parties/:id', Validate.findById, PartyController.deletePartyById);

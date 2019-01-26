@@ -1,4 +1,4 @@
-import partyDb from '../model/PartyModel';
+import partyDb from '../model/partyModel';
 
 /**
  * Class representing PartyController
@@ -41,7 +41,7 @@ export default class PartyController {
   }
 
   /**
-   * @description Get all registered Political parties
+   * @description Get all registered Political party
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} JSON object representing data object
@@ -65,7 +65,7 @@ export default class PartyController {
     const data = partyDb.filter(
       partyObj => Number(req.params.id) === partyObj.id,
     );
-    res.status(200).json({
+    return res.status(200).json({
       status: 200,
       data,
     });
@@ -82,10 +82,16 @@ export default class PartyController {
     const id = Number(req.params.id);
     const { name } = req.body;
     const partyToUpdate = partyDb.find(partyObj => partyObj.id === id);
+    if (req.body.name === undefined) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Party name must be specified',
+      });
+    }
     const partyIndex = partyDb.indexOf(partyToUpdate);
     partyToUpdate.name = name;
     partyDb[partyIndex] = partyToUpdate;
-    res.status(200).json({
+    return res.status(200).json({
       status: 200,
       data: [{ id, name }],
     });
@@ -113,13 +119,15 @@ export default class PartyController {
     const objId = partyDb.indexOf(partyToDelete);
     // Using the object index, splice the object out of the partiesDb
     partyDb.splice(objId, 1);
-    res.status(200).json({
-      status: 200,
-      data: [{
-        id,
-        message: 'Party record has been deleted',
-      }],
-    });
+    if (objId) {
+      return res.status(200).json({
+        status: 200,
+        data: [{
+          id,
+          message: 'Party record has been deleted',
+        }],
+      });
+    }
     return res.status(404).json({
       status: 404,
       error: 'Such id does not exist',
