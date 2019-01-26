@@ -120,5 +120,9 @@ export default class PartyController {
         message: 'Party record has been deleted',
       }],
     });
+    return res.status(404).json({
+      status: 404,
+      error: 'Such id does not exist',
+    });
   }
 }
