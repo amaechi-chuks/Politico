@@ -1,8 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
-import officeDb from '../model/OfficeModel';
-
+import officeDb from '../model/officeModel';
 chai.use(chaiHttp);
 const { expect } = chai;
 const url = '/api/v1/offices/';
@@ -35,7 +34,7 @@ describe('Handle all GET requests on /api/v1/offices/ routes', () => {
       .get('/api/v1/office')
       .end((err, res) => {
         expect(res).to.have.status(404);
-        expect(res.body.message).to.be.equal('Wrong endpoint. Such endpoint does not exist');
+        expect(res.body.error).to.be.equal('Wrong endpoint. Such endpoint does not exist');
         done(err);
       });
   });
@@ -59,7 +58,7 @@ describe('Handle POST requests on /api/v1/offices/ route', () => {
         done(err);
       });
   });
-  it('Should have a status 400 for invalid name while creating  office', (done) => {
+  it('Should have a status 404 for invalid name while creating  office', (done) => {
     const office = {
       name: 99,
       type: 'legislative',
@@ -70,11 +69,11 @@ describe('Handle POST requests on /api/v1/offices/ route', () => {
       .post(url)
       .send(office)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         done(err);
       });
   });
-  it('Should have a status 400 for empty name while creating a political office', (done) => {
+  it('Should have a status 404 for empty name while creating a political office', (done) => {
     const office = {
       name: '',
       type: 'federal',
@@ -85,22 +84,11 @@ describe('Handle POST requests on /api/v1/offices/ route', () => {
       .post(url)
       .send(office)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         done(err);
       });
   });
-  it('Should have a status 400 for duplicated name while creating  Office', (done) => {
-    const office = officeDb[0];
-    chai
-      .request(app)
-      .post(url)
-      .send(office)
-      .end((err, res) => {
-        expect(res).to.have.status(400);
-        done(err);
-      });
-  });
-  it('Should have a status 400 for empty type while creating a political office', (done) => {
+  it('Should have a status 404 for empty type while creating a political office', (done) => {
     const office = {
       name: 'house of rep',
       type: '',
@@ -111,15 +99,15 @@ describe('Handle POST requests on /api/v1/offices/ route', () => {
       .post(url)
       .send(office)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body).to.deep.equal({
-          status: 400,
+          status: 404,
           error: 'Type must be specified',
         });
         done(err);
       });
   });
-  it('Should have a status 400 for invalid office type while creating a political office', (done) => {
+  it('Should have a status 404 for invalid office type while creating a political office', (done) => {
     const office = {
       name: 'Youth head',
       type: 'senate',
@@ -129,43 +117,13 @@ describe('Handle POST requests on /api/v1/offices/ route', () => {
       .post(url)
       .send(office)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body).to.deep.equal({
-          status: 400,
+          status: 404,
           error: 'Invalid office type',
         });
         done(err);
       });
   });
 });
-describe('Test for DELETE methods in deleting a  Office records', () => {
-  it('Should have a status of 200 and successfully delete the Office records', (done) => {
-    chai
-      .request(app)
-      .delete(`${url}${id}`)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body.data[0].id).to.equal(id);
-        expect(res.body.data[0].message).to.equal('Office record has been deleted');
-        expect(res.body).to.deep.equal({
-          status: 200,
-          data: res.body.data,
-        });
-        done(err);
-      });
-  });
-  it('Should have a status of 400 and fail while Deleting Office record which does not exist', (done) => {
-    const idToDelete = 0;
-    chai
-      .request(app)
-      .delete(`${url}${idToDelete}`)
-      .end((err, res) => {
-        expect(res).to.have.status(400);
-        expect(res.body).to.deep.equal({
-          status: 400,
-          error: 'Such endpoint does not exist',
-        });
-        done(err);
-      });
-  });
-});
+

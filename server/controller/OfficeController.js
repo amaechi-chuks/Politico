@@ -1,4 +1,4 @@
-import officeDb from '../model/OfficeModel';
+import officeDb from '../model/officeModel';
 
 /**
  * Class representing OfficeController
@@ -38,12 +38,14 @@ export default class OfficeController {
   }
 
   /**
-   * @description Get all registered  Office
+
+   * @description Get all registered Political Office
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} JSON object representing data object
-   * @memberof getAllOffices
+   * @memberof getAllOffice
    */
+  
   static getAllOffice(req, res) {
     return res.status(200).json({
       status: 200,
@@ -51,15 +53,14 @@ export default class OfficeController {
     });
   }
 
-  // //Get by id
-
   /**
-   * @description Get a registered  office by id
+    *@description Get a registered Political office by id
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} {object} JSON object representing data object
    * @memberof getOfficeById
    */
+  
   static getOfficeById(req, res) {
     const data = officeDb.filter(
       OfficeObj => Number(req.params.id) === OfficeObj.id,

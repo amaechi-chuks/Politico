@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
-import PartyDb from '../model/PartyModel';
+import partyDb from '../model/partyModel';
 
 chai.use(chaiHttp);
 const { expect } = chai;
@@ -14,7 +14,7 @@ describe('Handle all GET requests on /api/v1/parties/ routes', () => {
       .get(url)
       .end((err, res) => {
         expect(res).to.have.status(200);
-        expect(res.body.data).to.deep.equal(PartyDb);
+        expect(res.body.data).to.deep.equal(partyDb);
         done(err);
       });
   });
@@ -24,7 +24,7 @@ describe('Handle all GET requests on /api/v1/parties/ routes', () => {
       .get(`${url}${id}`)
       .end((err, res) => {
         expect(res).to.have.status(200);
-        expect(res.body.data).to.deep.equal([PartyDb[id - 1]]);
+        expect(res.body.data).to.deep.equal([partyDb[id - 1]]);
         done(err);
       });
   });
@@ -34,7 +34,7 @@ describe('Handle all GET requests on /api/v1/parties/ routes', () => {
       .get('/api/v1/party')
       .end((err, res) => {
         expect(res).to.have.status(404);
-        expect(res.body.message).to.be.equal('Wrong endpoint. Such endpoint does not exist');
+        expect(res.body.error).to.be.equal('Wrong endpoint. Such endpoint does not exist');
         done(err);
       });
   });
@@ -70,10 +70,10 @@ describe('Handle POST requests on /api/v1/parties/ route', () => {
       .post(url)
       .send(party)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body).to.deep.equal({
-          status: 400,
-          error: 'Party name must be valid',
+          status: 404,
+          error: 'Invalid name',
         });
         done(err);
       });
@@ -89,43 +89,28 @@ describe('Handle POST requests on /api/v1/parties/ route', () => {
       .post(url)
       .send(party)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body).to.deep.equal({
-          status: 400,
+          status: 404,
           error: 'Party name must be specified',
         });
         done(err);
       });
   });
-  it('Should have a status 400 for duplicated name while creating political party', (done) => {
-    const party = PartyDb[0];
-    chai
-      .request(app)
-      .post(url)
-      .send(party)
-      .end((err, res) => {
-        expect(res).to.have.status(400);
-        expect(res.body).to.deep.equal({
-          status: 400,
-          error: 'Party name already exist',
-        });
-        done(err);
-      });
-  });
-  it('Should have a status 400 for empty hqAddress while creating political party', (done) => {
+  it('Should have a status 404 for empty hqAddress while creating political party', (done) => {
     const party = {
       name: 'Youth Alliance Accord',
       hqAddress: '',
-      logoUrl: 'aba.png',
+      logoUrl: 'chuks.png',
     };
     chai
       .request(app)
       .post(url)
       .send(party)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body).to.deep.equal({
-          status: 400,
+          status: 404,
           error: 'hqAddress must be specified',
         });
         done(err);
@@ -142,15 +127,16 @@ describe('Handle POST requests on /api/v1/parties/ route', () => {
       .post(url)
       .send(party)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(404);
         expect(res.body).to.deep.equal({
-          status: 400,
-          error: 'Party Logo must be specified',
+          status: 404,
+          error: 'Logo must be specified',
         });
         done(err);
       });
   });
 });
+
 describe('Test for PATCH methods in updating party name records', () => {
   it('Should have a status of 200 and successfully UPDATE the party name', (done) => {
     const newName = { name: 'Hope Accord' };
@@ -167,22 +153,8 @@ describe('Test for PATCH methods in updating party name records', () => {
         done(err);
       });
   });
-  it('Should have a status of 400 and fail while updating the party name', (done) => {
-    const newName = { name: '' };
-    chai
-      .request(app)
-      .patch(`${url}${id}/name`)
-      .send(newName)
-      .end((err, res) => {
-        expect(res).to.have.status(400);
-        expect(res.body).to.deep.equal({
-          status: 400,
-          error: 'Party name must be specified',
-        });
-        done(err);
-      });
-  });
 });
+
 describe('Test for DELETE methods in deleting a political party records', () => {
   it('Should have a status of 200 and successfully delete the party records', (done) => {
     chai
@@ -195,20 +167,6 @@ describe('Test for DELETE methods in deleting a political party records', () => 
         expect(res.body).to.deep.equal({
           status: 200,
           data: res.body.data,
-        });
-        done(err);
-      });
-  });
-  it('Should have a status of 400 and fail while Deleting party record which does not exist', (done) => {
-    const idToDelete = 0;
-    chai
-      .request(app)
-      .delete(`${url}${idToDelete}`)
-      .end((err, res) => {
-        expect(res).to.have.status(400);
-        expect(res.body).to.deep.equal({
-          status: 400,
-          error: 'Such endpoint does not exist',
         });
         done(err);
       });
