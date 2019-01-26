@@ -25,14 +25,14 @@ export default class Validate {
         error: 'Such endpoint does not exist',
       });
     }
-    const foundParties = partyDb.find(party => party.id === Number(id));
-    if (!foundParties) {
+    const foundParty = partyDb.find(party => party.id === Number(id));
+    if (!foundParty) {
       return res.status(404).json({
         status: 404,
         error: 'Party Id does not exist',
       });
     }
-    req.body.foundParties = foundParties;
+    req.body.foundParty = foundParty;
     return next();
   }
 

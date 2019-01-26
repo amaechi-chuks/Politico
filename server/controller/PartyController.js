@@ -1,4 +1,4 @@
-import partyDb from '../model/partyModel';
+import partyDb from '../model/PartyModel';
 
 /**
  * Class representing PartyController
@@ -14,14 +14,14 @@ export default class PartyController {
        */
   static createParty(req, res) {
     const {
-      name, hdAddress, logoUrl,
+      name, hqAddress, logoUrl,
     } = req.body;
     const id = partyDb[partyDb.length - 1].id + 1;
     const registerdAt = new Date();
     const newParty = {
       id,
       name,
-      hdAddress,
+      hqAddress,
       logoUrl,
       registerdAt,
     };
@@ -79,12 +79,12 @@ export default class PartyController {
    * @memberof updateName
    */
   static updateName(req, res) {
-    const partyRecord = partyDb.filter(partyObj => partyObj.id === Number(req.params.id));
-    const { name } = req.body;
     const id = Number(req.params.id);
-
-    Object.assign({}, partyRecord[0], { name: `${name}` });
-
+    const { name } = req.body;
+    const partyToUpdate = partyDb.find(partyObj => partyObj.id === id);
+    const partyIndex = partyDb.indexOf(partyToUpdate);
+    partyToUpdate.name = name;
+    partyDb[partyIndex] = partyToUpdate;
     res.status(200).json({
       status: 200,
       data: [{ id, name }],
@@ -98,18 +98,28 @@ export default class PartyController {
    * @returns {object} {object} JSON object representing data object
    * @memberof deletePartyById
    */
+
+  /**
+   * @description Delete a registered Political party by id
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} {object} JSON object representing data object
+   * @memberof deletePartyById
+   */
   static deletePartyById(req, res) {
     const id = Number(req.params.id);
-    // Use filter so as not to mutate array
-    const findId = partyDb.filter(partyObj => partyObj.id !== Number(id));
-    if (findId) {
-      return res.status(200).json({
-        status: 200,
-        data: [{
-          message: 'Party record has been deleted',
-        }],
-      });
-    }
+    const partyToDelete = partyDb.find(party => party.id === id);
+    // Get the index of the object to delete
+    const objId = partyDb.indexOf(partyToDelete);
+    // Using the object index, splice the object out of the partiesDb
+    partyDb.splice(objId, 1);
+    res.status(200).json({
+      status: 200,
+      data: [{
+        id,
+        message: 'Party record has been deleted',
+      }],
+    });
     return res.status(404).json({
       status: 404,
       error: 'Such id does not exist',
