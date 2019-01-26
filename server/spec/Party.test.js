@@ -59,7 +59,7 @@ describe('Handle POST requests on /api/v1/parties/ route', () => {
         done(err);
       });
   });
-  it('Should have a status 400 for invalid name while creating political party', (done) => {
+  it('Should have a status 404 for invalid name while creating political party', (done) => {
     const party = {
       name: 99,
       hqAddress: '55 Brainbox Rd Aba',
@@ -73,7 +73,7 @@ describe('Handle POST requests on /api/v1/parties/ route', () => {
         expect(res).to.have.status(404);
         expect(res.body).to.deep.equal({
           status: 404,
-          error: 'Invalid name',
+          error: 'Invalid party name',
         });
         done(err);
       });
@@ -108,9 +108,9 @@ describe('Handle POST requests on /api/v1/parties/ route', () => {
       .post(url)
       .send(party)
       .end((err, res) => {
-        expect(res).to.have.status(404);
+        expect(res).to.have.status(400);
         expect(res.body).to.deep.equal({
-          status: 404,
+          status: 400,
           error: 'hqAddress must be specified',
         });
         done(err);
@@ -127,10 +127,10 @@ describe('Handle POST requests on /api/v1/parties/ route', () => {
       .post(url)
       .send(party)
       .end((err, res) => {
-        expect(res).to.have.status(404);
+        expect(res).to.have.status(400);
         expect(res.body).to.deep.equal({
-          status: 404,
-          error: 'Logo must be specified',
+          status: 400,
+          error: 'Party Logo must be specified',
         });
         done(err);
       });
@@ -138,7 +138,7 @@ describe('Handle POST requests on /api/v1/parties/ route', () => {
 });
 
 describe('Test for PATCH methods in updating party name records', () => {
-  it('Should have a status of 200 on successfully UPDATE the party name', (done) => {
+  it('Should have a status of 200 and successfully UPDATE the party name', (done) => {
     const newName = { name: 'Hope Accord' };
     chai
       .request(app)

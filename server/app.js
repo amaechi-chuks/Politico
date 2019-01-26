@@ -18,7 +18,7 @@ const port = process.env.PORT || 6000;
 
 app.get('/', (req, res) => res.status(200).json({
   status: 200,
-  error: 'Welcome to Politico',
+  message: 'Welcome to Politico',
 }));
 
 app.use('/api/v1/', routes);

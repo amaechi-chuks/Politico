@@ -38,12 +38,14 @@ export default class OfficeController {
   }
 
   /**
+
    * @description Get all registered Political Office
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} JSON object representing data object
    * @memberof getAllOffice
    */
+
   static getAllOffice(req, res) {
     return res.status(200).json({
       status: 200,
@@ -58,9 +60,10 @@ export default class OfficeController {
    * @returns {object} {object} JSON object representing data object
    * @memberof getOfficeById
    */
+
   static getOfficeById(req, res) {
     const data = officeDb.filter(
-      partyObj => Number(req.params.id) === partyObj.id,
+      OfficeObj => Number(req.params.id) === OfficeObj.id,
     );
     if (data) {
       return res.status(200).json({

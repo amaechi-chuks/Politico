@@ -47,6 +47,7 @@ export default class PartyController {
    * @returns {object} JSON object representing data object
    * @memberof getAllParty
    */
+
   static getAllParty(req, res) {
     return res.status(200).json({
       status: 200,
@@ -65,7 +66,7 @@ export default class PartyController {
     const data = partyDb.filter(
       partyObj => Number(req.params.id) === partyObj.id,
     );
-    return res.status(200).json({
+    res.status(200).json({
       status: 200,
       data,
     });
@@ -78,6 +79,7 @@ export default class PartyController {
    * @returns {object} {object} JSON object representing data object
    * @memberof updateName
    */
+
   static updateName(req, res) {
     const id = Number(req.params.id);
     const { name } = req.body;
@@ -105,13 +107,6 @@ export default class PartyController {
    * @memberof deletePartyById
    */
 
-  /**
-   * @description Delete a registered Political party by id
-   * @param {object} req - The request object
-   * @param {object} res - The response object
-   * @returns {object} {object} JSON object representing data object
-   * @memberof deletePartyById
-   */
   static deletePartyById(req, res) {
     const id = Number(req.params.id);
     const partyToDelete = partyDb.find(party => party.id === id);

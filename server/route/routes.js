@@ -1,13 +1,13 @@
 import express from 'express';
 import PartyController from '../controller/PartyController';
-import Validate from '../middleware/Validate';
+import Validate from '../middleware/Validator';
 import OfficeController from '../controller/OfficeController';
 
 const router = express.Router();
 
 // Handle all Post request
 router.post('/parties', Validate.validateHqAddress, Validate.validateLogoUrl, Validate.validateName, PartyController.createParty);
-router.post('/offices', Validate.validateOfficeType, Validate.validateName,
+router.post('/offices', Validate.validateOfficeType, Validate.validateOfficeName,
   OfficeController.createOffice);
 
 //  Handle all Get request

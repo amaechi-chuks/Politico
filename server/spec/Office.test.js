@@ -108,7 +108,7 @@ describe('Handle POST requests on /api/v1/offices/ route', () => {
         done(err);
       });
   });
-  it('Should have a status 400 for invalid office type while creating a political office', (done) => {
+  it('Should have a status 404 for invalid office type while creating a political office', (done) => {
     const office = {
       name: 'Youth head',
       type: 'senate',
