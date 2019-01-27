@@ -114,7 +114,7 @@ export default class PartyController {
     const objId = partyDb.indexOf(partyToDelete);
     // Using the object index, splice the object out of the partiesDb
     partyDb.splice(objId, 1);
-    if (objId) {
+    if (partyToDelete) {
       return res.status(200).json({
         status: 200,
         data: [{

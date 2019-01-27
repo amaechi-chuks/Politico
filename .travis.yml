@@ -1,24 +1,28 @@
 language: node_js
 node_js:
   - "10.15.0"
+services:
+  - postgresql
+dist: trusty  
 env:
-    global:
+  global:
     - CC_TEST_REPORTER_ID=752b820991057a553688cb0876e647bbb1ffe854a5d9bc8d20e4dbdb93242747
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+  - psql -c 'create database politico;' -U postgres
 
-  script:
-  - npm run test
-  
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-  
 cache:
   directories:
-    - "node_modules"  
-after_success:
+    - "node_modules" 
+
+after_script:
   - npm run coverage
   - npm run report-coverage
   - npm run coveralls
+  - ./cc-test-reporter after-build -r 752b820991057a553688cb0876e647bbb1ffe854a5d9bc8d20e4dbdb93242747 --exit-code $TRAVIS_TEST_RESULT
+
+notifications:
+  email: true
+
