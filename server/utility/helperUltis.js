@@ -1,8 +1,11 @@
+import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import bcryptjs from 'bcryptjs';
 
 dotenv.config();
+const secretKey = process.env.SECRET_KEY;
 
-class HelperUtils {
+export default class HelperUtils {
   static validate() {
     return {
       name: /^[a-zA-Z_ ]+$/,
@@ -14,6 +17,26 @@ class HelperUtils {
       type: /(federal|legislative|state|local government)$/i,
     };
   }
-}
 
-export default HelperUtils;
+  static async generateToken(payload) {
+    const token = await jwt.sign(payload, secretKey, { expiresIn: '1 week' });
+    return token;
+  }
+
+  static verifyToken(token) {
+    try {
+      const payload = jwt.verify(token, secretKey);
+      return payload;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  static hashPassword(password) {
+    return bcryptjs.hashSync(password, 10);
+  }
+
+  static verifyPassword(password, hash) {
+    return bcryptjs.compareSync(password, hash);
+  }
+}

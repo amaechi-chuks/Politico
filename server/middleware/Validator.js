@@ -26,7 +26,6 @@ export default class Validate {
       });
     }
     const foundParty = partyDb.find(party => party.id === Number(id));
-    // const foundOffice = officeDb.find(party => party.id === Number(id));
     if (!foundParty) {
       return res.status(404).json({
         status: 404,
