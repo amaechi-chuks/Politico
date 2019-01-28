@@ -33,10 +33,6 @@ export default class PartyController {
         ],
       });
     }
-    return res.status(400).json({
-      status: 400,
-      error: 'Bad request',
-    });
   }
 
   /**
@@ -84,8 +80,8 @@ export default class PartyController {
     const { name } = req.body;
     const partyToUpdate = partyDb.find(partyObj => partyObj.id === id);
     if (req.body.name === undefined) {
-      return res.status(404).json({
-        status: 404,
+      return res.status(400).json({
+        status: 400,
         error: 'Party name must be specified',
       });
     }
@@ -122,9 +118,9 @@ export default class PartyController {
         }],
       });
     }
-    return res.status(404).json({
-      status: 404,
-      error: 'Such id does not exist',
+    return res.status(400).json({
+      status: 400,
+      error: 'The id does not exist',
     });
   }
 }
