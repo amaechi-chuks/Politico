@@ -9,11 +9,11 @@ const pool = new Pool({
 
 const seed = () => {
   const qry = createTables;
-  pool.query(qry, (err, result) => {
+  pool.query(qry, (err, dbRes) => {
     if (err) {
       winston.info(err.toString());
     } else {
-      winston.info(result);
+      winston.info(dbRes);
     }
   });
 };
