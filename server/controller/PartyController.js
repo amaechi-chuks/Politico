@@ -1,5 +1,4 @@
 import partyDb from '../model/partyModel';
-
 /**
  * Class representing PartyController
  * @class PartyController

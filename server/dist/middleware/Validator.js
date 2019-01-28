@@ -1,26 +1,26 @@
-'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+const _createClass = (function () { function defineProperties(target, props) { for (let i = 0; i < props.length; i++) { const descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }());
 
-var _helperUltis = require('../utility/helperUltis');
+const _helperUltis = require('../utility/helperUltis');
 
-var _helperUltis2 = _interopRequireDefault(_helperUltis);
+const _helperUltis2 = _interopRequireDefault(_helperUltis);
 
-var _partyModel = require('../model/partyModel');
+const _partyModel = require('../model/partyModel');
 
-var _partyModel2 = _interopRequireDefault(_partyModel);
+const _partyModel2 = _interopRequireDefault(_partyModel);
 
-var _officeModel = require('../model/officeModel');
+const _officeModel = require('../model/officeModel');
 
-var _officeModel2 = _interopRequireDefault(_officeModel);
+const _officeModel2 = _interopRequireDefault(_officeModel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 /**
  * @class Validate
@@ -28,7 +28,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @exports Validate
  */
 
-var Validate = function () {
+const Validate = (function () {
   function Validate() {
     _classCallCheck(this, Validate);
   }
@@ -45,26 +45,24 @@ var Validate = function () {
            * @memberof findById
            */
     value: function findById(req, res, next) {
-      var id = req.params.id;
+      const id = req.params.id;
 
       if (!Number(id)) {
         return res.status(400).json({
           status: 400,
-          error: 'Such endpoint does not exist'
+          error: 'Such endpoint does not exist',
         });
       }
-      var foundParty = _partyModel2.default.find(function (party) {
-        return party.id === Number(id);
-      });
+      const foundParty = _partyModel2.default.find(party => party.id === Number(id));
       // const foundOffice = officeDb.find(party => party.id === Number(id));
       if (!foundParty) {
         return res.status(404).json({
           status: 404,
-          error: 'Id does not exist'
+          error: 'Id does not exist',
         });
       }
       return next();
-    }
+    },
 
     /**
         * @method validateName
@@ -77,9 +75,9 @@ var Validate = function () {
   }, {
     key: 'validateName',
     value: function validateName(req, res, next) {
-      var validate = _helperUltis2.default.validate();
-      var error = '';
-      var name = req.body.name;
+      const validate = _helperUltis2.default.validate();
+      let error = '';
+      const name = req.body.name;
 
       if (!validate.name.test(name)) {
         error = 'Invalid party name';
@@ -87,20 +85,18 @@ var Validate = function () {
       if (!name || name === undefined) {
         error = 'Party name must be specified';
       }
-      var duplicatName = _partyModel2.default.find(function (party) {
-        return party.name === name;
-      });
+      const duplicatName = _partyModel2.default.find(party => party.name === name);
       if (duplicatName) {
         error = 'Party name already exist';
       }
       if (error) {
         return res.status(404).json({
-          status: 404, error: error
+          status: 404, error,
         });
       }
 
       return next();
-    }
+    },
 
     /**
         * @method validateOfficeName
@@ -113,9 +109,9 @@ var Validate = function () {
   }, {
     key: 'validateOfficeName',
     value: function validateOfficeName(req, res, next) {
-      var validate = _helperUltis2.default.validate();
-      var error = '';
-      var name = req.body.name;
+      const validate = _helperUltis2.default.validate();
+      let error = '';
+      const name = req.body.name;
 
       if (!validate.name.test(name)) {
         error = 'Office name must be valid';
@@ -123,20 +119,18 @@ var Validate = function () {
       if (!name || name === undefined) {
         error = 'Office name must be specified';
       }
-      var duplicatOfficeName = _officeModel2.default.find(function (office) {
-        return office.name === name;
-      });
+      const duplicatOfficeName = _officeModel2.default.find(office => office.name === name);
       if (duplicatOfficeName) {
         error = 'Office name already exist';
       }
       if (error) {
         return res.status(404).json({
-          status: 404, error: error
+          status: 404, error,
         });
       }
 
       return next();
-    }
+    },
 
     /**
        * @method validateHqAddress
@@ -149,9 +143,9 @@ var Validate = function () {
   }, {
     key: 'validateHqAddress',
     value: function validateHqAddress(req, res, next) {
-      var validate = _helperUltis2.default.validate();
-      var error = '';
-      var hqAddress = req.body.hqAddress;
+      const validate = _helperUltis2.default.validate();
+      let error = '';
+      const hqAddress = req.body.hqAddress;
 
 
       if (!validate.hqAddress.test(hqAddress)) {
@@ -160,10 +154,10 @@ var Validate = function () {
         error = 'hqAddress must be specified';
       }
       if (error) {
-        return res.status(400).json({ status: 400, error: error });
+        return res.status(400).json({ status: 400, error });
       }
       return next();
-    }
+    },
 
     /**
       * @method validateLogoUrl
@@ -176,9 +170,9 @@ var Validate = function () {
   }, {
     key: 'validateLogoUrl',
     value: function validateLogoUrl(req, res, next) {
-      var validate = _helperUltis2.default.validate();
-      var error = '';
-      var logoUrl = req.body.logoUrl;
+      const validate = _helperUltis2.default.validate();
+      let error = '';
+      const logoUrl = req.body.logoUrl;
 
 
       if (!validate.logoUrl.test(logoUrl)) {
@@ -190,12 +184,12 @@ var Validate = function () {
       if (error) {
         return res.status(400).json({
           status: 400,
-          error: error
+          error,
         });
       }
 
       return next();
-    }
+    },
 
     /**
       * @method validateOfficeType
@@ -208,9 +202,9 @@ var Validate = function () {
   }, {
     key: 'validateOfficeType',
     value: function validateOfficeType(req, res, next) {
-      var validate = _helperUltis2.default.validate();
-      var error = '';
-      var type = req.body.type;
+      const validate = _helperUltis2.default.validate();
+      let error = '';
+      const type = req.body.type;
 
       if (!validate.type.test(type)) {
         error = 'Invalid office type';
@@ -220,14 +214,14 @@ var Validate = function () {
       }
       if (error) {
         return res.status(404).json({
-          status: 404, error: error
+          status: 404, error,
         });
       }
       return next();
-    }
+    },
   }]);
 
   return Validate;
-}();
+}());
 
 exports.default = Validate;

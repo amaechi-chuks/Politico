@@ -1,12 +1,12 @@
-'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
 
-var _dotenv = require('dotenv');
+const _dotenv = require('dotenv');
 
-var _dotenv2 = _interopRequireDefault(_dotenv);
+const _dotenv2 = _interopRequireDefault(_dotenv);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18,16 +18,16 @@ exports.default = {
     password: process.env.PGPASSWORD,
     database: process.env.PGDATABASE,
     host: process.env.PGHOST,
-    port: process.env.PGPORT
+    port: process.env.PGPORT,
   },
   test: {
     username: process.env.DB_TEST_PGUSER,
     password: process.env.PGPASSWORD,
     database: process.env.PGDATABASE_TEST,
     host: process.env.PGHOST,
-    port: process.env.PGPORT
+    port: process.env.PGPORT,
   },
   production: {
-    use_env_variable: 'DATABASE_URL'
-  }
+    use_env_variable: 'DATABASE_URL',
+  },
 };

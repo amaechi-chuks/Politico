@@ -1,14 +1,14 @@
-'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
-var dropUsers = 'DROP TABLE IF EXISTS users CASCADE; ';
-var dropParty = 'DROP TABLE IF EXISTS party CASCADE; ';
-var dropOffice = 'DROP TABLE IF EXISTS office CASCADE; ';
-var dropVote = 'DROP TABLE IF EXISTS vote CASCADE; ';
-var dropRegister = 'DROP TABLE IF EXISTS register CASCADE; ';
+const dropUsers = 'DROP TABLE IF EXISTS users CASCADE; ';
+const dropParty = 'DROP TABLE IF EXISTS party CASCADE; ';
+const dropOffice = 'DROP TABLE IF EXISTS office CASCADE; ';
+const dropVote = 'DROP TABLE IF EXISTS vote CASCADE; ';
+const dropRegister = 'DROP TABLE IF EXISTS register CASCADE; ';
 
-var dropQuery = '' + dropUsers + dropParty + dropOffice + dropVote + dropRegister;
+const dropQuery = `${dropUsers}${dropParty}${dropOffice}${dropVote}${dropRegister}`;
 
 exports.default = dropQuery;

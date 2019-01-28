@@ -1,24 +1,24 @@
-'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+const _createClass = (function () { function defineProperties(target, props) { for (let i = 0; i < props.length; i++) { const descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }());
 
-var _partyModel = require('../model/partyModel');
+const _partyModel = require('../model/partyModel');
 
-var _partyModel2 = _interopRequireDefault(_partyModel);
+const _partyModel2 = _interopRequireDefault(_partyModel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 /**
  * Class representing PartyController
  * @class PartyController
  */
-var PartyController = function () {
+const PartyController = (function () {
   function PartyController() {
     _classCallCheck(this, PartyController);
   }
@@ -34,32 +34,38 @@ var PartyController = function () {
          * @memberof createParty
          */
     value: function createParty(req, res) {
-      var _req$body = req.body,
-          name = _req$body.name,
-          hqAddress = _req$body.hqAddress,
-          logoUrl = _req$body.logoUrl;
+      const _req$body = req.body;
 
-      var id = _partyModel2.default[_partyModel2.default.length - 1].id + 1;
-      var registerdAt = new Date();
-      var newParty = {
-        id: id,
-        name: name,
-        hqAddress: hqAddress,
-        logoUrl: logoUrl,
-        registerdAt: registerdAt
+
+      const name = _req$body.name;
+
+
+      const hqAddress = _req$body.hqAddress;
+
+
+      const logoUrl = _req$body.logoUrl;
+
+      const id = _partyModel2.default[_partyModel2.default.length - 1].id + 1;
+      const registerdAt = new Date();
+      const newParty = {
+        id,
+        name,
+        hqAddress,
+        logoUrl,
+        registerdAt,
       };
       if (newParty) {
         _partyModel2.default.push(newParty);
         return res.status(201).json({
           status: 201,
-          data: [newParty]
+          data: [newParty],
         });
       }
       return res.status(400).json({
         status: 400,
-        error: 'Bad request'
+        error: 'Bad request',
       });
-    }
+    },
 
     /**
      * @description Get all registered Political party
@@ -74,9 +80,9 @@ var PartyController = function () {
     value: function getAllParty(req, res) {
       return res.status(200).json({
         status: 200,
-        data: _partyModel2.default
+        data: _partyModel2.default,
       });
-    }
+    },
 
     /**
      * @description Get a registered Political party by id
@@ -89,14 +95,12 @@ var PartyController = function () {
   }, {
     key: 'getPartyById',
     value: function getPartyById(req, res) {
-      var data = _partyModel2.default.filter(function (partyObj) {
-        return Number(req.params.id) === partyObj.id;
-      });
+      const data = _partyModel2.default.filter(partyObj => Number(req.params.id) === partyObj.id);
       res.status(200).json({
         status: 200,
-        data: data
+        data,
       });
-    }
+    },
 
     /**
      * @description PATCH a registered Political party by name
@@ -109,26 +113,24 @@ var PartyController = function () {
   }, {
     key: 'updateName',
     value: function updateName(req, res) {
-      var id = Number(req.params.id);
-      var name = req.body.name;
+      const id = Number(req.params.id);
+      const name = req.body.name;
 
-      var partyToUpdate = _partyModel2.default.find(function (partyObj) {
-        return partyObj.id === id;
-      });
+      const partyToUpdate = _partyModel2.default.find(partyObj => partyObj.id === id);
       if (req.body.name === undefined) {
         return res.status(404).json({
           status: 404,
-          error: 'Party name must be specified'
+          error: 'Party name must be specified',
         });
       }
-      var partyIndex = _partyModel2.default.indexOf(partyToUpdate);
+      const partyIndex = _partyModel2.default.indexOf(partyToUpdate);
       partyToUpdate.name = name;
       _partyModel2.default[partyIndex] = partyToUpdate;
       return res.status(200).json({
         status: 200,
-        data: [{ id: id, name: name }]
+        data: [{ id, name }],
       });
-    }
+    },
 
     /**
      * @description Delete a registered Political party by id
@@ -141,31 +143,29 @@ var PartyController = function () {
   }, {
     key: 'deletePartyById',
     value: function deletePartyById(req, res) {
-      var id = Number(req.params.id);
-      var partyToDelete = _partyModel2.default.find(function (party) {
-        return party.id === id;
-      });
+      const id = Number(req.params.id);
+      const partyToDelete = _partyModel2.default.find(party => party.id === id);
       // Get the index of the object to delete
-      var objId = _partyModel2.default.indexOf(partyToDelete);
+      const objId = _partyModel2.default.indexOf(partyToDelete);
       // Using the object index, splice the object out of the partiesDb
       _partyModel2.default.splice(objId, 1);
       if (partyToDelete) {
         return res.status(200).json({
           status: 200,
           data: [{
-            id: id,
-            message: 'Party record has been deleted'
-          }]
+            id,
+            message: 'Party record has been deleted',
+          }],
         });
       }
       return res.status(404).json({
         status: 404,
-        error: 'Such id does not exist'
+        error: 'Such id does not exist',
       });
-    }
+    },
   }]);
 
   return PartyController;
-}();
+}());
 
 exports.default = PartyController;

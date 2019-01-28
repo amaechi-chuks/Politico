@@ -1,28 +1,28 @@
-'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
 
-var _express = require('express');
+const _express = require('express');
 
-var _express2 = _interopRequireDefault(_express);
+const _express2 = _interopRequireDefault(_express);
 
-var _PartyController = require('../controller/PartyController');
+const _PartyController = require('../controller/PartyController');
 
-var _PartyController2 = _interopRequireDefault(_PartyController);
+const _PartyController2 = _interopRequireDefault(_PartyController);
 
-var _Validator = require('../middleware/Validator');
+const _Validator = require('../middleware/Validator');
 
-var _Validator2 = _interopRequireDefault(_Validator);
+const _Validator2 = _interopRequireDefault(_Validator);
 
-var _OfficeController = require('../controller/OfficeController');
+const _OfficeController = require('../controller/OfficeController');
 
-var _OfficeController2 = _interopRequireDefault(_OfficeController);
+const _OfficeController2 = _interopRequireDefault(_OfficeController);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var router = _express2.default.Router();
+const router = _express2.default.Router();
 
 // Handle all Post request
 router.post('/parties', _Validator2.default.validateHqAddress, _Validator2.default.validateLogoUrl, _Validator2.default.validateName, _PartyController2.default.createParty);
