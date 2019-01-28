@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import routes from './route/routes';
 import winston from './config/winston';
-
+import databaseConnection from './model/databaseConnection';
 
 
 // Create a top level instance of express
