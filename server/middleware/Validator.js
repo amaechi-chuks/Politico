@@ -22,11 +22,10 @@ export default class Validate {
     if (!Number(id)) {
       return res.status(400).json({
         status: 400,
-        error: 'Such endpoint does not exist',
+        error: 'The id you provided is invalid',
       });
     }
     const foundParty = partyDb.find(party => party.id === Number(id));
-    // const foundOffice = officeDb.find(party => party.id === Number(id));
     if (!foundParty) {
       return res.status(404).json({
         status: 404,
@@ -35,7 +34,7 @@ export default class Validate {
     }
     return next();
   }
-
+  
   /**
       * @method validateName
       * @description Validates the set of name passed in the request body
