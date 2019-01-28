@@ -9,7 +9,7 @@
   "main": "app.js",
   "scripts": {
     "start": "NODE_ENV=production babel-node ./server/app.js",
-    "start:dev": "nodemon --watch server --exec babel-node -- ./server/app.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon --watch server --exec babel-node -- ./server/app.js",
     "test": "nyc --reporter=html --reporter=text mocha --no-deprecation --exit --compilers js:babel-core/register --require babel-polyfill --timeout 6000 server/spec/*test.js || true",
     "build": "babel server -d server/dist --copy-files --ignore server/dist",
     "build:client": "babel client -d client/dist --copy-files --ignore client/dist",

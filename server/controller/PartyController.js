@@ -3,7 +3,7 @@ import partyDb from '../model/partyModel';
  * Class representing PartyController
  * @class PartyController
  */
-export default class PartyController {
+class PartyController {
   /**
        * @description Create a new political party
        * @param {object} req - The request object
@@ -124,3 +124,4 @@ export default class PartyController {
     });
   }
 }
+export default PartyController;

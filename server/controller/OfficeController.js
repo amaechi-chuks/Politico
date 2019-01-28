@@ -4,7 +4,7 @@ import officeDb from '../model/officeModel';
  * Class representing OfficeController
  * @class OfficeController
  */
-export default class OfficeController {
+class OfficeController {
   /**
          * @description Create a new political party
          * @param {object} req - The request object
@@ -77,3 +77,4 @@ export default class OfficeController {
     });
   }
 }
+export default OfficeController;

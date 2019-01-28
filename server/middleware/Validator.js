@@ -8,7 +8,7 @@ import officeDb from '../model/officeModel';
  * @exports Validate
  */
 
-export default class Validate {
+class Validate {
   /**
          * @description Get a specific party by id
          * @param {object} req - The request object
@@ -172,3 +172,4 @@ export default class Validate {
     return next();
   }
 }
+export default Validate;

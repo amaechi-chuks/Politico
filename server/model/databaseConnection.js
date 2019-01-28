@@ -20,9 +20,9 @@ const seed = () => {
 
 const connect = () => {
   pool.connect()
-    .then((err) => {
+    .then((client) => {
       winston.info('database connection established');
-      if (!err) {
+      if (client) {
         seed();
       }
     });
