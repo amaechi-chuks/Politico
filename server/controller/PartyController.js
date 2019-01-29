@@ -118,8 +118,8 @@ class PartyController {
         }],
       });
     }
-    return res.status(400).json({
-      status: 400,
+    return res.status(404).json({
+      status: 404,
       error: 'The id does not exist',
     });
   }
