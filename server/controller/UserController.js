@@ -36,12 +36,12 @@ class UserController {
             error: 'Something went wrong with the database.',
           });
         }
-        const userDetails = dbRes.rows[0];
-        const { id, isadmin } = userDetails;
-        const token = HelperUtils.generateToken({ id, email, isadmin });
+        const user = dbRes.rows[0];
+        const { id, isAdmin } = user;
+        const token = HelperUtils.generateToken({ isAdmin, id, email });
         return res.status(201).json({
           status: 201,
-          data: [{ token, userDetails }],
+          data: [{ token, user }],
         });
       });
     } catch (err) {
@@ -71,8 +71,10 @@ class UserController {
             const token = HelperUtils.generateToken(req.body);
             return res.status(200).json({
               status: 200,
-              token,
-              user,
+              data: [{
+                token,
+                user,
+              }],
             });
           }
           return res.status(401).json({

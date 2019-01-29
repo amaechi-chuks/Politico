@@ -1,4 +1,4 @@
-import officeDb from '../model/officeModel';
+import databaseConnection from '../model/databaseConnection';
 
 /**
  * Class representing OfficeController
@@ -16,24 +16,29 @@ class OfficeController {
     const {
       type, name,
     } = req.body;
-    const id = officeDb[officeDb.length - 1].id + 1;
-    const registerdAt = new Date();
-    const updatedAlt = new Date();
-    const newOffice = {
-      id, type, name, registerdAt, updatedAlt,
-    };
-    if (newOffice) {
-      officeDb.push(newOffice);
+    const createdAt = new Date();
+
+    const query = `
+    INSERT INTO office(type, name) VALUES($1, $2) RETURNING *`;
+    const params = [type, name];
+
+    databaseConnection.query(query, params, (err, dbRes) => {
+      if (err) {
+        return res.status(500).json({
+          status: 500,
+          error: 'Something went wrong with the database.',
+        });
+      }
+      const postId = dbRes.rows[0].id;
       return res.status(201).json({
         status: 201,
-        data: [
-          newOffice,
-        ],
+        data: [{
+          id: postId,
+          type,
+          name,
+          createdAt,
+        }],
       });
-    }
-    return res.status(400).json({
-      status: 400,
-      error: 'Bad request',
     });
   }
 
@@ -47,10 +52,11 @@ class OfficeController {
    */
 
   static getAllOffice(req, res) {
-    return res.status(200).json({
+    const query = 'SELECT * FROM office';
+    databaseConnection.query(query, (err, dbRes) => res.status(200).json({
       status: 200,
-      data: officeDb,
-    });
+      data: dbRes.rows,
+    }));
   }
 
   /**
@@ -62,18 +68,25 @@ class OfficeController {
    */
 
   static getOfficeById(req, res) {
-    const data = officeDb.filter(
-      OfficeObj => Number(req.params.id) === OfficeObj.id,
-    );
-    if (data) {
-      return res.status(200).json({
-        status: 200,
-        data,
+    const { id: postId } = req.params;
+    const query = 'SELECT * FROM office WHERE id = $1';
+    databaseConnection.query(query, [postId], (err, dbRes) => {
+      if (dbRes.rowCount > 0) {
+        return res.status(200).json({
+          status: 200,
+          data: dbRes.rows[0],
+        });
+      }
+      if (err) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Office with such id does not exist',
+        });
+      }
+      return res.status(404).json({
+        status: 404,
+        error: 'Party not found!',
       });
-    }
-    return res.status(404).json({
-      status: 404,
-      error: 'id does not exist',
     });
   }
 }

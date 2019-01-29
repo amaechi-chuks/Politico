@@ -1,4 +1,4 @@
-import partyDb from '../model/partyModel';
+import databaseConnection from '../model/databaseConnection';
 /**
  * Class representing PartyController
  * @class PartyController
@@ -11,28 +11,33 @@ class PartyController {
        * @return {object} JSON representing data object
        * @memberof createParty
        */
-  static async createParty(req, res) {
+  static createParty(req, res) {
     const {
       name, hqAddress, logoUrl,
     } = req.body;
-    const id = await partyDb[partyDb.length - 1].id + 1;
     const registerdAt = new Date();
-    const newParty = {
-      id,
-      name,
-      hqAddress,
-      logoUrl,
-      registerdAt,
-    };
-    if (newParty) {
-      partyDb.push(newParty);
+    const query = `
+    INSERT INTO party(name, hqAddress, logoUrl) VALUES($1, $2, $3) RETURNING *`;
+    const params = [name, hqAddress, logoUrl];
+    databaseConnection.query(query, params, (err, dbRes) => {
+      if (err) {
+        return res.status(500).json({
+          status: 500,
+          error: 'Something went wrong with the database.',
+        });
+      }
+      const postId = dbRes.rows[0].id;
       return res.status(201).json({
         status: 201,
-        data: [
-          newParty,
-        ],
+        data: [{
+          id: postId,
+          name,
+          hqAddress,
+          logoUrl,
+          registerdAt,
+        }],
       });
-    }
+    });
   }
 
   /**
@@ -44,10 +49,11 @@ class PartyController {
    */
 
   static getAllParty(req, res) {
-    return res.status(200).json({
+    const query = 'SELECT * FROM party';
+    databaseConnection.query(query, (err, dbRes) => res.status(200).json({
       status: 200,
-      data: partyDb,
-    });
+      data: dbRes.rows,
+    }));
   }
 
   /**
@@ -58,12 +64,25 @@ class PartyController {
    * @memberof getPartyById
    */
   static getPartyById(req, res) {
-    const data = partyDb.filter(
-      partyObj => Number(req.params.id) === partyObj.id,
-    );
-    res.status(200).json({
-      status: 200,
-      data,
+    const { id: postId } = req.params;
+    const query = 'SELECT * FROM party WHERE id = $1';
+    databaseConnection.query(query, [postId], (err, dbRes) => {
+      if (err) {
+        return res.status(404).json({
+          status: 404,
+          error: 'Party with such id does not exist',
+        });
+      }
+      if (dbRes.rowCount > 0) {
+        return res.status(200).json({
+          status: 200,
+          data: dbRes.rows[0],
+        });
+      }
+      return res.status(404).json({
+        status: 404,
+        error: 'Party not found!',
+      });
     });
   }
 
@@ -76,21 +95,32 @@ class PartyController {
    */
 
   static updateName(req, res) {
-    const id = Number(req.params.id);
-    const { name } = req.body;
-    const partyToUpdate = partyDb.find(partyObj => partyObj.id === id);
-    if (req.body.name === undefined) {
-      return res.status(400).json({
-        status: 400,
-        error: 'Party name must be specified',
+    const { id: postId } = req.params;
+    try {
+      if (req.body.name) {
+        const { name } = req.body;
+        const query = `
+        UPDATE party SET name = $1 WHERE id = $2 RETURNING name`;
+
+        return databaseConnection.query(query, [name, postId], (err, dbRes) => {
+          if (dbRes.rowCount > 0) {
+            const updatedName = dbRes.rows[0];
+            res.status(201).json({
+              status: 201,
+              data: updatedName,
+            });
+          }
+        });
+      }
+    } catch (err) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Something went wrong with the database',
       });
     }
-    const partyIndex = partyDb.indexOf(partyToUpdate);
-    partyToUpdate.name = name;
-    partyDb[partyIndex] = partyToUpdate;
-    return res.status(200).json({
-      status: 200,
-      data: [{ id, name }],
+    return res.status(404).json({
+      status: 404,
+      error: 'No party found',
     });
   }
 
@@ -103,24 +133,25 @@ class PartyController {
    */
 
   static deletePartyById(req, res) {
-    const id = Number(req.params.id);
-    const partyToDelete = partyDb.find(party => party.id === id);
-    // Get the index of the object to delete
-    const objId = partyDb.indexOf(partyToDelete);
-    // Using the object index, splice the object out of the partiesDb
-    partyDb.splice(objId, 1);
-    if (partyToDelete) {
-      return res.status(200).json({
-        status: 200,
-        data: [{
-          id,
-          message: 'Party record has been deleted',
-        }],
-      });
-    }
-    return res.status(404).json({
-      status: 404,
-      error: 'The id does not exist',
+    const { id: postId } = req.params;
+    const query = 'DELETE FROM party WHERE id = $1';
+    databaseConnection.query(query, [postId], (err, dbRes) => {
+      if (dbRes.rowCount > 0) {
+        return res.status(200).json({
+          status: 200,
+          data: [{
+            id: postId,
+            message: 'Party has been deleted',
+          }],
+        });
+      }
+      if (err) {
+        return res.status(400).json({
+          status: 400,
+          error: 'No incident record found',
+        });
+      }
+      return 'No incident with such record';
     });
   }
 }

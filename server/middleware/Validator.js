@@ -1,6 +1,5 @@
 import HelperUtils from '../utility/helperUltis';
-import partyDb from '../model/partyModel';
-import officeDb from '../model/officeModel';
+import databaseConnection from '../model/databaseConnection';
 
 /**
  * @class Validate
@@ -18,21 +17,23 @@ class Validate {
          * @memberof findById
          */
   static findById(req, res, next) {
-    const { id } = req.params;
-    if (!Number(id)) {
-      return res.status(400).json({
-        status: 400,
-        error: 'The id you provided is invalid',
-      });
+    if (Number.isNaN(Number(req.params.id))) {
+      return res.status(404).json({ status: 404, error: 'The id parameter must be a number' });
     }
-    const foundParty = partyDb.find(party => party.id === Number(id));
-    if (!foundParty) {
-      return res.status(404).json({
-        status: 404,
-        error: 'Id does not exist',
-      });
-    }
-    return next();
+
+    const query = 'SELECT * FROM incidents WHERE id = $1';
+    return databaseConnection.query(query, [req.params.id], (err, dbRes) => {
+      try {
+        if (err) {
+          return res.status(404).json({ status: 404, error: 'Sorry, no record with such id' });
+        }
+        req.postId = dbRes.rows[0].id;
+        return next();
+        // eslint-disable-next-line no-empty
+      } catch (err) {
+        return res.status(404).json({ status: 404, error: 'Sorry, no record with such id' });
+      }
+    });
   }
 
   /**
@@ -51,10 +52,6 @@ class Validate {
     }
     if (!name || name === undefined) {
       error = 'Party name must be specified';
-    }
-    const duplicatName = partyDb.find(party => party.name === name);
-    if (duplicatName) {
-      error = 'Party name already exist';
     }
     if (error) {
       return res.status(404).json({
@@ -81,10 +78,6 @@ class Validate {
     }
     if (!name || name === undefined) {
       error = 'Office name must be specified';
-    }
-    const duplicatOfficeName = officeDb.find(office => office.name === name);
-    if (duplicatOfficeName) {
-      error = 'Office name already exist';
     }
     if (error) {
       return res.status(404).json({
@@ -170,6 +163,52 @@ class Validate {
       });
     }
     return next();
+  }
+
+  /**
+   * @method validateExistingParty
+   * @description Validates already existing party
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static validateExistingParty(req, res, next) {
+    const party = {
+      text: 'SELECT * FROM party WHERE name = $1;',
+      values: [req.body.name],
+    };
+    return databaseConnection.query(party, (error, dbRes) => {
+      if (dbRes.rows[0]) {
+        return res.status(409).json({
+          status: 409,
+          error: 'party name already exist',
+        });
+      }
+      return next();
+    });
+  }
+
+  /**
+   * @method validateExistingOffice
+   * @description Validates user login/registration
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static validateExistingOffice(req, res, next) {
+    const officeName = {
+      text: 'SELECT * FROM office WHERE name = $1;',
+      values: [req.body.name],
+    };
+    return databaseConnection.query(officeName, (error, dbRes) => {
+      if (dbRes.rows[0]) {
+        return res.status(409).json({
+          status: 409,
+          error: 'Office name already exist',
+        });
+      }
+      return next();
+    });
   }
 }
 export default Validate;

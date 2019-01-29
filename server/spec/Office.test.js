@@ -1,129 +1,133 @@
+import supertest from 'supertest';
 import chai from 'chai';
-import chaiHttp from 'chai-http';
 import app from '../app';
-import officeDb from '../model/officeModel';
+import officeData from './seed/office.data';
 
-chai.use(chaiHttp);
-const { expect } = chai;
-const url = '/api/v1/offices/';
-const id = 2;
+const user2Token = { token: null };
+const { should, expect } = chai;
+should();
+const request = supertest(app);
 
-describe('Handle all GET requests on /api/v1/offices/ routes', () => {
-  it('should return status 200 and all Political offices for route api/v1/offices', (done) => {
-    chai
-      .request(app)
-      .get(url)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body.data).to.deep.equal(officeDb);
-        done(err);
-      });
-  });
-  it('should return status 200 and a Political office for route /api/v1/offices/:id', (done) => {
-    chai
-      .request(app)
-      .get(`${url}${id}`)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body.data).to.deep.equal([officeDb[id - 1]]);
-        done(err);
-      });
-  });
-  it('should return a 404 for all invalid routes', (done) => {
-    chai
-      .request(app)
-      .get('/api/v1/office')
-      .end((err, res) => {
-        expect(res).to.have.status(404);
-        expect(res.body.error).to.be.equal('Wrong endpoint. Such endpoint does not exist');
-        done(err);
-      });
-  });
-});
-
-describe('Handle POST requests on /api/v1/offices/ route', () => {
-  it('Should have a status 201 for creating new  office', (done) => {
-    const office = {
-      name: 'Presidency',
-      type: 'federal',
-
-    };
-    chai
-      .request(app)
-      .post(url)
-      .send(office)
-      .end((err, res) => {
-        expect(res).to.have.status(201);
-        expect(res.body.data[0].name).to.be.equal(office.name);
-        expect(res.body.data[0].type).to.be.equal(office.type);
-        done(err);
-      });
-  });
-  it('Should have a status 404 for invalid name while creating  office', (done) => {
-    const office = {
-      name: 99,
-      type: 'legislative',
-
-    };
-    chai
-      .request(app)
-      .post(url)
-      .send(office)
-      .end((err, res) => {
-        expect(res).to.have.status(404);
-        done(err);
-      });
-  });
-  it('Should have a status 404 for empty name while creating a political office', (done) => {
-    const office = {
-      name: '',
-      type: 'federal',
-
-    };
-    chai
-      .request(app)
-      .post(url)
-      .send(office)
-      .end((err, res) => {
-        expect(res).to.have.status(404);
-        done(err);
-      });
-  });
-  it('Should have a status 404 for empty type while creating a political office', (done) => {
-    const office = {
-      name: 'house of rep',
-      type: '',
-
-    };
-    chai
-      .request(app)
-      .post(url)
-      .send(office)
-      .end((err, res) => {
-        expect(res).to.have.status(404);
-        expect(res.body).to.deep.equal({
-          status: 404,
-          error: 'Type must be specified',
+describe('All test cases for Politico application', () => {
+  describe('Test case for creating a political party', () => {
+    it('should create return `201` status code for creating a political party', (done) => {
+      request.get('/api/v1/offices')
+        .set('req.headers.authorization', user2Token.token)
+        .send(officeData.validData1)
+        .expect(200)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(200);
+          done(err);
         });
-        done(err);
-      });
-  });
-  it('Should have a status 404 for invalid office type while creating a political office', (done) => {
-    const office = {
-      name: 'Youth head',
-      type: 'senate',
-    };
-    chai
-      .request(app)
-      .post(url)
-      .send(office)
-      .end((err, res) => {
-        expect(res).to.have.status(404);
-        expect(res.body).to.deep.equal({
-          status: 404,
-          error: 'Invalid office type',
+    });
+    it('should create return `201` status code for creating a political party', (done) => {
+      request.get('/api/v1/offices')
+        .set('req.headers.authorization', user2Token.token)
+        .send(officeData.validData2)
+        .expect(200)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(200);
+          done(err);
         });
-        done(err);
-      });
+    });
+  });
+  describe('Handle POST requests on /api/v1/offices/ route', () => {
+    it('should return a 404 for all undefined ', (done) => {
+      request.get('/api/v1/offices')
+        .set('req.headers.authorization', user2Token.token)
+        .send(officeData.emptyData)
+        .expect(200)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(200);
+          done(err);
+        });
+    });
+  });
+  describe('Handle POST requests on /api/v1/offices/ route', () => {
+    it('should return a 404 for an invalid type ', (done) => {
+      request.post('/api/v1/offices')
+        .set('req.headers.authorization', user2Token.token)
+        .send(officeData.invalidType)
+        .expect(404)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(404);
+          done(err);
+        });
+    });
+  });
+  describe('Handle POST requests on /api/v1/offices/ route', () => {
+    it('should return a 404 for an invalid type ', (done) => {
+      request.post('/api/v1/offices')
+        .set('req.headers.authorization', user2Token.token)
+        .send(officeData.invalidName)
+        .expect(404)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(404);
+          done(err);
+        });
+    });
+  });
+  describe('Handle POST requests on /api/v1/offices/ route', () => {
+    it('should return a 404 for an invalid type ', (done) => {
+      request.post('/api/v1/offices')
+        .set('req.headers.authorization', user2Token.token)
+        .send(officeData.officeExist)
+        .expect(201)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(201);
+          done(err);
+        });
+    });
+  });
+  describe('Handle POST requests on /api/v1/offices/ route', () => {
+    it('should return a 404 for an invalid id ', (done) => {
+      request.get('/api/v1/offices/love')
+        .set('req.headers.authorization', user2Token.token)
+        .send({})
+        .expect(404)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(404);
+          done(err);
+        });
+    });
+  });
+  describe('Handle POST requests on /api/v1/offices route', () => {
+    it('should return a  for an invalid id ', (done) => {
+      request.post('/api/v1/offices')
+        .set('req.headers.authorization', user2Token.token)
+        .send({
+          type: 'federal',
+          name: 'legislative',
+        })
+        .expect(201)
+        .end((err, res) => {
+          expect(res.status).to.equal(201);
+          done(err);
+        });
+    });
+  });
+  describe('Handle POST requests on /api/v1/offices route', () => {
+    it('should return a  for an invalid id ', (done) => {
+      request.post('/api/v1/offices')
+        .set('req.headers.authorization', user2Token.token)
+        .send({
+          type: '',
+          name: '',
+        })
+        .expect(404)
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.error).to.equal('Type must be specified');
+          expect(res.body).to.be.an('object');
+          done(err);
+        });
+    });
   });
 });
