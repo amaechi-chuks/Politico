@@ -34,7 +34,7 @@ class Validate {
     }
     return next();
   }
-  
+
   /**
       * @method validateName
       * @description Validates the set of name passed in the request body

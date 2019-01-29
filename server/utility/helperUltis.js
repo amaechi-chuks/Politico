@@ -19,7 +19,7 @@ class HelperUtils {
   }
 
   static generateToken(payload) {
-    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1 week' });
+    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: 60 * 60 * 1440 });
     return token;
   }
 

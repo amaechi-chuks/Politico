@@ -30,7 +30,7 @@ export default {
     passporturl: '',
   },
   userOneLogin: {
-    firstname: 'frank', lastname: 'joy', othernames: 'peter', email: 'amaechichuks20@yahoo.com', password: 'fabulous26', phonenumber: '07065768675', username: 'frankchuks',
+    firstname: 'frank', lastname: 'joy', othername: 'peter', email: 'amaechichuks20@yahoo.com', password: 'fabulous26', phonenumber: '07065768675', passporturl: 'chuks.jpeg',
   },
   userTwoLogin: {
     email: 'mikel@yahoo.com',
@@ -44,5 +44,5 @@ export default {
   noPassword: { email: 'mk@yahoo.com', password: '' },
   invalidEmail: { email: 'wrongEmail', password: 'bruce banner' },
   invalidPassword: { email: 'Bruce Banner', password: 'wrongPassword' },
-  invalidEmailPassword: { email: 'wrongEmail', password: 'wrongPassword' },
+  invalidEmailPassword: { email: '', password: '' },
 };

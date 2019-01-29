@@ -11,11 +11,11 @@ class PartyController {
        * @return {object} JSON representing data object
        * @memberof createParty
        */
-  static createParty(req, res) {
+  static async createParty(req, res) {
     const {
       name, hqAddress, logoUrl,
     } = req.body;
-    const id = partyDb[partyDb.length - 1].id + 1;
+    const id = await partyDb[partyDb.length - 1].id + 1;
     const registerdAt = new Date();
     const newParty = {
       id,

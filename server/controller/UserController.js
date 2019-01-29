@@ -49,13 +49,15 @@ class UserController {
     }
   }
 
+
   /**
-       * API method for user login
-       * @param {obj} req
-       * @param {obj} res
-       * @returns {obj} success message
-       */
-  static userLogin(req, res) {
+   * @method loginUser
+   * @description Logs in a user if details are correct
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static loginUser(req, res) {
     const { email, password } = req.body;
     const errors = { form: 'Invalid email or password' };
     const userQuery = 'SELECT * FROM users WHERE email = $1 LIMIT 1;';
@@ -63,19 +65,22 @@ class UserController {
     databaseConnection.query(userQuery, params)
       .then((dbRes) => {
         if (dbRes.rows[0]) {
-          const getPassword = HelperUtils.verifyPassword(password, dbRes.rows[0].password);
+          const getPassword = HelperUtils.hashPassword(password, dbRes.rows[0].password);
           if (getPassword) {
-            return HelperUtils.verifyToken(res, 200, 'User login Successfull', dbRes);
+            const user = dbRes.rows[0];
+            const token = HelperUtils.generateToken(req.body);
+            return res.status(200).json({
+              status: 200,
+              token,
+              user,
+            });
           }
           return res.status(401).json({
-            succes: false,
-            errors,
+            status: 401,
+            error: errors,
           });
         }
-        return res.status(401).json({
-          success: false,
-          errors,
-        });
+        return errors;
       }).catch(error => error(res, 500, errors));
   }
 }

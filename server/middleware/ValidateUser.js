@@ -75,11 +75,11 @@ class ValidateUser {
     } if (!password) {
       error = 'You need to provide a password';
     } if (error) {
-      status = 400;
+      status = 404;
       return res.status(status).json({ status, error });
     }
 
-    if (path === 'login') {
+    if (path === 'signin') {
       return databaseConnection.query(query, [email], (err, dbRes) => {
         if (dbRes.rowCount < 1) {
           return res.status(404).json({

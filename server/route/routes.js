@@ -13,7 +13,7 @@ router.post('/offices', Validate.validateOfficeType, Validate.validateOfficeName
   OfficeController.createOffice);
 router.post('/auth/signup', ValidateUser.validateExistingUser, ValidateUser.validateLoginDetails, ValidateUser.validateProfileDetails,
   UserController.registerUser);
-router.post('/auth/signin', UserController.userLogin);
+router.post('/auth/signin', ValidateUser.validateLoginDetails, UserController.loginUser);
 
 //  Handle all Get request
 router.get('/parties', PartyController.getAllParty);
