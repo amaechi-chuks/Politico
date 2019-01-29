@@ -1,10 +1,9 @@
 import partyDb from '../model/partyModel';
-
 /**
  * Class representing PartyController
  * @class PartyController
  */
-export default class PartyController {
+class PartyController {
   /**
        * @description Create a new political party
        * @param {object} req - The request object
@@ -12,11 +11,11 @@ export default class PartyController {
        * @return {object} JSON representing data object
        * @memberof createParty
        */
-  static createParty(req, res) {
+  static async createParty(req, res) {
     const {
       name, hqAddress, logoUrl,
     } = req.body;
-    const id = partyDb[partyDb.length - 1].id + 1;
+    const id = await partyDb[partyDb.length - 1].id + 1;
     const registerdAt = new Date();
     const newParty = {
       id,
@@ -34,10 +33,6 @@ export default class PartyController {
         ],
       });
     }
-    return res.status(400).json({
-      status: 400,
-      error: 'Bad request',
-    });
   }
 
   /**
@@ -85,8 +80,8 @@ export default class PartyController {
     const { name } = req.body;
     const partyToUpdate = partyDb.find(partyObj => partyObj.id === id);
     if (req.body.name === undefined) {
-      return res.status(404).json({
-        status: 404,
+      return res.status(400).json({
+        status: 400,
         error: 'Party name must be specified',
       });
     }
@@ -114,7 +109,7 @@ export default class PartyController {
     const objId = partyDb.indexOf(partyToDelete);
     // Using the object index, splice the object out of the partiesDb
     partyDb.splice(objId, 1);
-    if (objId) {
+    if (partyToDelete) {
       return res.status(200).json({
         status: 200,
         data: [{
@@ -125,7 +120,8 @@ export default class PartyController {
     }
     return res.status(404).json({
       status: 404,
-      error: 'Such id does not exist',
+      error: 'The id does not exist',
     });
   }
 }
+export default PartyController;

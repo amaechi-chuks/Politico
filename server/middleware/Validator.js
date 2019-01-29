@@ -8,7 +8,7 @@ import officeDb from '../model/officeModel';
  * @exports Validate
  */
 
-export default class Validate {
+class Validate {
   /**
          * @description Get a specific party by id
          * @param {object} req - The request object
@@ -22,43 +22,16 @@ export default class Validate {
     if (!Number(id)) {
       return res.status(400).json({
         status: 400,
-        error: 'Such endpoint does not exist',
+        error: 'The id you provided is invalid',
       });
     }
     const foundParty = partyDb.find(party => party.id === Number(id));
     if (!foundParty) {
       return res.status(404).json({
         status: 404,
-        error: 'Party Id does not exist',
+        error: 'Id does not exist',
       });
     }
-    return next();
-  }
-
-  /**
-         * @description Get a specific office by id
-         * @param {object} req - The request object
-         * @param {object} res - The response object
-         * @param {function} next - Calls the next function
-         * @returns {object} JSON representing the failure message
-         * @memberof findOfficeById
-         */
-  static findOfficeById(req, res, next) {
-    const { id } = req.params;
-    if (!Number(id)) {
-      return res.status(400).json({
-        status: 400,
-        error: 'Such endpoint does not exist',
-      });
-    }
-    const foundOffice = officeDb.find(office => office.id === Number(id));
-    if (!foundOffice) {
-      return res.status(404).json({
-        status: 404,
-        error: 'Party Id does not exist',
-      });
-    }
-
     return next();
   }
 
@@ -199,3 +172,4 @@ export default class Validate {
     return next();
   }
 }
+export default Validate;

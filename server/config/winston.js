@@ -1,8 +1,10 @@
 import appRoot from 'app-root-path';
 import winston from 'winston';
 
+const tsFormat = () => (new Date()).toLocaleTimeString();
 const options = {
   file: {
+    timestamp: tsFormat,
     level: 'info',
     filename: `${appRoot}/logs/app.log`,
     handleExceptions: true,
@@ -32,5 +34,4 @@ logger.stream = {
     logger.info(message, encoding);
   },
 };
-
 export default logger;

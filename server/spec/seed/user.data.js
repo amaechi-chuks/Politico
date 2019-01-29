@@ -1,0 +1,48 @@
+export default {
+  validInput1: {
+    firstname: 'Bruce',
+    lastname: 'Banner',
+    othername: 'john',
+    email: 'emeisksmusa@yahoo.com',
+    password: 'bruce banner',
+    phonenumber: '08093056052',
+    passporturl: 'chuks.jpeg.com',
+    isAdmin: 'false',
+    registered: 'Date.now()',
+    updated: 'Date.now()',
+  },
+  validInput2: {
+    firstname: 'Mike',
+    lastname: 'Owen',
+    othernames: 'johns',
+    email: 'mk@yahoo.com',
+    password: 'chuks mike',
+    phonenumber: '07068566559',
+    username: 'chukschukso',
+  },
+
+  emptyData: {
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: '',
+    phonenumber: '',
+    passporturl: '',
+  },
+  userOneLogin: {
+    firstname: 'frank', lastname: 'joy', othername: 'peter', email: 'amaechichuks20@yahoo.com', password: 'fabulous26', phonenumber: '07065768675', passporturl: 'chuks.jpeg',
+  },
+  userTwoLogin: {
+    email: 'mikel@yahoo.com',
+    password: 'chuks mike',
+    phonenumber: '07068566000',
+    username: 'chuksmike',
+  },
+  adminLogin: { email: 'amaechichuks2000@yahoo.com.com', password: 'fabulous26' },
+  emptyLoginData: { email: '', password: '' },
+  noEmail: { email: '', password: 'bruce banner' },
+  noPassword: { email: 'mk@yahoo.com', password: '' },
+  invalidEmail: { email: 'wrongEmail', password: 'bruce banner' },
+  invalidPassword: { email: 'Bruce Banner', password: 'wrongPassword' },
+  invalidEmailPassword: { email: '', password: '' },
+};
