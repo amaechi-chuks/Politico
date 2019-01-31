@@ -22,7 +22,7 @@ class VoteController {
       const { rows } = await databaseConnection.query(query, params);
       return res.status(201).json({
         status: 201,
-        data: rows[0],
+        data: [rows[0]],
       });
     } catch (error) {
       return res.status(500).json({

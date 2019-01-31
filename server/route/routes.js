@@ -14,8 +14,7 @@ const router = express.Router();
 // Handle all Post request
 router.post('/parties',
   AuthenticateUser.verifyAdmin,
-  AuthenticateUser.verifyUser,
-  Validate.validateExistingParty,
+  Validate.validateIfExist,
   Validate.validateHqAddress,
   Validate.validateLogoUrl,
   Validate.validateName,
@@ -23,10 +22,9 @@ router.post('/parties',
 
 router.post('/offices',
   AuthenticateUser.verifyAdmin,
-  AuthenticateUser.verifyUser,
+  Validate.validateIfExist,
   Validate.validateOfficeType,
-  Validate.validateOfficeName,
-  Validate.validateExistingOffice,
+  Validate.validateName,
   OfficeController.createOffice);
 
 router.post('/auth/signup',
@@ -43,10 +41,10 @@ router.post('/office/:id/register', AuthenticateUser.verifyUser, CandidateContro
 router.post('/votes', AuthenticateUser.verifyUser, Validate.validateExistingVote, VoteController.createVote);
 
 //  Handle all Get request
-router.get('/parties', PartyController.getAllParty);
-router.get('/parties/:id', Validate.findById, PartyController.getPartyById);
-router.get('/offices', OfficeController.getAllOffice);
-router.get('/offices/:id', Validate.findById, OfficeController.getOfficeById);
+router.get('/parties', AuthenticateUser.verifyUser, PartyController.getAllParty);
+router.get('/parties/:id', AuthenticateUser.verifyUser, Validate.findById, PartyController.getPartyById);
+router.get('/offices', AuthenticateUser.verifyUser, OfficeController.getAllOffice);
+router.get('/offices/:id', AuthenticateUser.verifyUser, Validate.findById, OfficeController.getOfficeById);
 
 //  Handle all Patch request
 router.patch('/parties/:id/name', AuthenticateUser.verifyAdmin,

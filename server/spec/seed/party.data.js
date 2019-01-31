@@ -26,9 +26,14 @@ export default {
     logoUrl: 'chuks.jpeg',
   },
   incompleteData: {
-    name: 'q',
+    name: 'Youth Accord',
     hqAddress: '',
-    logoUrl: '',
+    logoUrl: 'youth.png',
+  },
+  incompleteDatalogo: {
+    name: 'Winner Accord',
+    hqAddress: 'plot 35 owerri road',
+    logoUrl: 'youth',
   },
   validUpdate1: {
     name: 'People and vaibrant party',
@@ -39,9 +44,7 @@ export default {
     name: 'People and vaibrant party',
   },
   invalidUpdate1: {
-    name: '55',
-    hqAddress: 'plot 3 lagos',
-    logoUrl: '33',
+    name: '',
   },
   invalidUpdate2: {
     name: '.33',
@@ -49,7 +52,7 @@ export default {
     logoUrl: '1',
   },
   partyExist: {
-    name: 'All party',
+    name: 'People Party',
     hqAddress: 'Plot 5 lagos street',
     logoUrl: 'chuksimage.jpeg',
   },
