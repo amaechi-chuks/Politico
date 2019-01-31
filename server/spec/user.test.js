@@ -14,20 +14,6 @@ export const wrongToken = 'ThisIsAWrongToken';
 const userToken = { token: null };
 
 describe('All Test cases for user Register', () => {
-  describe('All Test cases for new user Register', () => {
-    it('Should return `201` for unique email signups', (done) => {
-      request.post('/api/v1/auth/signup')
-        .set('Content-Type', 'application/json')
-        .send(inputs.validInput1)
-        .expect(201)
-        .end((err, res) => {
-          res.body.should.be.an('object');
-          expect(res.body.status).to.equal(201);
-          expect(res.body.data[0]).to.haveOwnProperty('token');
-          done(err);
-        });
-    });
-  });
   describe('/POST api/v1/auth/signup', () => {
     it('should return `400` if some fields are undefined', (done) => {
       request.post('/api/v1/auth/signup')

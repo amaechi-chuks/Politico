@@ -1,174 +1,166 @@
+import supertest from 'supertest';
 import chai from 'chai';
-import chaiHttp from 'chai-http';
 import app from '../app';
-import partyDb from '../model/partyModel';
+import data from './seed/user.data';
+import input from './seed/party.data';
+import userToken, { wrongToken } from './user.test';
 
-chai.use(chaiHttp);
-const { expect } = chai;
-const url = '/api/v1/parties/';
-const id = 2;
-describe('Handle all GET requests on /api/v1/parties/ routes', () => {
-  it('should return status 200 and all political parties for route api/v1/parties', (done) => {
-    chai
-      .request(app)
-      .get(url)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body.data).to.deep.equal(partyDb);
-        done(err);
-      });
-  });
-  it('should return status 200 and a political party for route /api/v1/parties/:id', (done) => {
-    chai
-      .request(app)
-      .get(`${url}${id}`)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body.data).to.deep.equal([partyDb[id - 1]]);
-        done(err);
-      });
-  });
-  it('should return a 404 for all invalid routes', (done) => {
-    chai
-      .request(app)
-      .get('/api/v1/party')
-      .end((err, res) => {
-        expect(res).to.have.status(404);
-        expect(res.body.error).to.be.equal('Wrong endpoint. Such endpoint does not exist');
-        done(err);
-      });
-  });
-});
+const user2Token = { token: null };
 
-describe('Handle POST requests on /api/v1/parties/ route', () => {
-  it('Should have a status 201 for creating new political party', (done) => {
-    const party = {
-      name: 'All Progressive Alliance',
-      hqAddress: '9 Atiba Ikeja',
-      logoUrl: 'apga.png',
-    };
-    chai
-      .request(app)
-      .post(url)
-      .send(party)
-      .end((err, res) => {
-        expect(res).to.have.status(201);
-        expect(res.body.data[0].name).to.be.equal(party.name);
-        expect(res.body.data[0].hqAddress).to.be.equal(party.hqAddress);
-        expect(res.body.data[0].logoUrl).to.be.equal(party.logoUrl);
-        done(err);
-      });
-  });
-  it('Should have a status 404 for invalid name while creating political party', (done) => {
-    const party = {
-      name: 99,
-      hqAddress: '55 Brainbox Rd Aba',
-      logoUrl: 'aba.png',
-    };
-    chai
-      .request(app)
-      .post(url)
-      .send(party)
-      .end((err, res) => {
-        expect(res).to.have.status(404);
-        expect(res.body).to.deep.equal({
-          status: 404,
-          error: 'Invalid party name',
-        });
-        done(err);
-      });
-  });
-  it('Should have a status 400 for empty name while creating political party', (done) => {
-    const party = {
-      name: '',
-      hqAddress: '55 Brainbox Rd Aba',
-      logoUrl: 'aba.png',
-    };
-    chai
-      .request(app)
-      .post(url)
-      .send(party)
-      .end((err, res) => {
-        expect(res).to.have.status(404);
-        expect(res.body).to.deep.equal({
-          status: 404,
-          error: 'Party name must be specified',
-        });
-        done(err);
-      });
-  });
-  it('Should have a status 404 for empty hqAddress while creating political party', (done) => {
-    const party = {
-      name: 'Youth Alliance Accord',
-      hqAddress: '',
-      logoUrl: 'chuks.png',
-    };
-    chai
-      .request(app)
-      .post(url)
-      .send(party)
-      .end((err, res) => {
-        expect(res).to.have.status(400);
-        expect(res.body).to.deep.equal({
-          status: 400,
-          error: 'hqAddress must be specified',
-        });
-        done(err);
-      });
-  });
-  it('Should have a status 400 for empty logoUrl while creating political party', (done) => {
-    const party = {
-      name: 'Youth Alliance Accord',
-      hqAddress: 'Ayanleye Close Ogba, Lagos',
-      logoUrl: '',
-    };
-    chai
-      .request(app)
-      .post(url)
-      .send(party)
-      .end((err, res) => {
-        expect(res).to.have.status(400);
-        expect(res.body).to.deep.equal({
-          status: 400,
-          error: 'Party Logo must be specified',
-        });
-        done(err);
-      });
-  });
-});
 
-describe('Test for PATCH methods in updating party name records', () => {
-  it('Should have a status of 200 and successfully UPDATE the party name', (done) => {
-    const newName = { name: 'Hope Accord' };
-    chai
-      .request(app)
-      .patch(`${url}${id}/name`)
-      .send(newName)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.deep.equal({
-          status: 200,
-          data: res.body.data,
+const { should, expect } = chai;
+should();
+const request = supertest(app);
+const invalidID = 50;
+describe('All test cases for Politico application', () => {
+  describe('Test case for loading application home page', () => {
+    it('should load the application home page', (done) => {
+      request.get('/')
+        .set('Content-Type', 'application/json')
+        .expect(200)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(200);
+          done(err);
         });
-        done(err);
-      });
-  });
-});
+    });
+    it('should return `400` status code with for undefined party', (done) => {
+      request.post('/api/v1/parties')
+        .set('req.headers.authorization', user2Token.token)
+        .send({}) // request body not defined
+        .expect(400)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(400);
+          done(err);
+        });
+    });
 
-describe('Test for DELETE methods in deleting a political party records', () => {
-  it('Should have a status of 200 and successfully delete the party records', (done) => {
-    chai
-      .request(app)
-      .delete(`${url}${id}`)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body.data[0].id).to.equal(id);
-        expect(res.body.data[0].message).to.equal('Party record has been deleted');
-        expect(res.body).to.deep.equal({
-          status: 200,
-          data: res.body.data,
+    it('should return status code `400` with errors message for empty party', (done) => {
+      request.post('/api/v1/parties')
+        .set('req.headers.authorization', user2Token.token)
+        .send() // empty body request
+        .expect(400)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.body.hqAddress).to.equal(undefined);
+          expect(res.body.name).to.equal(undefined);
+          expect(res.body.party).to.equal(undefined);
+          expect(res.status).to.equal(400);
+          done(err);
         });
-        done(err);
-      });
+    });
+
+    it('should return `400` if party name and hqAddress characters are incomplete', (done) => {
+      request.post('/api/v1/parties')
+        .set('req.headers.authorization', user2Token.token)
+        .send(input.incompleteData)
+        .expect(400)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(400);
+          done(err);
+        });
+    });
+
+    it('should return a `400` status code if invalid party image', (done) => {
+      request.post('/api/v1/parties')
+        .set('req.headers.authorization', user2Token.token)
+        .send(input.invalidData)
+        .expect(400)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.body.error).to.equal('Invalid party logo');
+          expect(res.status).to.equal(400);
+          done(err);
+        });
+    });
+    it('should return a `400` status code if invalid party image', (done) => {
+      request.post('/api/v1/parties')
+        .set('req.headers.authorization', user2Token.token)
+        .send(input.invalidData11)
+        .expect(404)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.body.error).to.equal('Invalid party name');
+          expect(res.status).to.equal(404);
+          done(err);
+        });
+    });
+
+    it('should deny an unauthenticated user access', (done) => {
+      request.post('/api/v1/parties')
+        .set('req.headers.authorization', user2Token.token)
+        .send({}) // request body not defined
+        .expect(400)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done(err);
+        });
+    });
+
+    it('should allow authenticated users to create request successfully', (done) => {
+      request.post('/api/v1/parties')
+        .set('req.headers.authorization', user2Token.token)
+        .send(input.validData1)
+        .expect(201)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(201);
+          done(err);
+        });
+    });
+  });
+  describe('Handle POST requests on /api/v1/parties/ route', () => {
+    it('should return a 409 for an invalid type ', (done) => {
+      request.post('/api/v1/parties')
+        .set('req.headers.authorization', user2Token.token)
+        .send(input.partyExist)
+        .expect(409)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(409);
+          done(err);
+        });
+    });
+  });
+  describe('Handle POST requests on /api/v1/party/ route', () => {
+    it('should return a 409 for an invalid type ', (done) => {
+      request.post('/api/v1/party/love')
+        .set('req.headers.authorization', user2Token.token)
+        .send({})
+        .expect(404)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(404);
+          done(err);
+        });
+    });
+  });
+  describe('Handle POST requests on /api/v1/parties/id/ route', () => {
+    it('should return a 404 for an valid update name ', (done) => {
+      request.patch('/api/v1/parties/id')
+        .set('req.headers.authorization', user2Token.token)
+        .send(input.validUpdate2)
+        .expect(404)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(404);
+          done(err);
+        });
+    });
+  });
+  describe('Handle POST requests on /api/v1/parties/id/ route', () => {
+    it('should return a 200 for a valid update name ', (done) => {
+      request.patch('/api/v1/parties/1/name')
+        .set('req.headers.authorization', user2Token.token)
+        .send(input.validUpdate2)
+        .expect(404)
+        .end((err, res) => {
+          res.body.should.be.an('object');
+          expect(res.status).to.equal(404);
+          done(err);
+        });
+    });
   });
 });

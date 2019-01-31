@@ -13,16 +13,14 @@ class AuthenticateUser {
    * @returns {object} - JSON response object
    */
   static verifyAuthHeader(req) {
-    if (!req.headers.authorization || req.headers['x-access-token'] || req.body.token || req.query.token) {
-      return { error: 'auth' };
+    if (!req.headers.authorization || !req.headers['x-access-token'] || !req.body.token || req.query.token) {
+      return { error: 'error' };
     }
     const token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers.authorization.split(' ')[1];
     const payload = HelperUtils.verifyToken(token);
-
     if (!payload) {
       return { error: 'token' };
     }
-
     return payload;
   }
 
@@ -34,27 +32,20 @@ class AuthenticateUser {
    * @returns {object} - JSON response object
    */
   static verifyUser(req, res, next) {
-    const incidentTypes = ['red-flags', 'interventions'];
-
-    if (!incidentTypes.includes(req.params.incidentType)) {
-      return res.status(404).json({ status: 404, error: 'Such endpoint does not exist' });
-    }
     const payload = AuthenticateUser.verifyAuthHeader(req);
     let error;
     let status;
-
     if (!payload && payload.error === 'auth') {
       status = 401;
       error = 'No authorization header was specified';
-    } else if (payload && payload.error === 'token') {
+    }
+    if (payload && payload.error === 'token') {
       status = 401;
       error = 'The provided token cannot be authenticated.';
     }
-
     if (error) {
       return res.status(status).json({ status, error });
     }
-
     req.user = payload;
     return next();
   }
@@ -67,27 +58,15 @@ class AuthenticateUser {
    * @returns {object} - JSON response object
    */
   static verifyAdmin(req, res, next) {
-    const incidentTypes = ['red-flags', 'interventions'];
-    const status = ['drafted', 'investigating', 'resolved', 'rejected'];
-
-    if (!incidentTypes.includes(req.params.incidentType)) {
-      return res.status(404).json({ status: 404, error: 'Such endpoint does not exist' });
-    }
-    if (!status.includes(req.body.status)) {
-      return res.status(401).json({ status: 401, error: 'You are trying to update an unknown status' });
-    }
     const payload = AuthenticateUser.verifyAuthHeader(req);
-    const { isadmin } = payload;
-
-    if (isadmin === 'false') {
+    const { id } = payload;
+    if (id === 1) {
       return res.status(401).json({
         status: 401,
         error: 'You are not authorized to access this endpoint.',
       });
     }
-
     return next();
   }
 }
-
 export default AuthenticateUser;
