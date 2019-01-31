@@ -13,9 +13,18 @@ class AuthenticateUser {
    * @returns {object} - JSON response object
    */
   static verifyAuthHeader(req) {
-    if (!req.headers.authorization || !req.headers['x-access-token'] || !req.body.token || req.query.token) {
-      return { error: 'error' };
-    }
+    // if (!req.headers.authorization) {
+    //   return { error: 'error' };
+    // }
+    // if (!req.headers['x-access-token']) {
+    //   return { error: 'error' };
+    // }
+    // if (!req.body.token) {
+    //   return { error: 'error' };
+    // }
+    // if (req.query.token) {
+    //   return { error: 'error' };
+    // }
     const token = req.body.token || req.query.token || req.headers['x-access-token'] || req.headers.authorization.split(' ')[1];
     const payload = HelperUtils.verifyToken(token);
     if (!payload) {

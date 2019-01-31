@@ -43,14 +43,15 @@ party int references party(id),
 candidate int references users(id),
 registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
+INSERT INTO candidate (office, party, candidate) VALUES ('1', '1', '1');
 
 DROP TABLE IF EXISTS vote CASCADE;
 CREATE TABLE vote (
 id SERIAL primary key,
 createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
-createdBy int references users(id),
+candidate int references candidate(id),
 office int references office(id),
-body varchar (100) NOT NULL
+voter int references users(id)
 );
 `;
 export default createTables;

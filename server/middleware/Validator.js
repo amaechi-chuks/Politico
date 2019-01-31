@@ -210,5 +210,51 @@ class Validate {
       return next();
     });
   }
+
+  /**
+   * @method validateExistingVote
+   * @description Validates users vote
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static validateExistingVote(req, res, next) {
+    const userVote = {
+      text: 'SELECT * FROM vote WHERE candidate = $1;',
+      values: [req.body.candidate],
+    };
+    return databaseConnection.query(userVote, (error, dbRes) => {
+      if (dbRes.rows[0]) {
+        return res.status(409).json({
+          status: 409,
+          error: 'User voters Id already exist',
+        });
+      }
+      return next();
+    });
+  }
+
+  /**
+   * @method validateExistingCandidate
+   * @description Validates candidates
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static validateExistingCandidate(req, res, next) {
+    const candidate = {
+      text: 'SELECT * FROM candidate WHERE candidate = $1;',
+      values: [req.body.candidate],
+    };
+    return databaseConnection.query(candidate, (error, dbRes) => {
+      if (dbRes.rows[0]) {
+        return res.status(409).json({
+          status: 409,
+          error: 'Candidate with Id already exist',
+        });
+      }
+      return next();
+    });
+  }
 }
 export default Validate;

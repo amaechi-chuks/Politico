@@ -29,5 +29,5 @@ export default {
     type: 'federal',
     name: 'president',
   },
-  
+
 };

@@ -24,13 +24,10 @@ class HelperUtils {
   }
 
   static verifyToken(token) {
-    try {
-      const payload = jwt.verify(token, process.env.SECRET_KEY);
-      return payload;
-    } catch (error) {
-      return false;
-    }
+    const payload = jwt.verify(token, process.env.SECRET_KEY);
+    return payload;
   }
+
 
   static hashPassword(password) {
     return bcryptjs.hashSync(password, 10);

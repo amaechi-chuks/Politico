@@ -6,6 +6,8 @@ import UserController from '../controller/UserController';
 import AuthenticateUser from '../middleware/AuthenticateUser';
 import ValidateUser from '../middleware/ValidateUser';
 import CandidateController from '../controller/CandidateController';
+import VoteController from '../controller/VoteController';
+
 
 const router = express.Router();
 
@@ -20,6 +22,8 @@ router.post('/parties',
   PartyController.createParty);
 
 router.post('/offices',
+  AuthenticateUser.verifyAdmin,
+  AuthenticateUser.verifyUser,
   Validate.validateOfficeType,
   Validate.validateOfficeName,
   Validate.validateExistingOffice,
@@ -34,7 +38,9 @@ router.post('/auth/signup',
 router.post('/auth/signin', ValidateUser.validateLoginDetails,
   UserController.loginUser);
 
-router.post('/candidate', CandidateController.createCandidate);
+router.post('/office/:id/register', AuthenticateUser.verifyUser, CandidateController.createCandidate);
+
+router.post('/votes', AuthenticateUser.verifyUser, Validate.validateExistingVote, VoteController.createVote);
 
 //  Handle all Get request
 router.get('/parties', PartyController.getAllParty);
@@ -43,9 +49,11 @@ router.get('/offices', OfficeController.getAllOffice);
 router.get('/offices/:id', Validate.findById, OfficeController.getOfficeById);
 
 //  Handle all Patch request
-router.patch('/parties/:id/name', Validate.findById, PartyController.updateName);
+router.patch('/parties/:id/name', AuthenticateUser.verifyAdmin,
+  AuthenticateUser.verifyUser, Validate.findById, PartyController.updateName);
 
 //  Handles all delete request
-router.delete('/parties/:id', Validate.findById, PartyController.deletePartyById);
+router.delete('/parties/:id', AuthenticateUser.verifyAdmin,
+  AuthenticateUser.verifyUser, Validate.findById, PartyController.deletePartyById);
 
 export default router;
