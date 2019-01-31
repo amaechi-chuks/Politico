@@ -20,8 +20,13 @@ class Validate {
     if (Number.isNaN(Number(req.params.id))) {
       return res.status(404).json({ status: 404, error: 'The id parameter must be a number' });
     }
-
-    const query = 'SELECT * FROM incidents WHERE id = $1';
+    let url = req.url.split('/')[1];
+    if (url.includes('offices')) {
+      url = 'office';
+    } else {
+      url = 'party';
+    }
+    const query = `SELECT * FROM ${url} WHERE id = $1`;
     return databaseConnection.query(query, [req.params.id], (err, dbRes) => {
       try {
         if (err) {
@@ -45,13 +50,19 @@ class Validate {
       */
   static validateName(req, res, next) {
     const validate = HelperUtils.validate();
+    let urlPath = req.url.split('/')[1];
+    if (urlPath.includes('offices')) {
+      urlPath = 'Office';
+    } else {
+      urlPath = 'Party';
+    }
     let error = '';
     const { name } = req.body;
     if (!validate.name.test(name)) {
-      error = 'Invalid party name';
+      error = `Invalid ${urlPath} name`;
     }
     if (!name || name === undefined) {
-      error = 'Party name must be specified';
+      error = `${urlPath} name must be specified`;
     }
     if (error) {
       return res.status(404).json({
@@ -61,33 +72,6 @@ class Validate {
 
     return next();
   }
-
-  /**
-      * @method validateOfficeName
-      * @description Validates the set of name passed in the request body
-      * @param {object} req - The Request Object
-      * @param {object} res - The Response Object
-      * @returns {object} JSON API Response
-      */
-  static validateOfficeName(req, res, next) {
-    const validate = HelperUtils.validate();
-    let error = '';
-    const { name } = req.body;
-    if (!validate.name.test(name)) {
-      error = 'Office name must be valid';
-    }
-    if (!name || name === undefined) {
-      error = 'Office name must be specified';
-    }
-    if (error) {
-      return res.status(404).json({
-        status: 404, error,
-      });
-    }
-
-    return next();
-  }
-
 
   /**
      * @method validateHqAddress
@@ -166,45 +150,28 @@ class Validate {
   }
 
   /**
-   * @method validateExistingParty
+   * @method validateIfExist
    * @description Validates already existing party
    * @param {object} req - The Request Object
    * @param {object} res - The Response Object
    * @returns {object} JSON API Response
    */
-  static validateExistingParty(req, res, next) {
-    const party = {
-      text: 'SELECT * FROM party WHERE name = $1;',
+  static validateIfExist(req, res, next) {
+    let url = req.url.split('/')[1];
+    if (url.includes('offices')) {
+      url = 'office';
+    } else {
+      url = 'party';
+    }
+    const query = {
+      text: `SELECT * FROM ${url} WHERE name = $1;`,
       values: [req.body.name],
     };
-    return databaseConnection.query(party, (error, dbRes) => {
+    return databaseConnection.query(query, (error, dbRes) => {
       if (dbRes.rows[0]) {
         return res.status(409).json({
           status: 409,
-          error: 'party name already exist',
-        });
-      }
-      return next();
-    });
-  }
-
-  /**
-   * @method validateExistingOffice
-   * @description Validates user login/registration
-   * @param {object} req - The Request Object
-   * @param {object} res - The Response Object
-   * @returns {object} JSON API Response
-   */
-  static validateExistingOffice(req, res, next) {
-    const officeName = {
-      text: 'SELECT * FROM office WHERE name = $1;',
-      values: [req.body.name],
-    };
-    return databaseConnection.query(officeName, (error, dbRes) => {
-      if (dbRes.rows[0]) {
-        return res.status(409).json({
-          status: 409,
-          error: 'Office name already exist',
+          error: `${url} name already exist`,
         });
       }
       return next();

@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import bcryptjs from 'bcryptjs';
+import databaseConnection from '../model/databaseConnection';
 
 dotenv.config();
 process.env.SECRET_KEY = 'andela21';
@@ -24,7 +25,7 @@ class HelperUtils {
   }
 
   static verifyToken(token) {
-    const payload = jwt.verify(token, process.env.SECRET_KEY);
+    const payload = jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => decoded);
     return payload;
   }
 
@@ -36,5 +37,15 @@ class HelperUtils {
   static verifyPassword(password, hash) {
     return bcryptjs.compareSync(password, hash);
   }
+
+  static doesOfficeIdExistQuery(office) {
+    return databaseConnection.any('SELECT id FROM offices WHERE id = $1', [office]);
+  }
+
+  static getResultQuery(office) {
+    return databaseConnection.any('SELECT office, candidate, count(candidate) as results FROM votes where office = $1 GROUP BY candidate, office', [office]);
+  }
 }
+
+
 export default HelperUtils;

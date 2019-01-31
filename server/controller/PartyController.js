@@ -132,11 +132,11 @@ class PartyController {
    * @memberof deletePartyById
    */
 
-  static deletePartyById(req, res) {
+  static async deletePartyById(req, res) {
     const { id: postId } = req.params;
     const query = 'DELETE FROM party WHERE id = $1';
-    databaseConnection.query(query, [postId], (err, dbRes) => {
-      if (dbRes.rowCount > 0) {
+    await databaseConnection.query(query, [postId], (err, dbRes) => {
+      if (dbRes > 0) {
         return res.status(200).json({
           status: 200,
           data: [{

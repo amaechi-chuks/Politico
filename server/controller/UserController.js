@@ -68,9 +68,9 @@ class UserController {
           const getPassword = HelperUtils.verifyPassword(password, dbRes.rows[0].password);
           if (getPassword) {
             const user = dbRes.rows[0];
-            const { id, isAdmin } = user;
+            const { id, firstname, isadmin } = user;
             const token = HelperUtils.generateToken({
-              id, isAdmin, email, password,
+              id, firstname, isadmin, email,
             });
             return res.status(200).json({
               status: 200,
