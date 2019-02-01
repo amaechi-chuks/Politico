@@ -11,7 +11,8 @@ class PartyController {
        * @return {object} JSON representing data object
        * @memberof createParty
        */
-  static createParty(req, res) {
+  // eslint-disable-next-line consistent-return
+  static async createParty(req, res) {
     const {
       name, hqAddress, logoUrl,
     } = req.body;
@@ -19,27 +20,27 @@ class PartyController {
     const query = `
     INSERT INTO party(name, hqAddress, logoUrl) VALUES($1, $2, $3) RETURNING *`;
     const params = [name, hqAddress, logoUrl];
-    databaseConnection.query(query, params, (err, dbRes) => {
-      if (err) {
-        return res.status(500).json({
-          status: 500,
-          error: 'Something went wrong with the database.',
+    try {
+      await databaseConnection.query(query, params, (err, dbRes) => {
+        const postId = dbRes.rows[0].id;
+        return res.status(201).json({
+          status: 201,
+          data: [{
+            id: postId,
+            name,
+            hqAddress,
+            logoUrl,
+            registerdAt,
+          }],
         });
-      }
-      const postId = dbRes.rows[0].id;
-      return res.status(201).json({
-        status: 201,
-        data: [{
-          id: postId,
-          name,
-          hqAddress,
-          logoUrl,
-          registerdAt,
-        }],
       });
-    });
+    } catch (err) {
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong with the database.',
+      });
+    }
   }
-
   /**
    * @description Get all registered Political party
    * @param {object} req - The request object
@@ -63,29 +64,27 @@ class PartyController {
    * @returns {object} {object} JSON object representing data object
    * @memberof getPartyById
    */
-  static getPartyById(req, res) {
+  // eslint-disable-next-line consistent-return
+  static async getPartyById(req, res) {
     const { id: postId } = req.params;
     const query = 'SELECT * FROM party WHERE id = $1';
-    databaseConnection.query(query, [postId], (err, dbRes) => {
-      if (err) {
-        return res.status(404).json({
-          status: 404,
-          error: 'Party with such id does not exist',
-        });
-      }
-      if (dbRes.rowCount > 0) {
-        return res.status(200).json({
-          status: 200,
-          data: dbRes.rows[0],
-        });
-      }
+    try {
+      // eslint-disable-next-line consistent-return
+      await databaseConnection.query(query, [postId], (err, dbRes) => {
+        if (dbRes.rowCount > 0) {
+          return res.status(200).json({
+            status: 200,
+            data: dbRes.rows[0],
+          });
+        }
+      });
+    } catch (err) {
       return res.status(404).json({
         status: 404,
-        error: 'Party not found!',
+        error: 'Party with such id does not exist',
       });
-    });
+    }
   }
-
   /**
    * @description PATCH a registered Political party by name
    * @param {object} req - The request object
@@ -94,34 +93,28 @@ class PartyController {
    * @memberof updateName
    */
 
-  static updateName(req, res) {
+  // eslint-disable-next-line consistent-return
+  static async updateName(req, res) {
     const { id: postId } = req.params;
-    try {
-      if (req.body.name) {
-        const { name } = req.body;
-        const query = `
+    const { name } = req.body;
+    const query = `
         UPDATE party SET name = $1 WHERE id = $2 RETURNING name`;
-
-        return databaseConnection.query(query, [name, postId], (err, dbRes) => {
-          if (dbRes.rowCount > 0) {
-            const updatedName = dbRes.rows[0];
-            res.status(201).json({
-              status: 201,
-              data: updatedName,
-            });
-          }
-        });
-      }
+    try {
+      await databaseConnection.query(query, [name, postId], (err, dbRes) => {
+        if (dbRes.rowCount > 0) {
+          const updatedName = dbRes.rows[0];
+          res.status(201).json({
+            status: 201,
+            data: updatedName,
+          });
+        }
+      });
     } catch (err) {
       return res.status(500).json({
         status: 500,
         error: 'Something went wrong with the database',
       });
     }
-    return res.status(404).json({
-      status: 404,
-      error: 'No party found',
-    });
   }
 
   /**
@@ -132,27 +125,29 @@ class PartyController {
    * @memberof deletePartyById
    */
 
+  // eslint-disable-next-line consistent-return
   static async deletePartyById(req, res) {
     const { id: postId } = req.params;
     const query = 'DELETE FROM party WHERE id = $1';
-    await databaseConnection.query(query, [postId], (err, dbRes) => {
-      if (dbRes > 0) {
-        return res.status(200).json({
-          status: 200,
-          data: [{
-            id: postId,
-            message: 'Party has been deleted',
-          }],
-        });
-      }
-      if (err) {
-        return res.status(400).json({
-          status: 400,
-          error: 'No incident record found',
-        });
-      }
-      return 'No incident with such record';
-    });
+    try {
+      // eslint-disable-next-line consistent-return
+      await databaseConnection.query(query, [postId], (err, dbRes) => {
+        if (dbRes.rowCount > 0) {
+          return res.status(200).json({
+            status: 200,
+            data: [{
+              id: postId,
+              message: 'Party has been deleted',
+            }],
+          });
+        }
+      });
+    } catch (err) {
+      return res.status(400).json({
+        status: 400,
+        error: 'No incident record found',
+      });
+    }
   }
 }
 export default PartyController;

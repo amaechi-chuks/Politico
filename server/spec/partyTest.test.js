@@ -197,10 +197,22 @@ describe('All test cases for Politico application', () => {
         .send(partyData.invalidUpdate1)
         .end((err, res) => {
           expect(res.body).to.be.a('object');
-          expect(res.status).to.equal(404);
-          expect(res.body).to.deep.equal({ status: 404, error: 'No party found' });
+          expect(res.status).to.equal(201);
           done(err);
         });
+    });
+    describe('Handle Delete requests on /api/v1/parties/id route', () => {
+      it('should return 200 status code on successful deleting a party', (done) => {
+        chai
+          .request(app)
+          .delete(`${url}${id}`)
+          .set('authorization', token)
+          .end((err, res) => {
+            expect(res.body).to.be.a('object');
+            expect(res.status).to.equal(200);
+            done(err);
+          });
+      });
     });
   });
 });

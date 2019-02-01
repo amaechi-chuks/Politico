@@ -14,27 +14,46 @@ class CandidateController {
          * @return {object} JSON representing data object
          * @memberof createCandidate
          */
-  static createCandidate(req, res) {
-    const {
-      office, party, candidate,
-    } = req.body;
+  //   static createCandidate(req, res) {
+  //     const {
+  //       office, party, candidate,
+  //     } = req.body;
+  //     const query = `
+  //       INSERT INTO candidate(office, party, candidate) VALUES($1, $2, $3) RETURNING *`;
+  //     const params = [office, party, candidate];
+  //     databaseConnection.query(query, params, (err, dbRes) => {
+  //       if (dbRes) {
+  //         return res.status(201).json({
+  //           status: 201,
+  //           data: dbRes.rows[0],
+  //         });
+  //       }
+  //       return res.status(500).json({
+  //         status: 500,
+  //         error: 'Something went wrong with the database.',
+  //       });
+  //     });
+  //   }
+  // }
+  static async createCandidate(req, res) {
+    const { office, party } = req.body;
+    const { id: candidate } = req.user;
     const query = `
-      INSERT INTO candidate(office, party, candidate) VALUES($1, $2, $3) RETURNING *`;
-    const params = [office, party, candidate];
-    databaseConnection.query(query, params, (err, dbRes) => {
-      if (dbRes) {
-        return res.status(201).json({
-          status: 201,
-          data: dbRes.rows[0],
-        });
-      }
+  INSERT INTO vote(office, party, candidate) VALUES($1, $2, $3) RETURNING *`;
+    const params = [office, candidate, party];
+    try {
+      const { rows } = await databaseConnection.query(query, params);
+      return res.status(201).json({
+        status: 201,
+        data: [rows[0]],
+      });
+    } catch (error) {
       return res.status(500).json({
         status: 500,
-        error: 'Something went wrong with the database.',
+        error: 'Something went wrong with the database',
       });
-    });
+    }
   }
 }
-
 
 export default CandidateController;

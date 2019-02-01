@@ -17,7 +17,7 @@ class UserController {
   * @param {object} res - The Response Object
   * @returns {object} JSON API Response
   */
-  static registerUser(req, res) {
+  static async registerUser(req, res) {
     const {
       firstname, lastname, othername,
       email, phonenumber, password, passporturl,
@@ -29,13 +29,7 @@ class UserController {
       const values = [firstname, lastname,
         othername, email, phonenumber,
         hashedPassword, passporturl];
-      databaseConnection.query(query, values, (err, dbRes) => {
-        if (err) {
-          return res.status(500).json({
-            status: 500,
-            error: 'Something went wrong with the database.',
-          });
-        }
+      await databaseConnection.query(query, values, (err, dbRes) => {
         const user = dbRes.rows[0];
         const { id, isAdmin } = user;
         const token = HelperUtils.generateToken({ isAdmin, id, email });
@@ -45,10 +39,12 @@ class UserController {
         });
       });
     } catch (err) {
-      winston.info('ops!', err);
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong with the database.',
+      });
     }
   }
-
 
   /**
    * @method loginUser
@@ -59,10 +55,10 @@ class UserController {
    */
   static loginUser(req, res) {
     const { email, password } = req.body;
-    const errors = { form: 'Invalid email or password' };
     const userQuery = 'SELECT * FROM users WHERE email = $1 LIMIT 1;';
     const params = [email];
     databaseConnection.query(userQuery, params)
+      // eslint-disable-next-line consistent-return
       .then((dbRes) => {
         if (dbRes.rows[0]) {
           const getPassword = HelperUtils.verifyPassword(password, dbRes.rows[0].password);
@@ -80,16 +76,11 @@ class UserController {
               }],
             });
           }
-          return res.status(401).json({
-            status: 401,
-            error: 'Can not found user',
-          });
         }
-        return res.status(404).json({
-          status: 404,
-          error: 'User does not exist',
-        });
-      }).catch(error => error(res, 500, errors));
+      }).catch(() => res.status(404).json({
+        status: 404,
+        error: 'User does not exist',
+      }));
   }
 }
 export default UserController;

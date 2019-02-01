@@ -92,7 +92,7 @@ class ValidateUser {
       return res.status(status).json({ status, error });
     }
 
-    if (path === 'signin') {
+    if (path === 'login') {
       return databaseConnection.query(query, [email], (err, dbRes) => {
         if (dbRes.rowCount < 1) {
           return res.status(404).json({

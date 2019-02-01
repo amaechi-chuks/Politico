@@ -260,12 +260,12 @@ describe('All Test cases for user Registeration', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
-          expect(res.body.error).to.equal('User does not exist');
+          expect(res.body.error).to.equal('Sorry, the email account you provided does not exist');
           if (err) { return done(err); }
           done();
         });
     });
-    it('should sign in user with an empty password field', (done) => {
+    it('should  should not sign in user with an empty password field', (done) => {
       chai
         .request(app)
         .post(loginUrl)
@@ -277,7 +277,7 @@ describe('All Test cases for user Registeration', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
-          expect(res.body.error).to.equal('User does not exist');
+          expect(res.body.error).to.equal('Sorry, the email account you provided does not exist');
           if (err) { return done(err); }
           done();
         });
