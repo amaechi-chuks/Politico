@@ -82,10 +82,13 @@ class UserController {
           }
           return res.status(401).json({
             status: 401,
-            error: errors,
+            error: 'Can not found user',
           });
         }
-        return errors;
+        return res.status(404).json({
+          status: 404,
+          error: 'User does not exist',
+        });
       }).catch(error => error(res, 500, errors));
   }
 }
