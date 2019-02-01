@@ -12,16 +12,15 @@ export default {
     updated: 'Date.now()',
   },
   validInput2: {
-    firstname: 'Mike',
+    firstname: 'Simeon',
     lastname: 'Owen',
-    othernames: 'johns',
-    email: 'mk@yahoo.com',
-    password: 'chuks mike',
+    othername: 'johns',
+    email: 'mkwees@ytedx.com',
+    password: 'chuks9mike',
     passporturl: 'johns.jpeg',
-    phonenumber: '07068566559',
-
+    phonenumber: '07064566559',
   },
-  invalifFirstname1: {
+  invalidFirstname1: {
     lastname: 'Owen',
     othernames: 'johns',
     email: 'mk@yahoo.com',
@@ -29,7 +28,7 @@ export default {
     phonenumber: '07068566559',
     passporturl: 'owenjohn.jpeg',
   },
-  invalifFirstname2: {
+  invalidFirstname2: {
     firstname: 93,
     lastname: 'Owen',
     othernames: 'johns',
@@ -37,18 +36,16 @@ export default {
     password: 'chuks mike',
     phonenumber: '07068566559',
     passporturl: 'owen.png',
-
   },
-  invalifLastname1: {
+  invalidLastname1: {
     firstname: 'Chibuzor',
     othernames: 'johns',
     email: 'mk@yahoo.com',
     password: 'chuks mike',
     phonenumber: '07068566559',
     passporturl: 'buzo.png',
-
   },
-  invalifLastname2: {
+  invalidLastname2: {
     firstname: 'Chibuzor',
     lastname: 99,
     othernames: 'johns',
@@ -56,7 +53,75 @@ export default {
     password: 'chuks mike',
     phonenumber: '07068566559',
     passporturl: 'buzwen.png',
-
+  },
+  invalidEmail1: {
+    firstname: 'Chibuzor',
+    lastname: 'Onyeka',
+    password: 'loisnwa',
+    othernames: 'johns',
+    phonenumber: '07068566559',
+    passporturl: 'buzwen.png',
+  },
+  invalidEmail2: {
+    firstname: 'Chibuzor',
+    lastname: 'Onyeka',
+    othernames: 'johns',
+    email: 'mk@yahoo',
+    password: 'hy39927',
+    phonenumber: '07068566559',
+    passporturl: 'buzwen.png',
+  },
+  invalidPassword1: {
+    firstname: 'Chibuzor',
+    lastname: 'Onyeka',
+    othernames: 'johns',
+    email: 'mk@yahoo.com',
+    phonenumber: '07068566559',
+    passporturl: 'buzwen.png',
+  },
+  invalidPassword2: {
+    firstname: 'Chibuzor',
+    lastname: 'Onyeka',
+    othernames: 'johns',
+    email: 'mk@yahoo.com',
+    password: '344[]',
+    phonenumber: '07068566559',
+    passporturl: 'buzwen.png',
+  },
+  invalidPassword3: {
+    firstname: 'Chibuzor',
+    lastname: 'Onyeka',
+    othernames: 'johns',
+    email: 'mk@yahoo.com',
+    password: 'l06y',
+    phonenumber: '07068566559',
+    passporturl: 'buzwen.png',
+  },
+  invalidPassport1: {
+    firstname: 'Chibuzor',
+    lastname: 'Onyeka',
+    othernames: 'johns',
+    email: 'mk@yahoo.com',
+    password: 'l06y98',
+    phonenumber: '07068566559',
+  },
+  invalidPassport2: {
+    firstname: 'Chibuzor',
+    lastname: 'Onyeka',
+    othernames: 'johns',
+    email: 'mk@yahoo.com',
+    password: 'l06y28h',
+    phonenumber: '07068566559',
+    passporturl: '',
+  },
+  invalidPassport3: {
+    firstname: 'Chibuzor',
+    lastname: 'Onyeka',
+    othernames: 'johns',
+    email: 'mk@yahoo.com',
+    password: 'l06ysde',
+    phonenumber: '07068566559',
+    passporturl: 'buzwen',
   },
   emptyData: {
     firstname: '',

@@ -1,32 +1,61 @@
-// import supertest from 'supertest';
-// import chai from 'chai';
-// import app from '../app';
-// import candidateInput from './seed/candidate.data';
+import chaiHttp from 'chai-http';
+import chai from 'chai';
+import app from '../app';
 
-// const user2Token = { token: null };
-// const { should, expect } = chai;
-// should();
-// const request = supertest(app);
+chai.use(chaiHttp);
+const { expect } = chai;
 
-// describe('All test cases for Politico application', () => {
-//   describe('Test case for creating a candidate', () => {
-//     it('should create return `200`status code if candidate does nor exist in database', (done) => {
-//       request.post('/api/v1/candidate')
-//         .set('req.headers.authorization', user2Token.token)
-//         .send(candidateInput.candidateData1)
-//         .end((err, res) => {
-//           res.body.should.be.an('object');
-//           done(err);
-//         });
-//     });
-//     it('should create return `200`status code if candidate does nor exist in database', (done) => {
-//       request.post('/api/v1/candidate')
-//         .set('req.headers.authorization', user2Token.token)
-//         .send(candidateInput.candidateData1)
-//         .end((err, res) => {
-//           expect(res.status).to.equal(500);
-//           done(err);
-//         });
-//     });
-//   });
-// });
+
+const loginUrl = '/api/v1/auth/login';
+const signupUrl = '/api/v1/auth/signup';
+const partyUrl = './api/v1/parties';
+const officeUrl = './api/v1/offices';
+const token1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3RuYW1lIjoiY2h1a3MiLCJpc2FkbWluIjp0cnVlLCJlbWFpbCI6ImFtYWVjaGljaHVrczIwMDBAeWFob28uY29tIiwiaWF0IjoxNTQ4OTcwNzQyLCJleHAiOjE1NTQxNTQ3NDJ9.UZX4DXoJnDMKDXi4LQrN643q8q1He6GPMgHE-KsdJWI';
+let token;
+describe('POST Requests', () => {
+  describe('POST url', () => {
+    it('should sign in a user', (done) => {
+      chai
+        .request(app)
+        .post(loginUrl)
+        .send({
+          email: 'amaechichuks2000@yahoo.com',
+          password: 'fabulous26',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          token = res.body.data[0].token;
+          if (err) { return done(err); }
+          done();
+        });
+    });
+  });
+
+  describe('POST /api/v1/auth/signup', () => {
+    it('should create a new user', (done) => {
+      chai
+        .request(app)
+        .post(signupUrl)
+        .send({
+          firstname: 'Jacob',
+          lastname: 'Mike',
+          othername: 'johns',
+          email: 'mkw4ppp54ees@ytedx.com',
+          password: 'chuk4s9mike',
+          passporturl: 'johns.jpeg',
+          phonenumber: '07064566559',
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(201);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0]).to.be.an('object');
+          if (err) { return done(err); }
+          done();
+        });
+    });
+  });
+});

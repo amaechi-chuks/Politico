@@ -17,7 +17,7 @@ class ValidateUser {
   static validateProfileDetails(req, res, next) {
     const validate = HelperUtils.validate();
     const {
-      firstname, lastname, phonenumber, email, passporturl,
+      firstname, lastname, phonenumber, email, passporturl, password,
     } = req.body;
     let error;
     if (!validate.name.test(firstname)) {
@@ -47,7 +47,20 @@ class ValidateUser {
     if (!passporturl || !validate.logoUrl.test(passporturl)) {
       error = 'You need to include a valid passport';
     }
+    if (password === '' || typeof password === 'undefined') {
+      error = 'Password must be specified';
+    }
+    if (!password) {
+      error = 'Password field cannot be empty';
+    }
+    if (!validate.hqAddress.test(password)) {
+      error = 'Password is invalid';
+    }
     if (error) {
+      return res.status(400).json({ status: 400, error });
+    }
+    if (password.length < 5) {
+      error = 'Password strength is too low';
       return res.status(400).json({ status: 400, error });
     }
 

@@ -30,7 +30,6 @@ router.post('/offices',
 router.post('/auth/signup',
   ValidateUser.validateProfileDetails,
   ValidateUser.validateExistingUser,
-  ValidateUser.validateLoginDetails,
   UserController.registerUser);
 
 router.post('/auth/login', ValidateUser.validateLoginDetails,
