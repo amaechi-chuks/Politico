@@ -9,11 +9,11 @@ CREATE TABLE users (
   password varchar (65) NOT NULL,
   phonenumber varchar (14) UNIQUE NOT NULL,
   passporturl varchar (100) UNIQUE NOT NULL,
-  isAdmin varchar (5) DEFAULT 'false',
+  isAdmin boolean DEFAULT FALSE,
   registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now(),
   updatedAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
-INSERT INTO users (firstname, lastname, othername, email, password, phonenumber, passporturl, isAdmin) VALUES ('chuks', 'amaechi', 'patrick', 'amaechichuks2000@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989898', 'chuksimage.jpeg', 'true'
+INSERT INTO users (firstname, lastname, othername, email, password, phonenumber, passporturl, isAdmin) VALUES ('chuks', 'amaechi', 'patrick', 'amaechichuks2000@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989898', 'chuksimage.jpeg', TRUE
 );
 
 DROP TABLE IF EXISTS party CASCADE;
@@ -33,7 +33,7 @@ type varchar (20) NOT NULL,
 name varchar (40) NOT NULL,
 createdAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
-INSERT INTO office (type, name) VALUES ('federal', 'governor');
+INSERT INTO office (type, name) VALUES ('federal', 'senate');
 
 DROP TABLE IF EXISTS candidate CASCADE;
 CREATE TABLE candidate (
@@ -43,14 +43,15 @@ party int references party(id),
 candidate int references users(id),
 registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
+INSERT INTO candidate (office, party, candidate) VALUES ('1', '1', '1');
 
 DROP TABLE IF EXISTS vote CASCADE;
 CREATE TABLE vote (
 id SERIAL primary key,
 createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
-createdBy int references users(id),
+candidate int references candidate(id),
 office int references office(id),
-body varchar (100) NOT NULL
+voter int references users(id)
 );
 `;
 export default createTables;

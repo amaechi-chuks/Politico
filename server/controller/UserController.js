@@ -65,10 +65,13 @@ class UserController {
     databaseConnection.query(userQuery, params)
       .then((dbRes) => {
         if (dbRes.rows[0]) {
-          const getPassword = HelperUtils.hashPassword(password, dbRes.rows[0].password);
+          const getPassword = HelperUtils.verifyPassword(password, dbRes.rows[0].password);
           if (getPassword) {
             const user = dbRes.rows[0];
-            const token = HelperUtils.generateToken(req.body);
+            const { id, firstname, isadmin } = user;
+            const token = HelperUtils.generateToken({
+              id, firstname, isadmin, email,
+            });
             return res.status(200).json({
               status: 200,
               data: [{

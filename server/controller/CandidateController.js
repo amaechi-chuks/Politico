@@ -8,7 +8,7 @@ import databaseConnection from '../model/databaseConnection';
 
 class CandidateController {
   /**
-         * @description Create a new political party
+         * @description Create a new political candidate
          * @param {object} req - The request object
          * @param {object} res - The response object
          * @return {object} JSON representing data object

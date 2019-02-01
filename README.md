@@ -3,7 +3,6 @@ Politico is a platform that enables citizens give their mandate to politicians r
 
 [![Build Status](https://travis-ci.com/amaechi-chuks/Politico.svg?branch=develop)](https://travis-ci.com/amaechi-chuks/Politico)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6d87da9486940f2ed6f5/maintainability)](https://codeclimate.com/github/amaechi-chuks/Politico/maintainability)
-[![codecov](https://codecov.io/gh/amaechi-chuks/Politico/branch/develop/graph/badge.svg)](https://codecov.io/gh/amaechi-chuks/Politico)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6d87da9486940f2ed6f5/test_coverage)](https://codeclimate.com/github/amaechi-chuks/Politico/test_coverage)
 [![Coverage Status](https://coveralls.io/repos/github/amaechi-chuks/Politico/badge.svg?branch=develop)](https://coveralls.io/github/amaechi-chuks/Politico?branch=develop)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
@@ -93,14 +92,19 @@ npm test
  ## *API Endpoints*
 |Endpoint                                           | Functionality                     |HTTP method 
 |---------------------------------------------------|:-----------------------------------:|-------------:
+|/api/v1/auth/signup                            |Create a user account        |POST
+|/api/v1/auth/login                                |Login a user        |POST
 |/api/v1/parties                                |Create a political party        |POST
-|/api/v1/offices                               |Create a political office         |POST
-|/api/v1/parties                               |Fetch all political parties        |GET 
-|/api/v1/offices                              |Fetch all political offices        |GET 
-|/api/v1/parties/*party_id*                      |Fetch the details of a single political party|GET
-|/api/v1/offices/*office_id*/             |Fetch the details of a single political office             |Get
-|/api/v1/parties/*party_id*/name             |Update political party name              |PATCH
-|/api/v1/parties/*party_id*              |Delete a political party by id     |DELETE
+|/api/v1/office/*user_id*                       |Register a user as candidate running for a specific office       |POST
+|/api/v1/votes                                  |Vote for a candidate       |POST
+|/api/v1/offices                                |Create a political office         |POST
+|/api/v1/parties                                |Fetch all political parties        |GET 
+|/api/v1/offices                                |Fetch all political offices        |GET 
+|/api/v1/parties/*party_id*                     |Fetch the details of a single political party|GET
+|/api/v1/offices/*office_id*/                   |Fetch the details of a single political office             |Get
+|/api/v1/office/*office_id*/result              |Fetch the result of a specific  office following the conclusion of an election    |GET
+|/api/v1/parties/*party_id*/name                |Update political party name              |PATCH
+|/api/v1/parties/*party_id*                     |Delete a political party by id     |DELETE
 
 
 

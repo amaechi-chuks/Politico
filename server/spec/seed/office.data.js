@@ -4,8 +4,8 @@ export default {
     name: 'president',
   },
   validData2: {
-    type: 'federal',
-    name: 'president',
+    type: 'state',
+    name: 'governor',
   },
   validData3: {
     type: 'federal',
@@ -18,16 +18,16 @@ export default {
     name: '',
   },
   invalidType: {
+    type: '',
+    name: 'chairman',
+  },
+  invalidName: {
     type: 'federal',
     name: '',
   },
-  invalidName: {
-    type: '',
-    name: 'love',
-  },
   officeExist: {
     type: 'federal',
-    name: 'president',
+    name: 'senate',
   },
-  
+
 };
