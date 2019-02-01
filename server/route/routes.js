@@ -35,7 +35,10 @@ router.post('/auth/signup',
 router.post('/auth/login', ValidateUser.validateLoginDetails,
   UserController.loginUser);
 
-router.post('/office/:id/register', AuthenticateUser.verifyUser, CandidateController.createCandidate);
+router.post('/office/:id/register',
+  AuthenticateUser.verifyAdmin,
+  Validate.validateExistingCandidate,
+  CandidateController.createCandidate);
 
 router.post('/votes', AuthenticateUser.verifyUser, Validate.validateExistingVote, VoteController.createVote);
 
