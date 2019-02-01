@@ -1,95 +1,104 @@
-import supertest from 'supertest';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
 import inputs from './seed/user.data';
 
 chai.use(chaiHttp);
-const { should, expect } = chai;
-should();
-export const request = supertest(app);
+const { expect } = chai;
+const signupUrl = '/api/v1/auth/signup';
+const loginUrl = '/api/v1/auth/login';
 
-export const wrongToken = 'ThisIsAWrongToken';
-
-const userToken = { token: null };
-
-describe('All Test cases for user Register', () => {
+describe('All Test cases for user Registeration', () => {
   describe('/POST api/v1/auth/signup', () => {
-    it('should return `400` if some fields are undefined', (done) => {
-      request.post('/api/v1/auth/signup')
+    it('should return status code 400 if firstname field is ommitted', (done) => {
+      chai
+        .request(app)
+        .post(signupUrl)
         .set('Content-Type', 'application/json')
-        .send(inputs.emptyData)
-        .expect(404)
+        .send(inputs.invalifFirstname1)
         .end((err, res) => {
-          res.body.should.be.an('object');
-          expect(res.body.status).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.status).to.equal(400);
+          expect(res.body).to.deep.equal({ status: 400, error: 'firstname must be specified' });
+          done(err);
+        });
+    });
+    it('should return status code 400 if firstname field is ommitted', (done) => {
+      chai
+        .request(app)
+        .post(signupUrl)
+        .set('Content-Type', 'application/json')
+        .send(inputs.invalifFirstname2)
+        .end((err, res) => {
+          expect(res.body).to.be.an('object');
+          expect(res.body.status).to.equal(400);
+          expect(res.body).to.deep.equal({ status: 400, error: 'You need to include a valid firstname' });
+          done(err);
+        });
+    });
+    it('should return status code 400 if lasttname field is ommitted', (done) => {
+      chai
+        .request(app)
+        .post(signupUrl)
+        .set('Content-Type', 'application/json')
+        .send(inputs.invalifLastname1)
+        .end((err, res) => {
+          expect(res.body).to.be.an('object');
+          expect(res.body.status).to.equal(400);
+          expect(res.body).to.deep.equal({ status: 400, error: 'lastname must be specified' });
+          done(err);
+        });
+    });
+    it('should return status code 400 if lastname field is invalid', (done) => {
+      chai
+        .request(app)
+        .post(signupUrl)
+        .set('Content-Type', 'application/json')
+        .send(inputs.invalifLastname2)
+        .end((err, res) => {
+          expect(res.body).to.be.an('object');
+          expect(res.body.status).to.equal(400);
+          expect(res.body).to.deep.equal({ status: 400, error: 'You need to include a valid last name' });
           done(err);
         });
     });
   });
-  describe('/POST api/v1/auth/signup', () => {
-    it('Should return `500` if password is not hashed', (done) => {
-      request.post('/api/v1/auth/signup')
-        .set('Content-Type', 'application/json')
-        .send({})
-        .expect(404)
-        .end((err, res) => {
-          expect(res.body.password).to.equal(undefined);
-          expect(res.status).to.equal(404);
-          done();
-        });
-    });
-  });
-  describe('/POST api/v1/auth/signup', () => {
-    it('should return `404` status code with errors message for empty request', (done) => {
-      request.post('/api/v1/auth/signup')
-        .set('Content-Type', 'application/json')
-        .send(inputs.emptyData)
-        .expect(404)
-        .end((err, res) => {
-          expect(res.body.firstname).to.eql(undefined);
-          expect(res.body.lastname).to.eql(undefined);
-          expect(res.body.email).to.eql(undefined);
-          expect(res.body.password).to.eql(undefined);
-          expect(res.body.phonenumber).to.eql(undefined);
-          expect(res.body.passporturl).to.eql(undefined);
-          expect(res.status).to.equal(404);
-          done();
-        });
-    });
-  });
-
   describe('All Test cases for user login', () => {
     it('Should return `401` for empty user input', (done) => {
-      request.post('/api/v1/auth/signin')
+      chai
+        .request(app)
+        .post(loginUrl)
         .set('Content-Type', 'application/json')
         .send(inputs.invalidEmailPassword)
         .end((err, res) => {
-          res.body.should.be.an('object');
+          expect(res.body).to.be.an('object');
           expect(res.status).to.equal(404);
           done();
         });
     });
     it('Should return `404` and deny access if wrong userName is not entered', (done) => {
-      request.post('/api/v1/auth/signin')
+      chai
+        .request(app)
+        .post(loginUrl)
         .set('Content-Type', 'application/json')
         .send(inputs.noEmail)
         .end((err, res) => {
-          res.body.should.be.an('object');
+          expect(res.body).to.be.an('object');
           expect(res.status).to.equal(404);
           done();
         });
     });
     it('Should return `404` and deny access if wrong Password is not entered', (done) => {
-      request.post('/api/v1/auth/signin')
+      chai
+        .request(app)
+        .post(loginUrl)
         .set('Content-Type', 'application/json')
         .send(inputs.noPassword)
         .end((err, res) => {
-          res.body.should.be.an('object');
+          expect(res.body).to.be.an('object');
           expect(res.status).to.equal(404);
           done();
         });
     });
   });
 });
-export default userToken;

@@ -44,7 +44,7 @@ class ValidateUser {
     if (!email || email === undefined) {
       error = 'Email must be specified';
     }
-    if (!passporturl || validate.logoUrl.test(passporturl)) {
+    if (!passporturl || !validate.logoUrl.test(passporturl)) {
       error = 'You need to include a valid passport';
     }
     if (error) {

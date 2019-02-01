@@ -17,10 +17,47 @@ export default {
     othernames: 'johns',
     email: 'mk@yahoo.com',
     password: 'chuks mike',
+    passporturl: 'johns.jpeg',
     phonenumber: '07068566559',
-    username: 'chukschukso',
-  },
 
+  },
+  invalifFirstname1: {
+    lastname: 'Owen',
+    othernames: 'johns',
+    email: 'mk@yahoo.com',
+    password: 'chuks mike',
+    phonenumber: '07068566559',
+    passporturl: 'owenjohn.jpeg',
+  },
+  invalifFirstname2: {
+    firstname: 93,
+    lastname: 'Owen',
+    othernames: 'johns',
+    email: 'mk@yahoo.com',
+    password: 'chuks mike',
+    phonenumber: '07068566559',
+    passporturl: 'owen.png',
+
+  },
+  invalifLastname1: {
+    firstname: 'Chibuzor',
+    othernames: 'johns',
+    email: 'mk@yahoo.com',
+    password: 'chuks mike',
+    phonenumber: '07068566559',
+    passporturl: 'buzo.png',
+
+  },
+  invalifLastname2: {
+    firstname: 'Chibuzor',
+    lastname: 99,
+    othernames: 'johns',
+    email: 'mk@yahoo.com',
+    password: 'chuks mike',
+    phonenumber: '07068566559',
+    passporturl: 'buzwen.png',
+
+  },
   emptyData: {
     firstname: '',
     lastname: '',
