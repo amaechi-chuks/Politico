@@ -28,12 +28,12 @@ router.post('/offices',
   OfficeController.createOffice);
 
 router.post('/auth/signup',
+  ValidateUser.validateProfileDetails,
   ValidateUser.validateExistingUser,
   ValidateUser.validateLoginDetails,
-  ValidateUser.validateProfileDetails,
   UserController.registerUser);
 
-router.post('/auth/signin', ValidateUser.validateLoginDetails,
+router.post('/auth/login', ValidateUser.validateLoginDetails,
   UserController.loginUser);
 
 router.post('/office/:id/register', AuthenticateUser.verifyUser, CandidateController.createCandidate);

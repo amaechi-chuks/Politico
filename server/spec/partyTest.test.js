@@ -6,10 +6,10 @@ import partyData from './seed/party.data';
 chai.use(chaiHttp);
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3RuYW1lIjoiY2h1a3MiLCJpc2FkbWluIjp0cnVlLCJlbWFpbCI6ImFtYWVjaGljaHVrczIwMDBAeWFob28uY29tIiwiaWF0IjoxNTQ4OTcwNzQyLCJleHAiOjE1NTQxNTQ3NDJ9.UZX4DXoJnDMKDXi4LQrN643q8q1He6GPMgHE-KsdJWI';
 const user2Token = { token: null };
-const { should, expect } = chai;
+const { expect } = chai;
 const url = '/api/v1/parties/';
 const id = 1;
-should();
+
 
 describe('All test cases for Politico application', () => {
   describe('Test case for fetching all parties', () => {

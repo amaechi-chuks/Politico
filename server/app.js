@@ -19,7 +19,10 @@ app.get('/', (req, res) => res.status(200).json({
   status: 200,
   message: 'Welcome to Politico',
 }));
-
+app.get('/api/v1', (req, res) => res.status(200).json({
+  status: 200,
+  message: 'Welcome to Politico API V1',
+}));
 app.use('/api/v1/', routes);
 
 app.all('*', (req, res) => res.status(404).json({

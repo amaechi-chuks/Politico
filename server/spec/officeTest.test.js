@@ -77,6 +77,30 @@ describe('All test cases for Politico application', () => {
           done(err);
         });
     });
+    it('should return 404 status code for a GET request with a wrong params ', (done) => {
+      chai
+        .request(app)
+        .get(`${url}s`)
+        .set('authorization', token)
+        .end((err, res) => {
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.deep.equal({ status: 404, error: 'The id parameter must be a number' });
+          expect(res.status).to.equal(404);
+          done(err);
+        });
+    });
+    it('should return 404 status code for a GET request to a wrong endpoint ', (done) => {
+      chai
+        .request(app)
+        .get('/offices')
+        .set('authorization', token)
+        .end((err, res) => {
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.deep.equal({ status: 404, error: 'Wrong endpoint. Such endpoint does not exist' });
+          expect(res.status).to.equal(404);
+          done(err);
+        });
+    });
   });
   describe('Handle POST requests on /api/v1/offices/ route', () => {
     it('should return 401 status code for wrong auth header', (done) => {
@@ -156,6 +180,19 @@ describe('All test cases for Politico application', () => {
           expect(res.body.data[0].type).to.equal(officeData.validData2.type);
           expect(res.body.data[0].name).to.equal(officeData.validData2.name);
           expect(res.status).to.equal(201);
+          done(err);
+        });
+    });
+    it('should return 404 status code for Post request to a wrong endpoint', (done) => {
+      chai
+        .request(app)
+        .post('/offices')
+        .set('authorization', token)
+        .send(officeData.validData2)
+        .end((err, res) => {
+          expect(res.body).to.be.a('object');
+          expect(res.body).to.deep.equal({ status: 404, error: 'Wrong endpoint. Such endpoint does not exist' });
+          expect(res.status).to.equal(404);
           done(err);
         });
     });
