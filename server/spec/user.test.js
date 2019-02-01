@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
@@ -236,6 +237,7 @@ describe('All Test cases for user Registeration', () => {
           email: 'amaechichuks2000@yahoo.com',
           password: 'fabulous26',
         })
+        // eslint-disable-next-line consistent-return
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
@@ -254,6 +256,7 @@ describe('All Test cases for user Registeration', () => {
           email: 'danbader@mabel.com',
           password: 'lilian',
         })
+        // eslint-disable-next-line consistent-return
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
@@ -270,6 +273,7 @@ describe('All Test cases for user Registeration', () => {
           email: 'dan@yahoomabel.com',
           password: '   ',
         })
+        // eslint-disable-next-line consistent-return
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
