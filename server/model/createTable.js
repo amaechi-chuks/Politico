@@ -16,6 +16,7 @@ CREATE TABLE users (
 INSERT INTO users (firstname, lastname, othername, email, password, phonenumber, passporturl, isAdmin) VALUES ('chuks', 'amaechi', 'patrick', 'amaechichuks2000@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989898', 'chuksimage.jpeg', TRUE
 );
 
+
 DROP TABLE IF EXISTS party CASCADE;
 CREATE TABLE party (
 id SERIAL primary key,
@@ -25,6 +26,7 @@ logoUrl varchar (50) NOT NULL,
 registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
 INSERT INTO party (name, hqAddress, logoUrl) VALUES ('People Party', 'plot 5 bello street', 'people.jpeg');
+
 
 DROP TABLE IF EXISTS office CASCADE;
 CREATE TABLE office (
@@ -43,7 +45,6 @@ party int references party(id),
 candidate int references users(id),
 registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
-INSERT INTO candidate (office, party, candidate) VALUES ('1', '1', '1');
 
 DROP TABLE IF EXISTS vote CASCADE;
 CREATE TABLE vote (
@@ -53,5 +54,6 @@ candidate int references candidate(id),
 office int references office(id),
 voter int references users(id)
 );
+
 `;
 export default createTables;

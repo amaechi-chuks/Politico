@@ -67,27 +67,27 @@ class OfficeController {
    * @memberof getOfficeById
    */
 
-  static getOfficeById(req, res) {
+  // eslint-disable-next-line consistent-return
+  static async getOfficeById(req, res) {
     const { id: postId } = req.params;
     const query = 'SELECT * FROM office WHERE id = $1';
-    databaseConnection.query(query, [postId], (err, dbRes) => {
-      if (dbRes.rowCount > 0) {
-        return res.status(200).json({
-          status: 200,
-          data: dbRes.rows[0],
-        });
-      }
-      if (err) {
-        return res.status(404).json({
-          status: 404,
-          error: 'Office with such id does not exist',
-        });
-      }
-      return res.status(404).json({
-        status: 404,
-        error: 'Party not found!',
+    // eslint-disable-next-line consistent-return
+    try {
+      // eslint-disable-next-line consistent-return
+      await databaseConnection.query(query, [postId], (err, dbRes) => {
+        if (dbRes.rowCount > 0) {
+          return res.status(200).json({
+            status: 200,
+            data: dbRes.rows[0],
+          });
+        }
       });
-    });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong with the database',
+      });
+    }
   }
 }
 export default OfficeController;

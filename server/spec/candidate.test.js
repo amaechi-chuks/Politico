@@ -8,6 +8,8 @@ const { expect } = chai;
 
 const loginUrl = '/api/v1/auth/login';
 const signupUrl = '/api/v1/auth/signup';
+const registerUrl = '/api/v1/office';
+const id = 1;
 // eslint-disable-next-line no-unused-vars
 let token;
 describe('POST Requests', () => {
@@ -58,5 +60,27 @@ describe('POST Requests', () => {
           done();
         });
     });
+    // describe('POST /api/v1/office/id/register', () => {
+    //   it.only('should create a new candidate', (done) => {
+    //     chai
+    //       .request(app)
+    //       .post(`${registerUrl}${id}/register`)
+    //       .send({
+    //         office: 1,
+    //         party: 1,
+    //         candidate: 1,
+    //       })
+    //     // eslint-disable-next-line consistent-return
+    //       .end((err, res) => {
+    //           console.log(res.body);
+    //         expect(res.status).to.equal(201);
+    //         expect(res.body).to.be.an('object');
+    //         expect(res.body.data).to.be.an('array');
+    //         expect(res.body.data[0]).to.be.an('object');
+    //         if (err) { return done(err); }
+    //         done();
+    //       });
+    //   });
+    // });
   });
 });
