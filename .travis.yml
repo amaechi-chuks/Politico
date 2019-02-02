@@ -7,22 +7,22 @@ dist: trusty
 env:
   global:
     - CC_TEST_REPORTER_ID=752b820991057a553688cb0876e647bbb1ffe854a5d9bc8d20e4dbdb93242747
+
+addons:
+  chrome: stable
 before_script:
+  - yarn global add nyc
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - psql -c 'create database politico;' -U postgres
 
-cache:
-  directories:
-    - "node_modules" 
-
+script:
+  - npm test
+  
 after_script:
-  - npm run coverage
-  - npm run report-coverage
-  - npm run coveralls
-  - ./cc-test-reporter after-build -r 752b820991057a553688cb0876e647bbb1ffe854a5d9bc8d20e4dbdb93242747 --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 notifications:
-  email: true
+  email: false
+
 

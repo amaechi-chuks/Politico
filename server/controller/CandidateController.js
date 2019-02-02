@@ -1,4 +1,5 @@
 import databaseConnection from '../model/databaseConnection';
+import HelperUtils from '../utility/helperUltis';
 
 /**
  * @class CandidateController
@@ -14,35 +15,21 @@ class CandidateController {
          * @return {object} JSON representing data object
          * @memberof createCandidate
          */
-  //   static createCandidate(req, res) {
-  //     const {
-  //       office, party, candidate,
-  //     } = req.body;
-  //     const query = `
-  //       INSERT INTO candidate(office, party, candidate) VALUES($1, $2, $3) RETURNING *`;
-  //     const params = [office, party, candidate];
-  //     databaseConnection.query(query, params, (err, dbRes) => {
-  //       if (dbRes) {
-  //         return res.status(201).json({
-  //           status: 201,
-  //           data: dbRes.rows[0],
-  //         });
-  //       }
-  //       return res.status(500).json({
-  //         status: 500,
-  //         error: 'Something went wrong with the database.',
-  //       });
-  //     });
-  //   }
-  // }
   static async createCandidate(req, res) {
-    const { office, party } = req.body;
-    const { id: candidate } = req.user;
-    const query = `
-  INSERT INTO vote(office, party, candidate) VALUES($1, $2, $3) RETURNING *`;
-    const params = [office, candidate, party];
+    const { office } = req.body;
+    const { id: candidate } = req.params;
+    const query1check = await HelperUtils.duplicateCandidateCheck(candidate);
     try {
-      const { rows } = await databaseConnection.query(query, params);
+      if (query1check.rowCount > 0) {
+        return res.status(400).json({
+          status: 400,
+          error: 'Candidate already running for another office',
+        });
+      }
+      const query2 = `
+  INSERT INTO candidate(office, candidate) VALUES($1, $2) RETURNING *`;
+      const params = [office, candidate];
+      const { rows } = await databaseConnection.query(query2, params);
       return res.status(201).json({
         status: 201,
         data: [rows[0]],

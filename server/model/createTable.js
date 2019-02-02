@@ -39,20 +39,22 @@ INSERT INTO office (type, name) VALUES ('federal', 'senate');
 
 DROP TABLE IF EXISTS candidate CASCADE;
 CREATE TABLE candidate (
-id SERIAL primary key,
+id SERIAL ,
 office int references office(id),
-party int references party(id),
 candidate int references users(id),
-registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now()
+registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now(),
+PRIMARY KEY (candidate, office)
 );
+
 
 DROP TABLE IF EXISTS vote CASCADE;
 CREATE TABLE vote (
-id SERIAL primary key,
+id SERIAL ,
 createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
-candidate int references candidate(id),
+candidate int references users(id),
 office int references office(id),
-voter int references users(id)
+voter int references users(id),
+primary key (office, voter)
 );
 
 `;
