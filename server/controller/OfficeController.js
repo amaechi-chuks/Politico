@@ -10,9 +10,9 @@ class OfficeController {
          * @param {object} req - The request object
          * @param {object} res - The response object
          * @return {object} JSON representing data object
-         * @memberof createOffice
+         * @memberof OfficeController
          */
-  static createOffice(req, res) {
+  static async createOffice(req, res) {
     const {
       type, name,
     } = req.body;
@@ -21,25 +21,27 @@ class OfficeController {
     const query = `
     INSERT INTO office(type, name) VALUES($1, $2) RETURNING *`;
     const params = [type, name];
-
-    databaseConnection.query(query, params, (err, dbRes) => {
-      if (err) {
-        return res.status(500).json({
-          status: 500,
-          error: 'Something went wrong with the database.',
-        });
-      }
-      const postId = dbRes.rows[0].id;
-      return res.status(201).json({
-        status: 201,
-        data: [{
-          id: postId,
-          type,
-          name,
-          createdAt,
-        }],
+    try {
+      await databaseConnection.query(query, params, (err, dbRes) => {
+        if (dbRes) {
+          const postId = dbRes.rows[0].id;
+          return res.status(201).json({
+            status: 201,
+            data: [{
+              id: postId,
+              type,
+              name,
+              createdAt,
+            }],
+          });
+        }
       });
-    });
+    } catch (eer) {
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong with the database.',
+      });
+    }
   }
 
   /**
@@ -48,7 +50,7 @@ class OfficeController {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} JSON object representing data object
-   * @memberof getAllOffice
+   * @memberof OfficeController
    */
 
   static getAllOffice(req, res) {
@@ -64,14 +66,13 @@ class OfficeController {
    * @param {object} req - The request object
    * @param {object} res - The response object
    * @returns {object} {object} JSON object representing data object
-   * @memberof getOfficeById
+   * @memberof OfficeController
    */
 
   // eslint-disable-next-line consistent-return
   static async getOfficeById(req, res) {
     const { id: postId } = req.params;
     const query = 'SELECT * FROM office WHERE id = $1';
-    // eslint-disable-next-line consistent-return
     try {
       // eslint-disable-next-line consistent-return
       await databaseConnection.query(query, [postId], (err, dbRes) => {
@@ -79,6 +80,37 @@ class OfficeController {
           return res.status(200).json({
             status: 200,
             data: dbRes.rows[0],
+          });
+        }
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        error: 'Something went wrong with the database',
+      });
+    }
+  }
+
+  /**
+   *
+   *
+   * @static
+   * @param {Object} req  The request object
+   * @param {Object} res The response object
+   * @returns {Object} JSON object representing the data
+   * @memberof OfficeController
+   */
+  // eslint-disable-next-line consistent-return
+  static async getOfficeResultById(req, res) {
+    const { id: postId } = req.params;
+    const query = 'SELECT office, candidate, count(candidate) as results FROM vote WHERE vote.office = $1 GROUP BY vote.candidate, vote.office';
+    try {
+      // eslint-disable-next-line consistent-return
+      await databaseConnection.query(query, [postId], (err, dbRes) => {
+        if (dbRes) {
+          return res.status(200).json({
+            status: 200,
+            data: dbRes.rows,
           });
         }
       });

@@ -1,4 +1,3 @@
-import winston from '../config/winston';
 import HelperUtils from '../utility/helperUltis';
 import databaseConnection from '../model/databaseConnection';
 
@@ -17,6 +16,7 @@ class UserController {
   * @param {object} res - The Response Object
   * @returns {object} JSON API Response
   */
+  // eslint-disable-next-line consistent-return
   static async registerUser(req, res) {
     const {
       firstname, lastname, othername,
@@ -53,7 +53,7 @@ class UserController {
    * @param {object} res - The Response Object
    * @returns {object} JSON API Response
    */
-  static loginUser(req, res) {
+  static async loginUser(req, res) {
     const { email, password } = req.body;
     const userQuery = 'SELECT * FROM users WHERE email = $1 LIMIT 1;';
     const params = [email];

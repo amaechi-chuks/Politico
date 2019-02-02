@@ -16,7 +16,7 @@ class Validate {
          * @returns {object} JSON representing the failure message
          * @memberof findById
          */
-  static findById(req, res, next) {
+  static async findById(req, res, next) {
     if (Number.isNaN(Number(req.params.id))) {
       return res.status(404).json({ status: 404, error: 'The id parameter must be a number' });
     }
@@ -27,7 +27,7 @@ class Validate {
       url = 'party';
     }
     const query = `SELECT * FROM ${url} WHERE id = $1`;
-    return databaseConnection.query(query, [req.params.id], (err, dbRes) => {
+    await databaseConnection.query(query, [req.params.id], (err, dbRes) => {
       try {
         if (err) {
           return res.status(404).json({ status: 404, error: 'Sorry, no record with such id' });
@@ -218,6 +218,29 @@ class Validate {
         return res.status(409).json({
           status: 409,
           error: 'Candidate with Id already exist',
+        });
+      }
+      return next();
+    });
+  }
+
+  /**
+   * @method validateExistingCandidate
+   * @description Validates candidates
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static validateCandidacy(req, res, next) {
+    const candidate = {
+      text: 'SELECT * FROM candidate WHERE candidate = $1;',
+      values: [req.body.candidate],
+    };
+    return databaseConnection.query(candidate, (error, dbRes) => {
+      if (dbRes.rowCount < 1) {
+        return res.status(409).json({
+          status: 409,
+          error: 'User not interested to run for this office',
         });
       }
       return next();

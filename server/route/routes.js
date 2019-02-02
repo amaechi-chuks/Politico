@@ -40,13 +40,14 @@ router.post('/office/:id/register',
   Validate.validateExistingCandidate,
   CandidateController.createCandidate);
 
-router.post('/votes', AuthenticateUser.verifyUser, Validate.validateExistingVote, VoteController.createVote);
+router.post('/votes', AuthenticateUser.verifyUser, Validate.validateCandidacy, VoteController.createVote);
 
 //  Handle all Get request
 router.get('/parties', AuthenticateUser.verifyUser, PartyController.getAllParty);
 router.get('/parties/:id', AuthenticateUser.verifyUser, Validate.findById, PartyController.getPartyById);
 router.get('/offices', AuthenticateUser.verifyUser, OfficeController.getAllOffice);
 router.get('/offices/:id', AuthenticateUser.verifyUser, Validate.findById, OfficeController.getOfficeById);
+router.get('/offices/:id/results', AuthenticateUser.verifyUser, OfficeController.getOfficeResultById, OfficeController.getOfficeResultById);
 
 //  Handle all Patch request
 router.patch('/parties/:id/name', AuthenticateUser.verifyAdmin,

@@ -14,7 +14,7 @@
     "build": "babel server -d server/dist --copy-files --ignore server/dist",
     "build:client": "babel client -d client/dist --copy-files --ignore client/dist",
     "postinstall": "npm run build",
-    "coverage": "nyc report --reporter=text-lcov | coveralls && codecov -t 80593a9f-952f-4703-b513-948010c5141c",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
     "showcoverage": "start coverage/lcov-report/index.html",
     "lint": "eslint --fix server/"

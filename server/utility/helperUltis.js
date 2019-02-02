@@ -38,12 +38,16 @@ class HelperUtils {
     return bcryptjs.compareSync(password, hash);
   }
 
-  static doesOfficeIdExistQuery(office) {
-    return databaseConnection.any('SELECT id FROM offices WHERE id = $1', [office]);
+  static duplicateCandidateCheck(candidate) {
+    return databaseConnection.query('SELECT * FROM candidate WHERE candidate = $1', [candidate]);
   }
 
-  static getResultQuery(office) {
-    return databaseConnection.any('SELECT office, candidate, count(candidate) as results FROM votes where office = $1 GROUP BY candidate, office', [office]);
+  static duplicateVoteCheck(candidate, voter) {
+    return databaseConnection.query('SELECT * FROM vote WHERE candidate = $1 AND voter = $2', [candidate, voter]);
+  }
+
+  static doesCandidateExist(candidate, office) {
+    return databaseConnection.query('SELECT * FROM candidate WHERE candidate = $1 AND office = $2', [candidate, office]);
   }
 }
 
