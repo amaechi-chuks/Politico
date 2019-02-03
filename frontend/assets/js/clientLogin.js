@@ -1,4 +1,4 @@
-const baseUrl = 'https://politico-software.herokuapp.com/index.html/api/v1';
+const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
 const signupForm = document.querySelector('#signup-form');
 const loginForm = document.querySelector('#login-form');
 

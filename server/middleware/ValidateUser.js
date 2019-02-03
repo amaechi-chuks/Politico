@@ -17,7 +17,7 @@ class ValidateUser {
   static validateProfileDetails(req, res, next) {
     const validate = HelperUtils.validate();
     const {
-      firstname, lastname, phonenumber, email, passporturl, password,
+      firstname, lastname, phonenumber, email, password,
     } = req.body;
     let error;
     if (!validate.name.test(firstname)) {
@@ -43,9 +43,6 @@ class ValidateUser {
     }
     if (!email || email === undefined) {
       error = 'Email must be specified';
-    }
-    if (!passporturl || !validate.logoUrl.test(passporturl)) {
-      error = 'You need to include a valid passport';
     }
     if (password === '' || typeof password === 'undefined') {
       error = 'Password must be specified';

@@ -128,45 +128,6 @@ describe('/POST api/v1/auth/signup', () => {
         done(err);
       });
   });
-  it('should return status code 400 if passporturl field is ommitted', (done) => {
-    chai
-      .request(app)
-      .post(signupUrl)
-      .set('Content-Type', 'application/json')
-      .send(inputs.invalidPassport1)
-      .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body).to.deep.equal({ status: 400, error: 'You need to include a valid passport' });
-        done(err);
-      });
-  });
-  it('should return status code 400 if passporturl is empty or undefined', (done) => {
-    chai
-      .request(app)
-      .post(signupUrl)
-      .set('Content-Type', 'application/json')
-      .send(inputs.invalidPassport2)
-      .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body).to.deep.equal({ status: 400, error: 'You need to include a valid passport' });
-        done(err);
-      });
-  });
-  it('should return status code 400 if passporturl is invalid', (done) => {
-    chai
-      .request(app)
-      .post(signupUrl)
-      .set('Content-Type', 'application/json')
-      .send(inputs.invalidPassport3)
-      .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body).to.deep.equal({ status: 400, error: 'You need to include a valid passport' });
-        done(err);
-      });
-  });
   it('should return status code 409 for already existing user', (done) => {
     chai
       .request(app)
@@ -178,7 +139,6 @@ describe('/POST api/v1/auth/signup', () => {
         othername: 'johns',
         email: 'amaechichuks2000@yahoo.com',
         password: 'chuks9mike',
-        passporturl: 'johns.jpeg',
         phonenumber: '07064566559',
       })
       .end((err, res) => {

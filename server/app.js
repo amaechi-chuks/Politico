@@ -5,6 +5,7 @@ import path from 'path';
 import swaggerUI from 'swagger-ui-express';
 import routes from './route/routes';
 import winston from './config/winston';
+import swaggerDocument from '../swagger.json';
 
 // Create a top level instance of express
 const app = express();
@@ -27,6 +28,7 @@ app.use(cors());
 app.get('/', (req, res) => res.sendFile('../frontend/index.html'));
 
 app.use('/api/v1/', routes);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // invalid route
 app.all('*', (req, res) => res.status(404).json({
