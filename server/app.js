@@ -11,8 +11,6 @@ const app = express();
 
 app.use(cors({ credentials: true, origin: true }));
 // eslint-disable-next-line no-undef
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swagger));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -23,15 +21,20 @@ app.get('/', (req, res) => res.status(200).json({
   status: 200,
   message: 'Welcome to Politico',
 }));
+
+// Application home page
 app.get('/api/v1', (req, res) => res.status(200).json({
   status: 200,
   message: 'Welcome to Politico API V1',
 }));
+
+// valid route
 app.use('/api/v1/', routes);
 
+// invalid route
 app.all('*', (req, res) => res.status(404).json({
   status: 404,
-  error: 'Wrong endpoint. Such endpoint does not exist',
+  error: 'check documentation, "/docs"',
 }));
 
 app.listen(port, () => {

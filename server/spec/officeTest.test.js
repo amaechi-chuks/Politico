@@ -117,7 +117,7 @@ describe('All test cases for Politico application', () => {
         .set('authorization', token)
         .end((err, res) => {
           expect(res.body).to.be.a('object');
-          expect(res.body).to.deep.equal({ status: 404, error: 'Wrong endpoint. Such endpoint does not exist' });
+          expect(res.body).to.deep.equal({ status: 404, error: 'check documentation, "/docs"' });
           expect(res.status).to.equal(404);
           done(err);
         });
@@ -211,7 +211,7 @@ describe('All test cases for Politico application', () => {
         .send(officeData.validData2)
         .end((err, res) => {
           expect(res.body).to.be.a('object');
-          expect(res.body).to.deep.equal({ status: 404, error: 'Wrong endpoint. Such endpoint does not exist' });
+          expect(res.body).to.deep.equal({ status: 404, error: 'check documentation, "/docs"' });
           expect(res.status).to.equal(404);
           done(err);
         });
