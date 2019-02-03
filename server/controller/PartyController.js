@@ -110,9 +110,9 @@ class PartyController {
         }
       });
     } catch (err) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Something went wrong with the database',
+      return res.status(404).json({
+        status: 404,
+        error: 'Party with an id not found',
       });
     }
   }
@@ -145,7 +145,7 @@ class PartyController {
     } catch (err) {
       return res.status(400).json({
         status: 400,
-        error: 'No incident record found',
+        error: 'No party record found',
       });
     }
   }

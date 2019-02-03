@@ -61,6 +61,7 @@
     "nyc": "^13.1.0",
     "pg": "^7.7.1",
     "supertest": "^3.4.1",
+    "swagger-ui-express": "^4.0.2",
     "winston": "^3.1.0"
   },
   "devDependencies": {

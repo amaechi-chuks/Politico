@@ -1,0 +1,503 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Politico is a platform that enables citizens give their mandate to politicians runnning for different government offices while building trust in the process through transparency",
+    "version": "1.0.0",
+    "title": "Politico",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "amaechichuks2000@yahoo.com"
+    },
+    "license": {
+      "name": "GNU General Public License",
+      "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"
+    }
+  },
+  "host": "politico-software.herokuapp.com",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "auth",
+      "description": "User authentication",
+      "externalDocs": {
+        "url": "https://politico-software.herokuapp.com"
+      }
+    },
+    {
+      "name": "parties",
+      "description": "Everything about political parties",
+      "externalDocs": {
+        "url": "https://politico-software.herokuapp.com"
+      }
+    },
+    {
+      "name": "offices",
+      "description": "Everything about political offices",
+      "externalDocs": {
+        "url": "https://politico-software.herokuapp.com"
+      }
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/parties": {
+      "post": {
+        "tags": [
+          "parties"
+        ],
+        "summary": "Create a political party",
+        "description": "Admin is only allowed to create a political party",
+        "operationId": "addPoliticalParty",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "parties",
+            "description": "The party an admin wants to place",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/politico"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "party created successfully"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "parties"
+        ],
+        "summary": "Get all parties",
+        "description": "Return all parties from the database",
+        "operationId": "getAllParties",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got political party"
+          },
+          "204": {
+            "description": "No avaliable political party"
+          }
+        }
+      }
+    },
+    "/parties/{id}": {
+      "get": {
+        "tags": [
+          "parties"
+        ],
+        "summary": "Find Parties by ID",
+        "description": "Returns a single political parties",
+        "operationId": "getPartyById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of Party to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful got politcal party",
+            "schema": {
+              "$ref": "#/definitions/parties"
+            }
+          },
+          "404": {
+            "description": "party not found"
+          }
+        }
+      }
+    },
+    "/parties/{id}/name": {
+      "patch": {
+        "tags": [
+          "parties"
+        ],
+        "summary": "Edit a polical party by id",
+        "description": "Edits a politcal party name by id",
+        "operationId": "editNameById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of political party to edit",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Party has been deleted",
+            "schema": {
+              "$ref": "#/definitions/parties"
+            }
+          },
+          "404": {
+            "description": "No party record found"
+          },
+          "403": {
+            "description": "user is not authorized to edit this party."
+          }
+        }
+      }
+    },
+    "/offices": {
+      "post": {
+        "tags": [
+          "offices"
+        ],
+        "summary": "Create a politcal office",
+        "description": "Admin is only authorized to create a political office",
+        "operationId": "addPolitcalOffice",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "office",
+            "description": "The office the admin wants to place",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ofice"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "office created successfully"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "offices"
+        ],
+        "summary": "Get all Offices",
+        "description": "Return all offices from the database",
+        "operationId": "getAllOffices",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "office object that needs to be added to the datatbase",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/office"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully got office"
+          },
+          "403": {
+            "description": "No available political office"
+          }
+        }
+      }
+    },
+    "/offices/{id}": {
+      "get": {
+        "tags": [
+          "offices"
+        ],
+        "summary": "Find office by ID",
+        "description": "Returns a single political office",
+        "operationId": "getPoliticalOfficeById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of office to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful got office",
+            "schema": {
+              "$ref": "#/definitions/office"
+            }
+          },
+          "404": {
+            "description": "No office record found"
+          }
+        }
+      }
+    },
+    "/offices/{id}/results": {
+      "get": {
+        "tags": [
+          "offices"
+        ],
+        "summary": "Finds office result by ID",
+        "description": "Rturns a single office result by ID",
+        "operationId": "getPoliticalOfficeResult",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of political office result",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful got office result",
+            "schema": {
+              "$ref": "#/definitions/office"
+            }
+          },
+          "404": {
+            "description": "No result found for this office"
+          }
+        }
+      }
+    },
+    "/votes": {
+      "post": {
+        "tags": [
+          "parties"
+        ],
+        "summary": "Create a vote",
+        "description": "Users can create a vote",
+        "operationId": "addVote",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "votes",
+            "description": "The vote a user wants to place",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/votes"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "vote created successfully"
+          }
+        }
+      }
+    },
+    "/auth/signup": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Enables a user to signup",
+        "description": "Registers a new user",
+        "operationId": "signup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create user object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account created successfully",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Enables a user to login",
+        "description": "Authenticate a user",
+        "operationId": "login",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User sign in details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "You have been logged in successfully!"
+          },
+          "401": {
+            "description": "User does not exist",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "parties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "format": "int64"
+        },
+        "hqAddress": {
+          "type": "string"
+        },
+        "logoUrl": {
+          "type": "string",
+          "format": "int64"
+        },
+        "registereAt": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "parties"
+      }
+    },
+    "offices": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "registereAt": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "offices"
+      }
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "phonenumber": {
+          "type": "string"
+        },
+        "othername": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "passportUrl": {
+          "type": "string"
+        },
+        "isadmin": {
+          "type": "boolean"
+        },
+        "registered": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "User"
+      }
+    },
+    "login": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
