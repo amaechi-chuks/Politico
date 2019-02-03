@@ -12,7 +12,7 @@ const app = express();
 
 
 // set port for server to listen on
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 6000;
 
 // support parsing of application/json type post data
 app.use(bodyParser.json({ limit: '50mb' }));
