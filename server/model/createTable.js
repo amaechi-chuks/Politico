@@ -8,12 +8,11 @@ CREATE TABLE users (
   email varchar (30) UNIQUE NOT NULL,
   password varchar (65) NOT NULL,
   phonenumber varchar (14) UNIQUE NOT NULL,
-  passporturl varchar (100) UNIQUE NOT NULL,
   isAdmin boolean DEFAULT FALSE,
   registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now(),
   updatedAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
-INSERT INTO users (firstname, lastname, othername, email, password, phonenumber, passporturl, isAdmin) VALUES ('chuks', 'amaechi', 'patrick', 'amaechichuks2000@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989898', 'chuksimage.jpeg', TRUE
+INSERT INTO users (firstname, lastname, othername, email, password, phonenumber, isAdmin) VALUES ('chuks', 'amaechi', 'patrick', 'amaechichuks2000@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989898', TRUE
 );
 
 DROP TABLE IF EXISTS party CASCADE;

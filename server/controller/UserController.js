@@ -20,15 +20,15 @@ class UserController {
   static async registerUser(req, res) {
     const {
       firstname, lastname, othername,
-      email, phonenumber, password, passporturl,
+      email, phonenumber, password,
     } = req.body;
     const hashedPassword = HelperUtils.hashPassword(password);
 
     try {
-      const query = 'INSERT INTO users(firstname, lastname, othername, email, phonenumber, password, passporturl) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *';
+      const query = 'INSERT INTO users(firstname, lastname, othername, email, phonenumber, password) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
       const values = [firstname, lastname,
         othername, email, phonenumber,
-        hashedPassword, passporturl];
+        hashedPassword];
       await databaseConnection.query(query, values, (err, dbRes) => {
         const user = dbRes.rows[0];
         const { id, isAdmin } = user;

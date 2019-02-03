@@ -107,7 +107,7 @@ if (loginForm) {
       body: JSON.stringify({ email, password }),
     }).then(res => res.json())
       .then((data) => {
-        if (data.status === 200 || data.status === 201) {
+        if (data.status === 200) {
           window.localStorage.token = data.token;
           document.querySelector('#login-form')
             .innerHTML = `<h2>Login Successful<h2/>
