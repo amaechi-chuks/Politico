@@ -1,17 +1,17 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import swaggerUi from 'swagger-ui-express';
+import swaggerUI from 'swagger-ui-express';
 import routes from './route/routes';
 import winston from './config/winston';
 
 // Create a top level instance of express
 const app = express();
 
-// const swaggerDocument = JSON.load(`${process.cwd()}/swagger.yaml`);
 
 app.use(cors({ credentials: true, origin: true }));
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// eslint-disable-next-line no-undef
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swagger));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
