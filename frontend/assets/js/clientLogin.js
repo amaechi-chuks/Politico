@@ -67,7 +67,7 @@ if (signupForm) {
           window.localStorage.token = data.token;
           document.querySelector('#signup-form')
             .innerHTML = `<h2>Signup successful<h2/>
-          <h3>Welcome<h3/> <p>${data.user.firstname}<p/>`;
+          <h3>Welcome<h3/> <p>${data.data[0].user.firstname}<p/>`;
           setTimeout(() => {
             window.location.replace('user-profile.html');
           }, 5000);
@@ -97,7 +97,6 @@ if (loginForm) {
     e.preventDefault();
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
-
     fetch(`${baseUrl}/auth/login`, {
       method: 'POST',
       headers: {
@@ -108,16 +107,16 @@ if (loginForm) {
     }).then(res => res.json())
       .then((data) => {
         if (data.status === 200) {
-          window.localStorage.token = data.token;
+          window.localStorage.token = data.data[0].token;
           document.querySelector('#login-form')
             .innerHTML = `<h2>Login Successful<h2/>
-          <h3>Welcome<h3/> <p>${data.user.firstname}<p/>`;
+          <h3>Welcome<h3/> <p>${data.data[0].user.firstname}<p/>`;
           setTimeout(() => {
             authLogin();
           }, 5000);
         } else {
           document.querySelector('#login-form')
-            .innerHTML = `<h2>${data.errors.form}<h2/>
+            .innerHTML = `<h2>${data.error}<h2/>
           <h3>Please check your login details<h3/>`;
         }
       }).catch((error) => {
