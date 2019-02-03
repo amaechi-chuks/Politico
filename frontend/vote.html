@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+    <link rel="shortcut icon" href="./assets/img/Image-logo.png" type="image/icon">
+    <title>
+        Politico - Make Your Vote Count
+    </title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="modal-toggle"></div>
+    <!-- Begin Header -->
+    <header class="sticky-top">
+        <nav class="navbar">
+            <a href="./index.html" class="navbar-logo"><img src="./assets/img/Image-logo.png" alt="image logo" /></a>
+            <button class="hamburger-menu"><a class="hamburger"></a></button>
+            <ul class="navbar-menu">
+                <li class="navbar-link">
+                    <a href="./index.html">Home</a>
+                </li>
+                <li class="navbar-link"><a href="./user-profile.html">Profile</a></li>
+                <li class="navbar-link"><a href='./vote.html'>Vote
+                        <hr></a></li>
+                <li class="navbar-link active">
+                    <a href="./view-more-candidate.html">View Candidates
+                    </a>
+                </li>
+                <li class="navbar-link"><a href="./index.html">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- End Header -->
+    <main>
+        <!--Begin voting cards section-->
+        <section class="container2 reports-container">
+            <h2 class="section-title">Vote Your Candidates</h2>
+            <div class="column featured-cards">
+                <div class="card report-card1">
+                    <strong class="align1">Presidency</strong>
+                    <div class="report-status resolved"> </div>
+                    <div class="participant"><strong></strong></div>
+                    <select type="text" id="issue-type" name="issue-type" class="form-element" required>
+                        <option default>-- Select Candidate --</option>
+                        <option value="APC">Atiku Abubakar</option>
+                        <option value="pdp">Fela Durotoye</option>
+                        <option value="ACC">Donald Duke</option>
+                        <option value="intervention">Funmilayo Adesanya-Davies</option>
+                        <option value="AD">Muhammadu Buhari</option>
+                        <option value="ADP">Remi Sonaiya</option>
+                        <option value="ADC">Thomas-Wilson Ikubese</option>
+                        <option value="APP">Omoyele Sowore</option>
+                        <option value="DA">Enyinnaya Nnaemeka Nwosu</option>
+                        <option value="CPN">Ahmed Buhari</option>
+                    </select>
+                </div>
+                <div class="card report-card1">
+                    <strong class="align1">Senate </strong>
+                    <div class="participant"><strong> </strong></div>
+                    <div class="participant"><strong></strong></div>
+                    <select type="text" id="issue-type" name="issue-type" class="form-element" required>
+                        <option default>-- Select Candidate --</option>
+                        <option value="APC">Atiku Abubakar</option>
+                        <option value="pdp">Fela Durotoye</option>
+                        <option value="ACC">Donald Duke</option>
+                        <option value="intervention">Funmilayo Adesanya-Davies</option>
+                        <option value="AD">Muhammadu Buhari</option>
+                        <option value="ADP">Remi Sonaiya</option>
+                        <option value="ADC">Thomas-Wilson Ikubese</option>
+                        <option value="APP">Omoyele Sowore</option>
+                        <option value="DA">Enyinnaya Nnaemeka Nwosu</option>
+                        <option value="CPN">Ahmed Buhari</option>
+                    </select>
+                </div>
+                <div class="card report-card1">
+                    <strong class="align1">Governor</strong>
+                    <div class="participant"><strong> </strong></div>
+                    <div class="participant"><strong></strong></div>
+                    <select type="text" id="issue-type" name="issue-type" class="form-element" required>
+                        <option default>-- Select Candidate --</option>
+                        <option value="APC">Babajide Sanwo-Olu</option>
+                        <option value="pdp">Tonye Cole</option>
+                        <option value="ACC">Great Ogboru</option>
+                        <option value="intervention"> Abdullahi Umar Ganduje</option>
+                        <option value="AD">Nasir El-Rufai</option>
+                        <option value="ADP">Mohammed Badaru Abubakar</option>
+                        <option value="ADC">Ahmed Aliyu</option>
+                        <option value="APP">Omoyele Sowore</option>
+                        <option value="DA">Enyinnaya Nnaemeka Nwosu</option>
+                        <option value="CPN">Ahmed Buhari</option>
+                    </select>
+                </div>
+                <div class="card report-card1">
+                    <strong class="align1">Legislative</strong>
+                    <div class="participant"><strong> </strong></div>
+                    <div class="participant"><strong></strong></div>
+                    <select type="text" id="issue-type" name="issue-type" class="form-element" required>
+                        <option default>-- Select Candidate --</option>
+                        <option value="APC">Ahmed Aliyu</option>
+                        <option value="pdp">Mai Mala Buni</option>
+                        <option value="ACC">Abubakar A. Sule</option>
+                        <option value="intervention">Funmilayo Adesanya-Davies</option>
+                        <option value="AD">Muhammadu Buhari</option>
+                        <option value="ADP">Remi Sonaiya</option>
+                        <option value="ADC">Thomas-Wilson Ikubese</option>
+                        <option value="APP">Omoyele Sowore</option>
+                        <option value="DA">Enyinnaya Nnaemeka Nwosu</option>
+                        <option value="CPN">Ahmed Buhari</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary3 update report-media id=" vot">Submit</bu
+        </section>
+        <!--End of voting card section-->
+        <div class="modal">
+            <div class="modal-header">
+                <p class="modal-title">Voted Successfully</p>
+                <span class="modal-close">X</span>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p class="credits">Politico | Copyright &copy; Andela 2019</p>
+    </footer>
+</body>
+<script src="./assets/js/main.js"></script>
+
+</html>
