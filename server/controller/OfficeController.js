@@ -84,9 +84,9 @@ class OfficeController {
         }
       });
     } catch (error) {
-      return res.status(500).json({
-        status: 500,
-        error: 'Something went wrong with the database',
+      return res.status(404).json({
+        status: 404,
+        error: 'No office record found',
       });
     }
   }
@@ -117,7 +117,7 @@ class OfficeController {
     } catch (error) {
       return res.status(500).json({
         status: 500,
-        error: 'Something went wrong with the database',
+        error: 'No result found for this office',
       });
     }
   }
