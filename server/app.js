@@ -10,28 +10,23 @@ import winston from './config/winston';
 const app = express();
 
 
-app.use(cors({ credentials: true, origin: true }));
-// eslint-disable-next-line no-undef
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+// set port for server to listen on
+const port = process.env.PORT || 5000;
 
-const port = process.env.PORT || 6000;
+// support parsing of application/json type post data
+app.use(bodyParser.json({ limit: '50mb' }));
+
+// support parsing of application/x-www-form-urlencoded post data
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+app.use(express.static(path.resolve(__dirname, '../frontend')));
 
 app.use(cors());
 
-// Application home page
-app.get('/api/v1', (req, res) => res.status(200).json({
-  status: 200,
-  message: 'Welcome to Politico API V1',
-}));
+app.get('/', (req, res) => res.sendFile('../frontend/index.html'));
 
 app.use('/api/v1/', routes);
-app.use('/', express.static(path.join(__dirname, 'frontend')));
-
-app.get('/', (req, res) => res.status(200).json({
-  status: 200,
-  message: 'Welcome to Politico',
-}));
 
 // invalid route
 app.all('*', (req, res) => res.status(404).json({
