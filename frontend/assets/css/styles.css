@@ -102,7 +102,8 @@ button {
 }
 .btn-hollow {
   border: 2px solid #fffffa;
-  color: #fffffa;
+  color: white;
+  background-color: #398339;
 }
 .create-party {
     text-align: center;
@@ -147,7 +148,11 @@ button {
   color: #0facf3;
   border: 2px solid #fffffa;
 }
+.btn-white:hover {
+  background: #398339;
+  color: white;
 
+}
 .card {
   padding: 20px;
   border-left: 3px solid #0facf3;
@@ -433,7 +438,8 @@ section > .btn1 {
 
 .section-title {
   position: relative;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 .section-title1 {
   position: relative;
@@ -446,7 +452,7 @@ section > .btn1 {
 }
 
 .section-title::after {
-  content: "";
+  /* margin: -1px 610px 0; */
   position: absolute;
   bottom: -3px;
   left: 0;
@@ -460,6 +466,10 @@ section > .btn1 {
   left: 0;
   width: 60px;
   border: 1.5px solid #0facf3;
+}
+.center-content {
+  text-align:center;
+  margin: 0 0 3px 0;
 }
 
 /* Featured Reports */
@@ -492,12 +502,29 @@ section > .btn1 {
   margin-bottom: 15px;
 }
 
-.report-media,
+
 .report-user {
+  color: #216f93;
+  /* text-decoration: underline; */
+}
+.btn-primary2:hover {
+  color: green;
+}
+.btn-primary3:hover {
+  color: green;
+}
+.btn-primary:hover {
+  color: green;
+}
+.btn-hollow:hover {
+  background-color: white;
+  color: green;
+}
+.report-media
+ {
   color: #0facf3;
   text-decoration: underline;
 }
-
 .rejected, .rejected, .resolved{
   width: 40%;
 }
@@ -584,6 +611,7 @@ footer {
 
 .modal-title {
   display: inline-block;
+  color: #0facf3;
 }
 
 .modal-header {
@@ -616,6 +644,7 @@ footer {
 .modal-close {
   float: right;
   cursor: pointer;
+  color: #b23939;
 }
 
 .message-box {
