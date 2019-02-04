@@ -719,7 +719,7 @@ p.stat-value {
 .profile-table {
   /* z-index: 100; */
   flex-basis: 73%;
-  border-bottom: 3px #0facf3 solid;
+  /* border-bottom: 3px #0facf3 solid; */
 }
 
 .admin-table {
