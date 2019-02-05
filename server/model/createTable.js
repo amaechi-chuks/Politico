@@ -2,17 +2,17 @@ const createTables = `
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
   id SERIAL primary key,
-  firstname varchar (30) NOT NULL,
-  lastname varchar (30) NOT NULL,
-  othername varchar (30),
+  firstName varchar (30) NOT NULL,
+  lastName varchar (30) NOT NULL,
+  otherName varchar (30),
   email varchar (30) UNIQUE NOT NULL,
   password varchar (65) NOT NULL,
-  phonenumber varchar (14) UNIQUE NOT NULL,
-  isAdmin boolean DEFAULT FALSE,
+  phoneNumber varchar (14) UNIQUE NOT NULL,
+  isadmin boolean DEFAULT FALSE,
   registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now(),
   updatedAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
-INSERT INTO users (firstname, lastname, othername, email, password, phonenumber, isAdmin) VALUES ('chuks', 'amaechi', 'patrick', 'amaechichuks2000@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989898', TRUE
+INSERT INTO users (firstName, lastName, otherName, email, password, phoneNumber, isadmin) VALUES ('chuks', 'amaechi', 'patrick', 'amaechichuks2000@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989898', TRUE
 );
 
 DROP TABLE IF EXISTS party CASCADE;

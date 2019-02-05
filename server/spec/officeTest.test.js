@@ -65,16 +65,6 @@ describe('All test cases for Politico application', () => {
           done(err);
         });
     });
-    it('should respond with a specific office', (done) => {
-      chai.request(app)
-        .get(`${url}${id}`)
-        .set('Authorization', token)
-        .end((err, res) => {
-          const { status } = res.body;
-          expect(status).to.equal(200);
-          done();
-        });
-    });
     it('should return 404 status code for fetching a non existing political office ', (done) => {
       chai
         .request(app)
@@ -96,17 +86,6 @@ describe('All test cases for Politico application', () => {
           expect(res.body).to.be.a('object');
           expect(res.body).to.deep.equal({ status: 404, error: 'The id parameter must be a number' });
           expect(res.status).to.equal(404);
-          done(err);
-        });
-    });
-    it('should return 200 status code for a GET office resukt by id ', (done) => {
-      chai
-        .request(app)
-        .get(`${url}${id}/results`)
-        .set('authorization', token)
-        .end((err, res) => {
-          expect(res.body).to.be.a('object');
-          expect(res.status).to.equal(200);
           done(err);
         });
     });

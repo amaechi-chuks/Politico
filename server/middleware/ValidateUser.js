@@ -17,26 +17,26 @@ class ValidateUser {
   static validateProfileDetails(req, res, next) {
     const validate = HelperUtils.validate();
     const {
-      firstname, lastname, phonenumber, email, password,
+      firstName, lastName, phoneNumber, email, password,
     } = req.body;
     let error;
-    if (!validate.name.test(firstname)) {
-      error = 'You need to include a valid firstname';
+    if (!validate.userName.test(firstName)) {
+      error = 'You need to include a valid firstName';
     }
-    if (!firstname || firstname === undefined) {
-      error = 'firstname must be specified';
+    if (!firstName || firstName === undefined) {
+      error = 'firstName must be specified';
     }
-    if (!validate.name.test(lastname)) {
+    if (!validate.userName.test(lastName)) {
       error = 'You need to include a valid last name';
     }
-    if (!lastname || lastname === undefined) {
-      error = 'lastname must be specified';
+    if (!lastName || lastName === undefined) {
+      error = 'lastName must be specified';
     }
-    if (!validate.phonenumber.test(phonenumber)) {
+    if (!validate.phoneNumber.test(phoneNumber)) {
       error = 'You need to include a valid phone number';
     }
-    if (!phonenumber || phonenumber === undefined) {
-      error = 'phonenumber must be specified';
+    if (!phoneNumber || phoneNumber.length < 5) {
+      error = 'phoneNumber must be digit lenght from 5 to 15';
     }
     if (!email || !validate.email.test(email)) {
       error = 'You need to include a valid email';
@@ -51,7 +51,7 @@ class ValidateUser {
       error = 'Password field cannot be empty';
     }
     if (!validate.hqAddress.test(password)) {
-      error = 'Password is invalid';
+      error = 'hqAddress must be specify';
     }
     if (error) {
       return res.status(400).json({ status: 400, error });

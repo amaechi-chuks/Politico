@@ -13,10 +13,13 @@ class PartyController {
        */
   // eslint-disable-next-line consistent-return
   static async createParty(req, res) {
-    const {
+    let {
       name, hqAddress, logoUrl,
     } = req.body;
-    const registerdAt = new Date();
+    const registerdAt = new Date().toString();
+    name = name.trim().toLowerCase();
+    hqAddress = hqAddress.trim().toLowerCase();
+    logoUrl = logoUrl.trim().toLowerCase();
     const query = `
     INSERT INTO party(name, hqAddress, logoUrl) VALUES($1, $2, $3) RETURNING *`;
     const params = [name, hqAddress, logoUrl];
@@ -98,7 +101,7 @@ class PartyController {
     const { id: postId } = req.params;
     const { name } = req.body;
     const query = `
-        UPDATE party SET name = $1 WHERE id = $2 RETURNING name`;
+        UPDATE party SET name = $1 WHERE id = $2 RETURNING *`;
     try {
       await databaseConnection.query(query, [name, postId], (err, dbRes) => {
         if (dbRes.rowCount > 0) {
@@ -136,8 +139,7 @@ class PartyController {
           return res.status(200).json({
             status: 200,
             data: [{
-              id: postId,
-              message: 'Party has been deleted',
+              message: 'Successfully deleted',
             }],
           });
         }

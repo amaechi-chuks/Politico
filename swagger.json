@@ -11,6 +11,9 @@
     "license": {
       "name": "GNU General Public License",
       "url": "https://www.gnu.org/licenses/gpl-3.0.en.html"
+    },
+    "header": {
+      "name": "authorization"
     }
   },
   "host": "politico-software.herokuapp.com",
@@ -161,6 +164,43 @@
           },
           "403": {
             "description": "user is not authorized to edit this party."
+          }
+        }
+      }
+    },
+    "/parties/{id}/": {
+      "delete": {
+        "tags": [
+          "parties"
+        ],
+        "summary": "Delete a polical party by id",
+        "description": "Delete a politcal party by id",
+        "operationId": "DeletePartyById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of political party to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted",
+            "schema": {
+              "$ref": "#/definitions/parties"
+            }
+          },
+          "404": {
+            "description": "No party record found"
+          },
+          "403": {
+            "description": "user is not authorized to delete this party."
           }
         }
       }
@@ -470,9 +510,7 @@
         "password": {
           "type": "string"
         },
-        "passportUrl": {
-          "type": "string"
-        },
+
         "isadmin": {
           "type": "boolean"
         },

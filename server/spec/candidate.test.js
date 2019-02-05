@@ -40,13 +40,12 @@ describe('POST Requests', () => {
         .request(app)
         .post(signupUrl)
         .send({
-          firstname: 'Jacob',
-          lastname: 'Mike',
-          othername: 'johns',
+          firstName: 'Jacob',
+          lastName: 'Mike',
+          otherName: 'johns',
           email: 'mkw4ppp54ees@ytedx.com',
           password: 'chuk4s9mike',
-          passporturl: 'johns.jpeg',
-          phonenumber: '07064566559',
+          phoneNumber: '07064566559',
         })
         // eslint-disable-next-line consistent-return
         .end((err, res) => {

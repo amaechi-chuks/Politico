@@ -22,13 +22,14 @@
             <a href="./index.html" class="navbar-logo"><img src="./assets/img/Image-logo.png" alt="image logo" /></a>
             <button class="hamburger-menu"><a class="hamburger"></a></button>
             <ul class="navbar-menu">
-                <li class="navbar-link"><a href="./index.html">Home</a></li>
+                <li class="navbar-link"><a href="./vote.html">Vote</a></li>
                 <li class="navbar-link active"><a href="./admin-edit.html"> Update
                         <hr>
                     </a>
                 </li>
                 <li class="navbar-link"><a href="./admin-profile.html">Profile</a></li>
                 <li class="navbar-link">
+                        <li class="navbar-link"><a href="./view-all-party.html">View All Parties</a></li>
                     <a href="./view-more-candidate.html">View Candidates</a>
                 </li>
                 <li class="navbar-link"><a href="./index.html">Log Out</a></li>
@@ -38,11 +39,11 @@
     <!-- End Header -->
     <main>
         <section class="container form-container">
-            <h2 class="section-title">Admin Dashboard</h2>
+            <h2 class="section-title1">Admin Dashboard</h2>
             <form class="form-card" onsubmit="return submitFormAdmin()" method="post">
                 <h2 class="create-party">Update Party</h2>
                 <label for="issue-type">Select Political Party<span>*</span></label>
-                <select type="text" id="issue-type" name="issue-type" class="form-element" required>
+                <select type="text" id="issue-type" class="form-element select-style" name="issue-type" class="form-element" required>
                     <option default>-- Select Political Party --</option>
                     <option value="APC">All Progressives Congress (APC)</option>
                     <option value="pdp">People's Democratic Party (PDP)</option>

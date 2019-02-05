@@ -11,29 +11,29 @@ const loginUrl = '/api/v1/auth/login';
 let token;
 
 describe('/POST api/v1/auth/signup', () => {
-  it('should return status code 400 if firstname field is ommitted', (done) => {
+  it('should return status code 400 if firstName field is ommitted', (done) => {
     chai
       .request(app)
       .post(signupUrl)
       .set('Content-Type', 'application/json')
-      .send(inputs.invalidFirstname1)
+      .send(inputs.invalidfirstName1)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.body.status).to.equal(400);
-        expect(res.body).to.deep.equal({ status: 400, error: 'firstname must be specified' });
+        expect(res.body).to.deep.equal({ status: 400, error: 'firstName must be specified' });
         done(err);
       });
   });
-  it('should return status code 400 if firstname field is ommitted', (done) => {
+  it('should return status code 400 if firstName field is ommitted', (done) => {
     chai
       .request(app)
       .post(signupUrl)
       .set('Content-Type', 'application/json')
-      .send(inputs.invalidFirstname2)
+      .send(inputs.invalidfirstName2)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.body.status).to.equal(400);
-        expect(res.body).to.deep.equal({ status: 400, error: 'You need to include a valid firstname' });
+        expect(res.body).to.deep.equal({ status: 400, error: 'You need to include a valid firstName' });
         done(err);
       });
   });
@@ -42,20 +42,20 @@ describe('/POST api/v1/auth/signup', () => {
       .request(app)
       .post(signupUrl)
       .set('Content-Type', 'application/json')
-      .send(inputs.invalidLastname1)
+      .send(inputs.invalidlastName1)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.body.status).to.equal(400);
-        expect(res.body).to.deep.equal({ status: 400, error: 'lastname must be specified' });
+        expect(res.body).to.deep.equal({ status: 400, error: 'lastName must be specified' });
         done(err);
       });
   });
-  it('should return status code 400 if lastname is invalid', (done) => {
+  it('should return status code 400 if lastName is invalid', (done) => {
     chai
       .request(app)
       .post(signupUrl)
       .set('Content-Type', 'application/json')
-      .send(inputs.invalidLastname2)
+      .send(inputs.invalidlastName2)
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.body.status).to.equal(400);
@@ -111,7 +111,7 @@ describe('/POST api/v1/auth/signup', () => {
       .end((err, res) => {
         expect(res.body).to.be.an('object');
         expect(res.body.status).to.equal(400);
-        expect(res.body).to.deep.equal({ status: 400, error: 'Password is invalid' });
+        expect(res.body).to.deep.equal({ status: 400, error: 'hqAddress must be specify' });
         done(err);
       });
   });
@@ -134,18 +134,38 @@ describe('/POST api/v1/auth/signup', () => {
       .post(signupUrl)
       .set('Content-Type', 'application/json')
       .send({
-        firstname: 'chuks',
-        lastname: 'Owen',
-        othername: 'johns',
+        firstName: 'chuks',
+        lastName: 'Owen',
+        otherName: 'johns',
         email: 'amaechichuks2000@yahoo.com',
         password: 'chuks9mike',
-        phonenumber: '07064566559',
+        phoneNumber: '07064566559',
       })
       .end((err, res) => {
         expect(res.statusCode).to.equal(409);
         expect(res.body).to.be.an('object');
         expect(res.body).to.be.an('object');
         expect(res.body.error).to.equal('User with email already exist');
+        done(err);
+      });
+  });
+  it('should return status code 400 invalid phoneNumber', (done) => {
+    chai
+      .request(app)
+      .post(signupUrl)
+      .set('Content-Type', 'application/json')
+      .send({
+        firstName: 'chuks',
+        lastName: 'Owen',
+        otherName: 'johns',
+        email: 'amaechichuks2000@yahoo.com',
+        password: 'chuks9mike',
+        phoneNumber: '0706',
+      })
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        expect(res.body).to.be.an('object');
+        expect(res.body.error).to.equal('phoneNumber must be digit lenght from 5 to 15');
         done(err);
       });
   });
@@ -201,7 +221,6 @@ describe('All Test cases for user login', () => {
         expect(res.body).to.be.an('object');
         expect(res.body.data).to.be.an('array');
         expect(res.body.data[0]).to.be.an('object');
-        expect(res.body.data[0].user.firstname).to.equal('chuks');
         if (err) { return done(err); }
         done();
       });

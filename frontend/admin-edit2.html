@@ -22,7 +22,7 @@
             <a href="./index.html" class="navbar-logo"><img src="./assets/img/Image-logo.png" alt="image logo" /></a>
             <button class="hamburger-menu"><a class="hamburger"></a></button>
             <ul class="navbar-menu">
-                <li class="navbar-link"><a href="./index.html">Home</a></li>
+                <li class="navbar-link"><a href="./vote.html">Vote</a></li>
                 <li class="navbar-link active"><a href="./admin-edit2.html"> Update
                         <hr>
                     </a>
@@ -38,11 +38,11 @@
     <!-- End Header -->
     <main>
         <section class="container form-container">
-            <h2 class="section-title">Admin Dashboard</h2>
+            <h2 class="section-title1">Admin Dashboard</h2>
             <form class="form-card" onsubmit="return submitFormAdmin()" method="post">
                 <h2 class="create-party">Update Office</h2>
                 <label for="issue-type">Office Type<span>*</span></label>
-                <select type="text" id="issue-type" name="issue-type" class="form-element" required>
+                <select type="text" id="issue-type" class="form-element select-style" name="issue-type" class="form-element" required>
                     <option default>-- Select Office Type --</option>
                     <option value="atitku">Federal</option>
                     <option value="yemi">Legislative</option>
@@ -50,7 +50,7 @@
                     <option value="rotimi">Local Goverment</option>
                 </select>
                 <label for="issue-type">Office Name<span>*</span></label>
-                <select type="text" id="issue-type" name="issue-type" class="form-element" required>
+                <select type="text" id="issue-type" class="form-element select-style" name="issue-type" class="form-element" required>
                     <option default>-- Select Office Name --</option>
                     <option value="atitku">President</option>
                     <option value="yemi">Vice President</option>

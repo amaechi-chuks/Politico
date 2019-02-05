@@ -22,13 +22,14 @@
             <a href="./index.html" class="navbar-logo"><img src="./assets/img/Image-logo.png" alt="image logo" /></a>
             <button class="hamburger-menu"><a class="hamburger"></a></button>
             <ul class="navbar-menu">
-                <li class="navbar-link"><a href="./index.html">Home</a></li>
+                <li class="navbar-link"><a href="./vote.html">Vote</a></li>
                 <li class="navbar-link">
                     <a href="./admin-create-office.html">Create Office
                         <hr>
                     </a>
                 </li>
                 <li class="navbar-link"><a href="./admin-create-party.html">Create Party </a></li>
+                <li class="navbar-link"><a href="./view-all-party.html">View All Parties</a></li>
                 <li class="navbar-link active">
                     <a href="./view-more-candidate.html">View Candidates
                     </a>
@@ -41,11 +42,11 @@
     <!-- End Header -->
     <main>
         <section class="container form-container">
-            <h2 class="section-title">Admin Dashboard</h2>
+            <h2 class="section-title1">Admin Dashboard</h2>
             <form class="form-card" onsubmit="return submitFormAdminProfile()" method="post">
                 <h2 class="create-party">Create A Political Office</h2>
                 <label for="issue-type">Office Type<span>*</span></label>
-                <select type="text" id="issue-type" name="issue-type" class="form-element" required>
+                <select type="text" id="issue-type" class="form-element select-style" class="form-element select-style" name="issue-type" class="form-element" required>
                     <option default>-- Select Office Type --</option>
                     <option value="atitku">Federal</option>
                     <option value="yemi">Legislative</option>
@@ -53,7 +54,7 @@
                     <option value="rotimi">Local Goverment</option>
                 </select>
                 <label for="issue-type">Office Name<span>*</span></label>
-                <select type="text" id="issue-type" name="issue-type" class="form-element" required>
+                <select type="text" id="issue-type"  class="form-element select-style" name="issue-type" class="form-element" required>
                     <option default>-- Select Office Name --</option>
                     <option value="atitku">President</option>
                     <option value="yemi">Vice President</option>
@@ -65,7 +66,7 @@
                     <option value="okonji">Deputy Governor</option>
                     <option value="chuks">Minister of finance</option>
                 </select>
-                <button type="submit" class="btn btn-primary2">Create Office</button>
+                <button type="submit" class="btn btn-primary-btn">Create Office</button>
             </form>
         </section>
     </main>

@@ -55,7 +55,13 @@ select {
 input[type="file"] {
   padding-top: 8px;
 }
-
+select[type="file"] {
+  padding-top: 8px;
+}
+.select-style {
+  width: 99%;
+  margin: 0 1%;
+}
 textarea {
   padding: 10px;
   height: 90px;
@@ -164,6 +170,11 @@ background-color: rgb(57, 131, 57);
 .btn-primary {
   background: #0facf3;
   color: white;
+}
+.btn-primary-btn {
+  background: #0facf3;
+  color: #fffffa;
+  margin: 10px;
 }
 
 .btn-primary2 {
