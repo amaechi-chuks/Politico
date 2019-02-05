@@ -5,7 +5,7 @@ export default {
     logoUrl: 'chuksimage.jpeg',
   },
   validData2: {
-    name: 'All party',
+    name: 'all party',
     hqAddress: 'Plot 5 lagos street',
     logoUrl: 'chuksimage.jpeg',
   },

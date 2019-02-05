@@ -9,7 +9,7 @@ const createTablesQuery = createTables;
 
 const hashedPassword = HelperUtils.hashPassword('fabulous26');
 const createUserQuery = `
-    INSERT INTO users(firstname, lastname, othername, email, phonenumber, password) 
+    INSERT INTO users(firstName, lastName, otherName, email, phoneNumber, password) 
     VALUES('Chuks', 'Amaechi', 'frank', 'amaechichuks2000@yahoo.com', '07068566559', '${hashedPassword}') RETURNING *`;
 
 

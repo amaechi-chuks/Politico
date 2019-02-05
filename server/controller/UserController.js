@@ -18,21 +18,28 @@ class UserController {
   */
   // eslint-disable-next-line consistent-return
   static async registerUser(req, res) {
-    const {
-      firstname, lastname, othername,
-      email, phonenumber, password,
+    let {
+      firstName, lastName, otherName,
+      // eslint-disable-next-line prefer-const
+      email, phoneNumber, password,
     } = req.body;
     const hashedPassword = HelperUtils.hashPassword(password);
+    firstName = firstName.trim().toLowerCase();
+    lastName = lastName.trim().toLowerCase();
+    otherName = otherName.trim().toLowerCase();
+    email = email.trim().toLowerCase();
 
     try {
-      const query = 'INSERT INTO users(firstname, lastname, othername, email, phonenumber, password) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
-      const values = [firstname, lastname,
-        othername, email, phonenumber,
+      const query = 'INSERT INTO users(firstName, lastName, otherName, email, phoneNumber, password) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
+      const values = [firstName, lastName,
+        otherName, email, phoneNumber,
         hashedPassword];
       await databaseConnection.query(query, values, (err, dbRes) => {
         const user = dbRes.rows[0];
-        const { id, isAdmin } = user;
-        const token = HelperUtils.generateToken({ isAdmin, id, email });
+        const { id, isadmin } = user;
+        const token = HelperUtils.generateToken({ isadmin, id, email });
+        // eslint-disable-next-line no-param-reassign
+        delete dbRes.rows[0].password;
         return res.status(201).json({
           status: 201,
           data: [{ token, user }],
@@ -64,10 +71,12 @@ class UserController {
           const getPassword = HelperUtils.verifyPassword(password, dbRes.rows[0].password);
           if (getPassword) {
             const user = dbRes.rows[0];
-            const { id, firstname, isadmin } = user;
+            const { id, firstName, isadmin } = user;
             const token = HelperUtils.generateToken({
-              id, firstname, isadmin, email,
+              id, firstName, isadmin, email,
             });
+            // eslint-disable-next-line no-param-reassign
+            delete dbRes.rows[0].password;
             return res.status(200).json({
               status: 200,
               data: [{

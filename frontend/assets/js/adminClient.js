@@ -16,7 +16,7 @@ const getAllRequest = () => {
                       <h2>Party Records</h2>
                       </div>
             <table class="stats-table">
-            
+
           <h1 class="admin-request-title">${title}</h1>
           <small class="sub-title">${department}</small>
           <button type="submit" class="resolved">RESOLVED</button>
