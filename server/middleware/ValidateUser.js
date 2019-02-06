@@ -35,7 +35,7 @@ class ValidateUser {
     if (!validate.phoneNumber.test(phoneNumber)) {
       error = 'You need to include a valid phone number';
     }
-    if (!phoneNumber || phoneNumber.length < 5) {
+    if (!phoneNumber || phoneNumber === undefined) {
       error = 'phoneNumber must be digit lenght from 5 to 15';
     }
     if (!email || !validate.email.test(email)) {

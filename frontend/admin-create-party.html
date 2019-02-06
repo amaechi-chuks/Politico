@@ -29,6 +29,7 @@
                 </li>
                 <li class="navbar-link"><a href="./admin-create-office.html">Create Office </a></li>
                 <li class="navbar-link"><a href="./view-all-party.html">View All Parties</a></li>
+                <li class="navbar-link"><a href="./admin-profile-page.html">View All Offices</a></li>
                 <li class="navbar-link active">
                     <a href="./view-more-candidate.html">View Candidates
                     </a>
@@ -40,9 +41,9 @@
     </header>
     <!-- End Header -->
     <main>
-        <section class="container form-container">
-            <h2 class="section-title1">Admin Dashboard</h2>
-            <form class="form-card" onsubmit="return submitFormAdmin()" method="post">
+        <section class="container form-container" >
+            <h2 class="section-title1" >Admin Dashboard</h2>
+            <form class="form-card" method="post" id="admin-create-party">
                 <h2 class="create-party">Create A political Party</h2>
                 <label for="issue-type">Select Political Party<span>*</span></label>
                 <select type="text" class="form-element select-style" id="issue-type" name="issue-type" class="form-element" required>
@@ -61,7 +62,7 @@
                 <label for="headQ">HeadQuarter <span>*</span></label>
                 <input type="text" class="form-element" name="HeadQuarter" id="HeadQuarter" placeholder="Enter HeadQuarter" required>
                 <label for="attachment">Attach political logo</label>
-                <input type="file" accept="image/*,  id=" attachment" name="attachment" class="form-element" required>
+                <input type="file" accept="image/*, name="attachment" class="form-element hello" required>
                 <button type="submit" class="btn btn-primary2">Create Party</button>
             </form>
         </section>
@@ -71,5 +72,5 @@
     </footer>
 </body>
 <script src="./assets/js/main.js"></script>
-
+<script src="./assets/js/admin/adminCreateParty.js"></script>
 </html>

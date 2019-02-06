@@ -163,9 +163,9 @@ describe('/POST api/v1/auth/signup', () => {
         phoneNumber: '0706',
       })
       .end((err, res) => {
-        expect(res.status).to.equal(400);
+        expect(res.status).to.equal(409);
         expect(res.body).to.be.an('object');
-        expect(res.body.error).to.equal('phoneNumber must be digit lenght from 5 to 15');
+        expect(res.body.error).to.equal('User with email already exist');
         done(err);
       });
   });
