@@ -32,6 +32,9 @@
                     <a href="./view-more-candidate.html">View Candidates
                     </a>
                 </li>
+                <li class="navbar-link"><a href="./admin-profile-page.html">View All Offices</a></li>
+                <li class="navbar-link"><a href="./view-all-party.html">View All Parties</a></li>
+                <li class="navbar-link">
                 <li class="navbar-link"><a href="./admin-profile.html">Admin
                     <hr> </a></li>
                 <li class="navbar-link"><a href="./index.html">Log Out</a></li>
@@ -40,7 +43,6 @@
     </header>
     <main>
             <section class="container">
-                <h2 class="section-title"> Admin Profile</h2>
     <div class="admin-office-file">
             <div class="profile">
                 
@@ -54,7 +56,7 @@
                         <h2>Office Records</h2>
                     </div>
                     <table class="stats-table">
-                        <tbody>
+                        <tbody  id="offices">
                             <tr>
                                 <th class="office-table">S/N</th>
                                 <th class="office-table">Office Type</th>
@@ -64,7 +66,8 @@
                                 <th class="office-table">Edit</th>
                                 <th class="office-table">Delete</th>
                             </tr>
-                            <tr>
+                           
+                            <!-- <tr>
                                 <td>1</td>
                                 <td>Federal</td>
                                 <td>President</td>
@@ -99,7 +102,7 @@
                                 <td>16-02-2011</td>
                                 <td><a href="./admin-edit2.html" class="btn btn-primary">Edit</a></td>
                                 <td><button class="btn btn-warning delete-report">Delete</button></td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -113,5 +116,6 @@
 </footer>
 </body>
 <script src="./assets/js/main.js"></script>
+<script src="./assets/js/user/viewAll-office.js"></script>
 
 </html>

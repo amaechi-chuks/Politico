@@ -35,7 +35,7 @@ Politico is a platform that enables citizens give their mandate to politicians r
 
 
 ## Screenshoot(UI template)
-![alt](./screenShoot/landing-page.jpg)
+![alt](./screenShoot/homePage_1-min.png)
 
 # UI Templates
 
@@ -95,7 +95,7 @@ npm test
 |/api/v1/auth/signup                            |Create a user account        |POST
 |/api/v1/auth/login                                |Login a user        |POST
 |/api/v1/parties                                |Create a political party        |POST
-|/api/v1/office/*user_id*                       |Register a user as candidate running for a specific office       |POST
+|/api/v1/office/*user_id*/register                       |Register a user as candidate running for a specific office       |POST
 |/api/v1/votes                                  |Vote for a candidate       |POST
 |/api/v1/offices                                |Create a political office         |POST
 |/api/v1/parties                                |Fetch all political parties        |GET 
@@ -116,6 +116,8 @@ This projects is under the MIT LICENSE
 
 - [Egghead](https://egghead.io/)
 - [Andela](http://andela.com)
+- [Yomi Olaoye](abayomi.olaoye@andela.com)
+- [Oguejiofor Chidiebere](oguejiofor.chidiebere@andela.com)
 - [Devdocs](https://devdocs.io/)
 - [Wes Bos ](https://www.youtube.com/user/wesbos)
 - [Google Search](https://google.com)

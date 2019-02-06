@@ -109,20 +109,21 @@ if (loginForm) {
         if (data.status === 200) {
           window.localStorage.token = data.data[0].token;
           document.querySelector('#login-form')
-            .innerHTML = `<h2>Login Successful<h2/>
-          <h3>Welcome<h3/> <p>${data.data[0].user.firstname}<p/>`;
+            .innerHTML = `
+            <h2 class='welcome-success'>Login Successful<h2/>
+          <h3  class='welcome-success'>Welcome ${data.data[0].user.firstname}!<h3/> `;
           setTimeout(() => {
             authLogin();
-          }, 5000);
+          }, 50000);
         } else {
           document.querySelector('#login-form')
-            .innerHTML = `<h2>${data.error}<h2/>
-          <h3>Please check your login details<h3/>`;
+            .innerHTML = `<h2  class='welcome-success'>${data.error}<h2/>
+          <h3  class='welcome-success'>Please check your login details<h3/>`;
         }
       }).catch((error) => {
         document.querySelector('#error')
-          .innerHTML = `<h2>server error<h2/>
-            <h3>${error}<h3/>`;
+          .innerHTML = `<h2  class='welcome-success'>server error<h2/>
+            <h3  class='welcome-success'>${error}<h3/>`;
       });
   });
 }

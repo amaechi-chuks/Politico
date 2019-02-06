@@ -107,6 +107,7 @@ button {
   min-width: 110px;
   text-align: center;
 }
+
 .text-party{
   text-align: center;
   position: relative;
@@ -226,7 +227,6 @@ background-color: rgb(57, 131, 57);
   border-bottom: 3px solid #0facf3;
   position: relative;
   box-shadow: 0 10px 15px #cecaca;
-  height: 20%;
 }
 
 .card p {
@@ -320,6 +320,8 @@ background-color: rgb(57, 131, 57);
   background: #bcc6d9;
   padding: 60px 40px 130px;
   position: relative;
+  display: flex;
+  flex-direction: column
 }
 
 .container1 {
@@ -610,9 +612,6 @@ section>.btn1 {
   width: 40%;
 }
 
-.reports-container {
-  clip-path: polygon(0 0%, 100% 0, 100% 100%, 0% 100%);
-}
 .report-status::after {
   content: "";
   position: absolute;
@@ -661,6 +660,11 @@ footer {
   flex-direction: column;
   padding: 50px 40px;
   margin-top: 25px;
+}
+.welcome-success {
+  text-align: center;
+  margin: 5px;
+  word-spacing: 5px;
 }
 
 /* Modals */
