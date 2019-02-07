@@ -66,13 +66,13 @@ if (signupForm) {
       .then((data) => {
         if (data.status === 201) {
           window.localStorage.token = data.token;
-          const { user }= data.data[0];
+          const { user } = data.data[0];
           document.querySelector('#signup-form')
             .innerHTML = `<h2>Signup successful<h2/>
           <h3>Welcome<h3/> <p>${user.firstname}<p/> ${user.lastname}`;
           setTimeout(() => {
             window.location.replace('user-profile.html');
-          }, 5000);
+          }, 20000);
         } else {
           let output = '<h3>Error<h3/>';
           Object.keys(data).forEach((key) => {

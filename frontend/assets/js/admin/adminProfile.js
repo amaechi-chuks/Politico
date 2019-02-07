@@ -1,7 +1,5 @@
-// const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
-const baseUrl = 'http://localhost:60008/api/v1';
+const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
 let title;
-let id;
 /**
  * @description Admin Get all political parties
  */

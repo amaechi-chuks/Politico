@@ -7,7 +7,10 @@ function adminCreateParty(e) {
   const name = document.getElementById('issue-type').value;
   const logoUrl = document.getElementById('logoUrl').value;
   const hqAddress = document.getElementById('HeadQuarter').value;
+<<<<<<< HEAD
   const formBody = document.getElementById('admin-create-party');
+=======
+>>>>>>> [feature #163761100] Build out party update endpoint (#65)
 
   fetch(`${baseUrl}/parties`, {
     method: 'POST',

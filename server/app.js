@@ -26,6 +26,7 @@ app.use(cors());
 app.get('/', (req, res) => res.sendFile('../frontend/index.html'));
 
 
+<<<<<<< HEAD
 // Upload image
 app.get('/api/v1/images/:name', (req, res) => {
   fs.readFile(`./frontend/assets/img/${req.params.name}`, (err, data) => {
@@ -33,6 +34,8 @@ app.get('/api/v1/images/:name', (req, res) => {
   });
 });
 
+=======
+>>>>>>> [feature #163761100] Build out party update endpoint (#65)
 app.use('/api/v1/', routes);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
