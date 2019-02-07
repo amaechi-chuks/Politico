@@ -1,4 +1,5 @@
-const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+// const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+const baseUrl = 'http://localhost:60008/api/v1';
 /**
  * @description Admin Get all political parties
  */
@@ -32,4 +33,8 @@ fetch(`${baseUrl}/offices`, {
       document.getElementById('offices').innerHTML += parties;
     });
   })
-  .catch(error => (error));
+  .catch((error) => {
+    document.querySelector('#error')
+      .innerHTML = `<h2>Sorry, something went wrong with the server error<h2/>
+        <h3>${error}<h3/>`;
+  });

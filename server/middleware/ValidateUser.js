@@ -17,7 +17,7 @@ class ValidateUser {
   static validateProfileDetails(req, res, next) {
     const validate = HelperUtils.validate();
     const {
-      firstName, lastName, phoneNumber, email, password,
+      firstName, lastName, phoneNumber, email, password, otherName,
     } = req.body;
     let error;
     if (!validate.userName.test(firstName)) {
@@ -26,17 +26,26 @@ class ValidateUser {
     if (!firstName || firstName === undefined) {
       error = 'firstName must be specified';
     }
+    if (!firstName.trim().toLowerCase() || firstName === '') {
+      error = 'firstName must not be empty';
+    }
     if (!validate.userName.test(lastName)) {
       error = 'You need to include a valid last name';
     }
     if (!lastName || lastName === undefined) {
       error = 'lastName must be specified';
+    } if (!lastName.trim().toLowerCase() || lastName === '') {
+      error = 'lastName must not be empty';
+    } if (!otherName.trim().toLowerCase()) {
+      error = 'otherName must be specify';
     }
     if (!validate.phoneNumber.test(phoneNumber)) {
       error = 'You need to include a valid phone number';
     }
-    if (!phoneNumber || phoneNumber === undefined) {
+    if (!phoneNumber || phoneNumber.length < 5) {
       error = 'phoneNumber must be digit lenght from 5 to 15';
+    } if (!phoneNumber.trim().toLowerCase() || phoneNumber === '') {
+      error = 'PhoneNumber must not be empty';
     }
     if (!email || !validate.email.test(email)) {
       error = 'You need to include a valid email';
@@ -49,9 +58,6 @@ class ValidateUser {
     }
     if (!password) {
       error = 'Password field cannot be empty';
-    }
-    if (!validate.hqAddress.test(password)) {
-      error = 'hqAddress must be specify';
     }
     if (error) {
       return res.status(400).json({ status: 400, error });
@@ -134,6 +140,29 @@ class ValidateUser {
         return res.status(409).json({
           status: 409,
           error: 'User with email already exist',
+        });
+      }
+      return next();
+    });
+  }
+
+  /**
+   * @method validateExistingNumber
+   * @description Validates user login/registration
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static validateExistingNumber(req, res, next) {
+    const userEmail = {
+      text: 'SELECT * FROM users WHERE phoneNumber = $1;',
+      values: [req.body.phoneNumber],
+    };
+    return databaseConnection.query(userEmail, (error, dbRes) => {
+      if (dbRes.rows[0]) {
+        return res.status(409).json({
+          status: 409,
+          error: 'User with phoneNumber already exist',
         });
       }
       return next();

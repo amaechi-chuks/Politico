@@ -129,7 +129,7 @@ describe('All test cases for Politico application', () => {
         .send(partyData.incompleteData)
         .end((err, res) => {
           expect(res.body).to.be.a('object');
-          expect(res.body).to.deep.equal({ status: 400, error: 'hqAddress must be specified' });
+          expect(res.body).to.deep.equal({ status: 400, error: 'hqAddress must not be empty' });
           expect(res.status).to.equal(400);
           done(err);
         });

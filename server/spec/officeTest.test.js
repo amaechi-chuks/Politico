@@ -137,7 +137,7 @@ describe('All test cases for Politico application', () => {
         .send(officeData.invalidName)
         .end((err, res) => {
           expect(res.body).to.be.a('object');
-          expect(res.body).to.deep.equal({ status: 404, error: 'Office name must be specified' });
+          expect(res.body).to.deep.equal({ status: 404, error: 'Office must not be empty' });
           expect(res.status).to.equal(404);
           done(err);
         });

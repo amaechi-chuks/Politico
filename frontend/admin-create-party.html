@@ -23,17 +23,16 @@
             <button class="hamburger-menu"><a class="hamburger"></a></button>
             <ul class="navbar-menu">
                 <li class="navbar-link"><a href="./vote.html">Vote</a></li>
-                <li class="navbar-link">
-                    <a href="./admin-create-party.html">Create Party
-                        <hr> </a>
-                </li>
-                <li class="navbar-link"><a href="./admin-create-office.html">Create Office </a></li>
-                <li class="navbar-link"><a href="./view-all-party.html">View All Parties</a></li>
                 <li class="navbar-link"><a href="./admin-profile-page.html">View All Offices</a></li>
-                <li class="navbar-link active">
-                    <a href="./view-more-candidate.html">View Candidates
-                    </a>
+                <li class="navbar-link"><a href="./view-all-party.html">View All Parties</a></li>
+                <li class="navbar-link">
+                    <a href="./admin-create-office.html">Create Office  </a>
                 </li>
+                <li class="navbar-link"><a href="./admin-create-party.html">Create Party <hr></a></li>
+                <li class="navbar-link active">
+                    <a href="./view-more-candidate.html">View Candidates </a>
+                </li>
+                <li class="navbar-link"><a href="./user-profile.html">Profile</a></li>
                 <li class="navbar-link"><a href="./admin-profile.html">Admin</a></li>
                 <li class="navbar-link"><a href="./index.html">Log Out</a></li>
             </ul>
@@ -45,25 +44,18 @@
             <h2 class="section-title1" >Admin Dashboard</h2>
             <form class="form-card" method="post" id="admin-create-party">
                 <h2 class="create-party">Create A political Party</h2>
-                <label for="issue-type">Select Political Party<span>*</span></label>
-                <select type="text" class="form-element select-style" id="issue-type" name="issue-type" class="form-element" required>
-                    <option default>-- Select Political Party --</option>
-                    <option value="APC">All Progressives Congress (APC)</option>
-                    <option value="pdp">People's Democratic Party (PDP)</option>
-                    <option value="ACC">African Action Congress (AAC)</option>
-                    <option value="intervention">Abundant Nigeria Renewal Party (ANRP)</option>
-                    <option value="AD">Alliance for Democracy (AD)</option>
-                    <option value="ADP">Action Democratic Party (ADP)</option>
-                    <option value="ADC">African Democratic Congress (ADC)</option>
-                    <option value="APP">All People's Party (APP)</option>
-                    <option value="DA">Democratic Alternative (DA)</option>
-                    <option value="CPN">Communist Party of Nigeria (CPN)</option>
-                </select>
+                <div id="error"></div>
+                <label for="attachment">Party Name</label>
+                <div id="error"></div>
+                <input type="text" class="form-element" name="issue-type" id="issue-type" placeholder="Enter party Name" required>
                 <label for="headQ">HeadQuarter <span>*</span></label>
+                <div id="error"></div>
                 <input type="text" class="form-element" name="HeadQuarter" id="HeadQuarter" placeholder="Enter HeadQuarter" required>
                 <label for="attachment">Attach political logo</label>
-                <input type="file" accept="image/*, name="attachment" class="form-element hello" required>
+                <div id="error"></div>
+                <input type="text" class="form-element" name="logo" id="logoUrl" placeholder="Enter logoUrl" required>
                 <button type="submit" class="btn btn-primary2">Create Party</button>
+                <div id="error"></div>
             </form>
         </section>
     </main>

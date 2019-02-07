@@ -18,17 +18,11 @@ class UserController {
   */
   // eslint-disable-next-line consistent-return
   static async registerUser(req, res) {
-    let {
+    const {
       firstName, lastName, otherName,
-      // eslint-disable-next-line prefer-const
       email, phoneNumber, password,
     } = req.body;
     const hashedPassword = HelperUtils.hashPassword(password);
-    firstName = firstName.trim().toLowerCase();
-    lastName = lastName.trim().toLowerCase();
-    otherName = otherName.trim().toLowerCase();
-    email = email.trim().toLowerCase();
-
     try {
       const query = 'INSERT INTO users(firstName, lastName, otherName, email, phoneNumber, password) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
       const values = [firstName, lastName,

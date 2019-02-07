@@ -64,6 +64,11 @@ class Validate {
     if (!name || name === undefined) {
       error = `${urlPath} name must be specified`;
     }
+    if (!name || name === ' ') {
+      error = `${urlPath} name must not be empty`;
+    } if (!name.trim().toLowerCase() || name === '') {
+      error = `${urlPath} must not be empty`;
+    }
     if (error) {
       return res.status(404).json({
         status: 404, error,
@@ -87,8 +92,10 @@ class Validate {
 
     if (!validate.hqAddress.test(hqAddress)) {
       error = 'Invalid hqAddress format';
-    } else if (!hqAddress || hqAddress === undefined) {
+    } if (!hqAddress || hqAddress === undefined) {
       error = 'hqAddress must be specified';
+    } if (!hqAddress.trim().toLowerCase() || hqAddress === '') {
+      error = 'hqAddress must not be empty';
     }
     if (error) {
       return res.status(400).json({ status: 400, error });
@@ -113,6 +120,8 @@ class Validate {
     }
     if (!logoUrl || logoUrl === undefined) {
       error = 'Party Logo must be specified';
+    } if (!logoUrl.trim().toLowerCase() || logoUrl === '') {
+      error = 'logoUrl must not be empty';
     }
     if (error) {
       return res.status(400).json({
