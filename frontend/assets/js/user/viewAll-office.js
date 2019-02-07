@@ -32,4 +32,8 @@ fetch(`${baseUrl}/offices`, {
       document.getElementById('offices').innerHTML += parties;
     });
   })
-  .catch(error => (error));
+  .catch((error) => {
+    document.querySelector('#error')
+      .innerHTML = `<h2>Sorry, something went wrong with the server error<h2/>
+        <h3>${error}<h3/>`;
+  });

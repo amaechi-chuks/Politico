@@ -25,17 +25,17 @@
             <ul class="navbar-menu">
                 <li class="navbar-link"><a href="./vote.html">Vote</a></li>
                 <li class="navbar-link">
-                    <a href="./admin-profile-page.html">view Offices</a>
+                    <a href="./admin-profile-page.html">View All Offices</a>
                 </li>
+                <li class="navbar-link"><a href="./view-all-party.html">View All Parties</a></li>
                 <li class="navbar-link">
                     <a href="./admin-create-office.html">Create Office</a>
                 </li>
                 <li class="navbar-link"><a href="./admin-create-party.html">Create Party</a></li>
                 <li class="navbar-link active">
-                    <a href="./view-more-candidate.html">View Candidates
-                    </a>
+                    <a href="./view-more-candidate.html">View Candidates </a>
                 </li>
-                <li class="navbar-link"><a href="./view-all-party.html">View All Parties</a></li>
+                <li class="navbar-link"><a href="./user-profile.html">Profile</a></li>
                 <li class="navbar-link"><a href="./admin-profile.html">Admin
                         <hr> </a></li>
                 <li class="navbar-link"><a href="./index.html">Log Out</a></li>
@@ -45,7 +45,7 @@
     <!-- End Header -->
     <main>
         <section class="container">
-            <h2 class="section-title"> Admin Profile</h2>
+            <!-- <h2 class="section-title admin-header"> Admin Profile</h2> -->
             <div class="profile">
                 <div class="card profile-card">
                     <img class="profile-image" src="./assets/img/profile-img.JPG" alt="Amaechi Chuks Profile Image" />
@@ -56,21 +56,22 @@
                 
                  <div class="profile-table">
                     <div class="text-party">
-                        <h2>Party Records</h2>
+                        <h2 class="party-header">Party Records</h2>
                     </div>
                     <table class="stats-table">
-                        <tbody>
+                        
                             <tr>
-                                <th>S/N</th>
-                                <th>Party</th>
-                                <th>hdAddress</th>
-                                <th>Party Logo</th>
-                                <th>Date</th>
-                                <th>Chairman</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                            <tr>
+                                    <th>S/N</th>
+                                    <th>Party</th>
+                                    <th>hdAddress</th>
+                                    <th>Party Logo</th>
+                                    <th>Date</th>
+                                    <th>Chairman</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                        <tbody  id="parties">
+                             <tr>
                                 <td>1</td>
                                 <td>People's Democratic Party (PDP)</td>
                                 <td>Plot 5 Wuse Abuja Nigeria</td>
@@ -79,98 +80,14 @@
                                 </td>
                                 <td>16-02-2011</td>
                                 <td>Amaechi Chuks Ebele</td>
-                                <td><a href="./admin-edit1.html" class="btn btn-primary">Edit</a></td>
+                                <td><a href="./admin-editParty.html" class="btn btn-primary">Edit</a></td>
                                 <td><button class="btn btn-warning delete-report">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>All Progressives Congress (APC)</td>
-                                <td>Plot 5 Wuse Abuja Nigeria</td>
-                                <td class="col3 first">
-                                    <img class="party-logo" src="./assets/img/All_Progressives_Congress_logo.png" alt="APC logo">
-                                </td>
-                                <td>16-02-2011</td>
-                                <td>Jonathan Johnson John</td>
-                                <td><a href="./admin-edit1.html" class="btn btn-primary">Edit</a></td>
-                                <td><button class="btn btn-warning delete-report">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>All Progressives Congress (APC)</td>
-                                <td>Plot 5 Wuse Abuja Nigeria</td>
-                                <td class="col3 first">
-                                    <img class="party-logo" src="./assets/img/All_Progressives_Congress_logo.png" alt="APC logo">
-                                </td>
-                                <td>16-02-2011</td>
-                                <td>Jonathan Johnson John</td>
-                                <td><a href="./admin-edit1.html" class="btn btn-primary">Edit</a></td>
-                                <td><button class="btn btn-warning delete-report">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>People's Democratic Party (PDP)</td>
-                                <td>Plot 5 Wuse Abuja Nigeria</td>
-                                <td class="col3 first">
-                                    <img class="party-logo" src="./assets/img/PDP-logo.png" alt="APC logo">
-                                </td>
-                                <td>16-02-2011</td>
-                                <td>Jonathan Johnson John</td>
-                                <td><a href="./admin-edit1.html" class="btn btn-primary">Edit</a></td>
-                                <td><button class="btn btn-warning delete-report">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>People's Democratic Party (PDP)</td>
-                                <td>Plot 5 Wuse Abuja Nigeria</td>
-                                <td class="col3 first">
-                                    <img class="party-logo" src="./assets/img/PDP-logo.png" alt="APC logo">
-                                </td>
-                                <td>16-02-2011</td>
-                                <td>Jonathan Johnson John</td>
-                                <td><a href="./admin-edit1.html" class="btn btn-primary">Edit</a></td>
-                                <td><button class="btn btn-warning delete-report">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>People's Democratic Party (PDP)</td>
-                                <td>Plot 5 Wuse Abuja Nigeria</td>
-                                <td class="col3 first">
-                                    <img class="party-logo" src="./assets/img/PDP-logo.png" alt="APC logo">
-                                </td>
-                                <td>16-02-2011</td>
-                                <td>Jonathan Johnson John</td>
-                                <td><a href="./admin-edit1.html" class="btn btn-primary">Edit</a></td>
-                                <td><button class="btn btn-warning delete-report">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>People's Democratic Party (PDP)</td>
-                                <td>Plot 5 Wuse Abuja Nigeria</td>
-                                <td class="col3 first">
-                                    <img class="party-logo" src="./assets/img/PDP-logo.png" alt="APC logo">
-                                </td>
-                                <td>16-02-2011</td>
-                                <td>Jonathan Johnson John</td>
-                                <td><a href="./admin-edit1.html" class="btn btn-primary">Edit</a></td>
-                                <td><button class="btn btn-warning delete-report">Delete</button></td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>All Progressives Congress (APC)</td>
-                                <td>Plot 5 Wuse Abuja Nigeria</td>
-                                <td class="col3 first">
-                                    <img class="party-logo" src="./assets/img/All_Progressives_Congress_logo.png" alt="APC logo">
-                                </td>
-                                <td>16-02-2011</td>
-                                <td>Jonathan Johnson John</td>
-                                <td><a href="./admin-edit1.html" class="btn btn-primary">Edit</a></td>
-                                <td><button class="btn btn-warning delete-report">Delete</button></td>
-                            </tr>
+                            </tr> 
+                           
                         </tbody>
                     </table>
                 </div>
             </div>
-
             <div class="modal">
                 <div class="modal-header">
                     <p class="modal-title">Delete Report</p>
@@ -191,5 +108,6 @@
     </footer>
 </body>
 <script src="./assets/js/main.js"></script>
-
+<script src="./assets/js/admin/adminProfile.js"></script>
+<script src="./assets//js/admin/adminEditParty.js"></script>
 </html>

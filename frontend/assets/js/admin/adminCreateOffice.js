@@ -24,15 +24,19 @@ function adminCreateOffice(e) {
   })
     .then(res => res.json())
     .then((response) => {
-      const { error, data } = response;
+      const { data } = response;
       if (data) {
         document.getElementById('admin-create-office').innerHTML = `<h2>Office created successfully<h2/>
-        <h3>Office Name <h3/> <p>${data[0].name}<p/> <br> <p>Office type ${data[0].type}<p/> <br> `;
+        <h3>Office Name: <h3/><br <p>${data[0].name}<p/> <br> <p>Office type ${data[0].type}<p/> <br> `;
         setTimeout(() => {
           window.location.replace('admin-create-office.html');
-        }, 10000);
+        }, 1000);
       }
     })
-    .catch(error => console.log(error));
+    .catch((error) => {
+      document.querySelector('#error')
+        .innerHTML = `<h2>Sorry, something went wrong with the server error<h2/>
+          <h3>${error}<h3/>`;
+    });
 }
 document.getElementById('admin-create-office').addEventListener('submit', adminCreateOffice);

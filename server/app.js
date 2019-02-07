@@ -19,13 +19,11 @@ app.use(bodyParser.json({ limit: '50mb' }));
 
 // support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
-
-
 app.use(express.static(path.resolve(__dirname, '../frontend')));
-
 app.use(cors());
 
 app.get('/', (req, res) => res.sendFile('../frontend/index.html'));
+
 
 app.use('/api/v1/', routes);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));

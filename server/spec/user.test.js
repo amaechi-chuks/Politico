@@ -11,58 +11,6 @@ const loginUrl = '/api/v1/auth/login';
 let token;
 
 describe('/POST api/v1/auth/signup', () => {
-  it('should return status code 400 if firstName field is ommitted', (done) => {
-    chai
-      .request(app)
-      .post(signupUrl)
-      .set('Content-Type', 'application/json')
-      .send(inputs.invalidfirstName1)
-      .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body).to.deep.equal({ status: 400, error: 'firstName must be specified' });
-        done(err);
-      });
-  });
-  it('should return status code 400 if firstName field is ommitted', (done) => {
-    chai
-      .request(app)
-      .post(signupUrl)
-      .set('Content-Type', 'application/json')
-      .send(inputs.invalidfirstName2)
-      .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body).to.deep.equal({ status: 400, error: 'You need to include a valid firstName' });
-        done(err);
-      });
-  });
-  it('should return status code 400 if lasttname field is ommitted', (done) => {
-    chai
-      .request(app)
-      .post(signupUrl)
-      .set('Content-Type', 'application/json')
-      .send(inputs.invalidlastName1)
-      .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body).to.deep.equal({ status: 400, error: 'lastName must be specified' });
-        done(err);
-      });
-  });
-  it('should return status code 400 if lastName is invalid', (done) => {
-    chai
-      .request(app)
-      .post(signupUrl)
-      .set('Content-Type', 'application/json')
-      .send(inputs.invalidlastName2)
-      .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body).to.deep.equal({ status: 400, error: 'You need to include a valid last name' });
-        done(err);
-      });
-  });
   it('should return status code 400 if email field is ommitted', (done) => {
     chai
       .request(app)
@@ -99,19 +47,6 @@ describe('/POST api/v1/auth/signup', () => {
         expect(res.body).to.be.an('object');
         expect(res.body.status).to.equal(400);
         expect(res.body).to.deep.equal({ status: 400, error: 'Password field cannot be empty' });
-        done(err);
-      });
-  });
-  it('should return status code 400 if password is invalid', (done) => {
-    chai
-      .request(app)
-      .post(signupUrl)
-      .set('Content-Type', 'application/json')
-      .send(inputs.invalidPassword2)
-      .end((err, res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body.status).to.equal(400);
-        expect(res.body).to.deep.equal({ status: 400, error: 'hqAddress must be specify' });
         done(err);
       });
   });
@@ -163,9 +98,9 @@ describe('/POST api/v1/auth/signup', () => {
         phoneNumber: '0706',
       })
       .end((err, res) => {
-        expect(res.status).to.equal(409);
+        expect(res.status).to.equal(400);
         expect(res.body).to.be.an('object');
-        expect(res.body.error).to.equal('User with email already exist');
+        expect(res.body.error).to.equal('phoneNumber must be digit lenght from 5 to 15');
         done(err);
       });
   });

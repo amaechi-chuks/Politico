@@ -650,7 +650,11 @@ footer {
 .participant {
   padding-top: 10px;
 }
-
+.admin-header {
+  align-content: center;
+  padding-left: 300px;
+  padding-bottom: 3px;
+}
 /* Form Card */
 
 .form-card {
@@ -832,9 +836,10 @@ p.stat-value {
 /* Reports Table */
 
 .stats-table {
-  margin-top: 20px;
+  margin-top: 10px;
   background: #fffffa;
 }
+
 
 .profile-table {
   /* z-index: 100; */

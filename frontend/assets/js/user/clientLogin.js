@@ -45,14 +45,14 @@ const authLogin = () => {
 if (signupForm) {
   signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const firstname = document.querySelector('#first-name').value;
-    const lastname = document.querySelector('#last-name').value;
+    const firstName = document.querySelector('#first-name').value;
+    const lastName = document.querySelector('#last-name').value;
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
-    const othername = document.querySelector('#other-name').value;
-    const phonenumber = document.querySelector('#phonenumber').value;
+    const otherName = document.querySelector('#other-name').value;
+    const phoneNumber = document.querySelector('#phonenumber').value;
     const inputValue = {
-      firstname, lastname, email, password, othername, phonenumber,
+      firstName, lastName, email, password, otherName, phoneNumber,
     };
     fetch(`${baseUrl}/auth/signup`, {
       method: 'POST',
@@ -65,12 +65,13 @@ if (signupForm) {
       .then((data) => {
         if (data.status === 201) {
           window.localStorage.token = data.token;
+
           document.querySelector('#signup-form')
             .innerHTML = `<h2>Signup successful<h2/>
-          <h3>Welcome<h3/> <p>${data.data[0].user.firstname}<p/>`;
+          <h3>Welcome<h3/> <p>${data.data.user.firstName}<p/>`;
           setTimeout(() => {
             window.location.replace('user-profile.html');
-          }, 5000);
+          }, 20000);
         } else {
           let output = '<h3>Error<h3/>';
           Object.keys(data).forEach((key) => {
@@ -114,7 +115,7 @@ if (loginForm) {
           <h3  class='welcome-success'>Welcome ${data.data[0].user.firstname}!<h3/> `;
           setTimeout(() => {
             authLogin();
-          }, 50000);
+          }, 2000);
         } else {
           document.querySelector('#login-form')
             .innerHTML = `<h2  class='welcome-success'>${data.error}<h2/>
@@ -122,7 +123,7 @@ if (loginForm) {
         }
       }).catch((error) => {
         document.querySelector('#error')
-          .innerHTML = `<h2  class='welcome-success'>server error<h2/>
+          .innerHTML = `<h2  class='welcome-success'> Sorry, something went wrong with the server error<h2/>
             <h3  class='welcome-success'>${error}<h3/>`;
       });
   });
