@@ -1,4 +1,5 @@
-const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+// const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+const baseUrl = 'http://localhost:60008/api/v1';
 const signupForm = document.querySelector('#signup-form');
 const loginForm = document.querySelector('#login-form');
 
@@ -65,13 +66,13 @@ if (signupForm) {
       .then((data) => {
         if (data.status === 201) {
           window.localStorage.token = data.token;
-
+          const { user }= data.data[0];
           document.querySelector('#signup-form')
             .innerHTML = `<h2>Signup successful<h2/>
-          <h3>Welcome<h3/> <p>${data.data.user.firstName}<p/>`;
+          <h3>Welcome<h3/> <p>${user.firstname}<p/> ${user.lastname}`;
           setTimeout(() => {
             window.location.replace('user-profile.html');
-          }, 20000);
+          }, 5000);
         } else {
           let output = '<h3>Error<h3/>';
           Object.keys(data).forEach((key) => {

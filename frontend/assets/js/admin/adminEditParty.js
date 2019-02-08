@@ -1,4 +1,5 @@
-const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+// const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+const baseUrl = 'http://localhost:60008/api/v1';
 const token = localStorage.getItem('token');
 const editParty = document.querySelector('#edit-party');
 
@@ -25,21 +26,20 @@ function editPartyName(e) {
   })
     .then(res => res.json())
     .then((response) => {
-      const { data } = response;
+      const { data, error } = response;
       if (data) {
         document.getElementById('edit-party').innerHTML = `<h2>Party updated successfully<h2/>
-            <h3>Party Name: <h3/><br <p>${data[0].name}</p> `;
+            <h3>Party Name: <h3/><br <p>${data.name}</p> `;
         setTimeout(() => {
           window.location.replace('admin-profile.html');
-        }, 1000);
+        }, 5000);
       } else {
-        let output = '<h3>Error<h3/>';
-        Object.keys(data).forEach((key) => {
-          output += `<p>${data[key]}<p/>`;
-        });
         document.querySelector('#edit-party')
-          .innerHTML = output;
+          .innerHTML = `<h2> ${error}</h2><h3>Please try again!!</h3>`;
       }
+      setTimeout(() => {
+        window.location.replace('admin-editParty.html');
+      }, 5000);
     })
     .catch((error) => {
       document.querySelector('#error')

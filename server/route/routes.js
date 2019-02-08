@@ -51,7 +51,7 @@ router.get('/offices/:id', AuthenticateUser.verifyUser, Validate.findById, Offic
 router.get('/office/:id/result', AuthenticateUser.verifyUser, OfficeController.getOfficeResultById, OfficeController.getOfficeResultById);
 
 //  Handle all Patch request
-router.patch('/parties/:id/name', AuthenticateUser.verifyAdmin,
+router.patch('/parties/:id/name', Validate.validateName, AuthenticateUser.verifyAdmin,
   AuthenticateUser.verifyUser, Validate.findById, PartyController.updateName);
 
 //  Handles all delete request

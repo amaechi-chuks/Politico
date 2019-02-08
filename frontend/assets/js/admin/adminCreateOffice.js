@@ -1,4 +1,5 @@
-const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+// const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+const baseUrl = 'http://localhost:60008/api/v1';
 const token = localStorage.getItem('token');
 
 
@@ -30,7 +31,7 @@ function adminCreateOffice(e) {
         <h3>Office Name: <h3/><br <p>${data[0].name}<p/> <br> <p>Office type ${data[0].type}<p/> <br> `;
         setTimeout(() => {
           window.location.replace('admin-create-office.html');
-        }, 1000);
+        }, 5000);
       }
     })
     .catch((error) => {
