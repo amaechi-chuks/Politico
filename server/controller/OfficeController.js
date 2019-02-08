@@ -110,7 +110,7 @@ class OfficeController {
   // eslint-disable-next-line consistent-return
   static async getOfficeResultById(req, res) {
     const { id: postId } = req.params;
-    const query = 'SELECT office, candidate, count(candidate) as results FROM vote WHERE vote.office = $1 GROUP BY vote.candidate, vote.office';
+    const query = 'SELECT office, candidate, count(candidate) :: int as results FROM vote WHERE vote.office = $1 GROUP BY vote.candidate, vote.office';
     try {
       // eslint-disable-next-line consistent-return
       await databaseConnection.query(query, [postId], (err, dbRes) => {

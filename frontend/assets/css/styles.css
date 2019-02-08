@@ -212,9 +212,11 @@ background-color: rgb(57, 131, 57);
   color: #0facf3;
   border: 2px solid #fffffa;
 }
-
+element.style {
+  width: 77%;
+}
 .card {
-  padding: 20px;
+  padding: 32px;
   border-left: 3px solid #0facf3;
   border-bottom: 3px solid #0facf3;
   position: relative;

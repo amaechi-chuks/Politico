@@ -1,4 +1,5 @@
-const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+// const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+const baseUrl = 'http://localhost:60008/api/v1';
 /**
  * @description Admin Get all political parties
  */
@@ -23,8 +24,8 @@ fetch(`${baseUrl}/parties`, {
                   <div class="col2 last">
                       <div class="grid clearfix">
                           <div class="col4 first">
-                                <h1>Party logo:<img src="${baseUrl}/img/${party.logourl}">
-                              </h1>
+                                <h3>Party logo:<br /><img  src="${baseUrl}/images/${party.logourl}" style="width:50px;">
+                              </h3>
                           </div>
                       </div>
                   </div>

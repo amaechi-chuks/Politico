@@ -23,7 +23,6 @@ hqAddress varchar (70) NOT NULL,
 logoUrl varchar (50) NOT NULL,
 registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
-INSERT INTO party (name, hqAddress, logoUrl) VALUES ('People Party', 'plot 5 bello street', 'people.jpeg');
 
 DROP TABLE IF EXISTS office CASCADE;
 CREATE TABLE office (

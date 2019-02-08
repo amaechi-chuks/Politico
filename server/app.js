@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import fs from 'fs';
 import path from 'path';
 import swaggerUI from 'swagger-ui-express';
 import routes from './route/routes';
@@ -24,6 +25,13 @@ app.use(cors());
 
 app.get('/', (req, res) => res.sendFile('../frontend/index.html'));
 
+
+// Upload image
+app.get('/api/v1/images/:name', (req, res) => {
+  fs.readFile(`./frontend/assets/img/${req.params.name}`, (err, data) => {
+    res.status(200).send(data);
+  });
+});
 
 app.use('/api/v1/', routes);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
