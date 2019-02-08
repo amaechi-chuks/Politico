@@ -43,7 +43,7 @@ class VoteController {
     } catch (error) {
       return res.status(500).json({
         status: 500,
-        error: 'Something went wrong with the database',
+        error: 'You have already voted',
       });
     }
   }

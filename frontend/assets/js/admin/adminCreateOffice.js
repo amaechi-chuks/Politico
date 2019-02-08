@@ -1,5 +1,4 @@
-// const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
-const baseUrl = 'http://localhost:60008/api/v1';
+const baseUrl = 'http://localhost:60002/api/v1';
 const token = localStorage.getItem('token');
 
 
@@ -31,11 +30,7 @@ function adminCreateOffice(e) {
         <h3>Office Name: <h3/><br <p>${data[0].name}<p/> <br> <p>Office type ${data[0].type}<p/> <br> `;
         setTimeout(() => {
           window.location.replace('admin-create-office.html');
-<<<<<<< HEAD
         }, 5000);
-=======
-        }, 1000);
->>>>>>> [feature #163761100] Build out party update endpoint (#65)
       }
     })
     .catch((error) => {

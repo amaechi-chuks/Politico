@@ -1,10 +1,10 @@
-const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+const baseUrl = 'http://localhost:60002/api/v1';
 const token = localStorage.getItem('token');
 const editParty = document.querySelector('#edit-party');
 
 let id = localStorage.getItem('idKey');
 
-function editPartyName(e) {
+const editPartyName = (e) => {
   e.preventDefault();
   const name = document.getElementById('name').value;
   id = Number(id);
@@ -45,5 +45,5 @@ function editPartyName(e) {
         .innerHTML = `<h2>Sorry, something went wrong with the server error<h2/>
               <h3>${error}<h3/>`;
     });
-}
+};
 document.getElementById('edit-party').addEventListener('submit', editPartyName);

@@ -1,16 +1,12 @@
-// const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
-const baseUrl = 'http://localhost:60008/api/v1';
+const baseUrl = 'http://localhost:60002/api/v1';
 const token = localStorage.getItem('token');
 
-function adminCreateParty(e) {
+const adminCreateParty = (e) => {
   e.preventDefault();
   const name = document.getElementById('issue-type').value;
   const logoUrl = document.getElementById('logoUrl').value;
   const hqAddress = document.getElementById('HeadQuarter').value;
-<<<<<<< HEAD
   const formBody = document.getElementById('admin-create-party');
-=======
->>>>>>> [feature #163761100] Build out party update endpoint (#65)
 
   fetch(`${baseUrl}/parties`, {
     method: 'POST',
@@ -49,5 +45,5 @@ function adminCreateParty(e) {
         .innerHTML = `<h2>Sorry, something went wrong eith the server error<h2/>
           <h3>${error}<h3/>`;
     });
-}
+};
 document.getElementById('admin-create-party').addEventListener('submit', adminCreateParty);
