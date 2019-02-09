@@ -71,7 +71,7 @@ if (signupForm) {
           <h3>Welcome<h3/> <p>${user.firstname}<p/> ${user.lastname}`;
           setTimeout(() => {
             window.location.replace('user-profile.html');
-          }, 20000);
+          }, 5000);
         } else {
           let output = '<h3>Error<h3/>';
           Object.keys(data).forEach((key) => {
@@ -115,7 +115,7 @@ if (loginForm) {
           <h3  class='welcome-success'>Welcome ${data.data[0].user.firstname}!<h3/> `;
           setTimeout(() => {
             authLogin();
-          }, 2000);
+          }, 5000);
         } else {
           document.querySelector('#login-form')
             .innerHTML = `<h2  class='welcome-success'>${data.error}<h2/>

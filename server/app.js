@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import fileupload from 'express-fileupload';
 import fs from 'fs';
 import path from 'path';
 import swaggerUI from 'swagger-ui-express';
@@ -18,13 +19,15 @@ const port = process.env.PORT || 6000;
 // support parsing of application/json type post data
 app.use(bodyParser.json({ limit: '50mb' }));
 
+// support Image upload
+app.use(fileupload());
+
 // support parsing of application/x-www-form-urlencoded post data
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.resolve(__dirname, '../frontend')));
 app.use(cors());
 
 app.get('/', (req, res) => res.sendFile('../frontend/index.html'));
-
 
 // Upload image
 app.get('/api/v1/images/:name', (req, res) => {

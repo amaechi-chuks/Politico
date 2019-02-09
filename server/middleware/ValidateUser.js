@@ -17,34 +17,31 @@ class ValidateUser {
   static validateProfileDetails(req, res, next) {
     const validate = HelperUtils.validate();
     const {
-      firstName, lastName, phoneNumber, email, password, otherName,
+      firstName, lastName, phoneNumber, email, password,
     } = req.body;
     let error;
     if (!validate.userName.test(firstName)) {
-      error = 'You need to include a valid firstName';
+      error = 'You need to include a valid firstname';
     }
     if (!firstName || firstName === undefined) {
-      error = 'firstName must be specified';
+      error = 'firstname must be specified';
     }
-    if (!firstName.trim().toLowerCase() || firstName === '') {
-      error = 'firstName must not be empty';
+    if (!firstName.trim() || firstName === '') {
+      error = 'firstname must not be empty';
     }
     if (!validate.userName.test(lastName)) {
-      error = 'You need to include a valid last name';
+      error = 'You need to include a valid lastname';
     }
     if (!lastName || lastName === undefined) {
-      error = 'lastName must be specified';
-    } if (!lastName.trim().toLowerCase() || lastName === '') {
-      error = 'lastName must not be empty';
-    } if (!otherName.trim().toLowerCase()) {
-      error = 'otherName must be specify';
-    }
-    if (!validate.phoneNumber.test(phoneNumber)) {
+      error = 'lastname must be specified';
+    } if (!lastName.trim() || lastName === '') {
+      error = 'lastname must not be empty';
+    } if (!validate.phoneNumber.test(phoneNumber)) {
       error = 'You need to include a valid phone number';
     }
     if (!phoneNumber || phoneNumber.length < 5) {
       error = 'phoneNumber must be digit lenght from 5 to 15';
-    } if (!phoneNumber.trim().toLowerCase() || phoneNumber === '') {
+    } if (!phoneNumber.trim() || phoneNumber === '') {
       error = 'PhoneNumber must not be empty';
     }
     if (!email || !validate.email.test(email)) {

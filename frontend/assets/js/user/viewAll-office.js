@@ -1,5 +1,5 @@
 const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
-/**
+/*
  * @description Admin Get all political parties
  */
 const token = localStorage.getItem('token');

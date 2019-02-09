@@ -45,26 +45,9 @@
             <form class="form-card" method="post" id="admin-create-office">
                 <h2 class="create-party">Create A Political Office</h2>
                 <label for="issue-type">Office Type<span>*</span></label>
-                <select type="text" id="issue-type" class="form-element select-style" class="form-element select-style" name="issue-type" class="form-element" required>
-                    <option selected disabled hidden>-- Select Office Type --</option>
-                    <option value="federal">Federal</option>
-                    <option value="legislative">Legislative</option>
-                    <option value="state">State</option>
-                    <option value="local government">Local Goverment</option>
-                </select>
+                <input type="text" id="issue-type"  name="issue-type" class="form-element" required>
                 <label for="issue-type">Office Name<span>*</span></label>
-                <select type="text" id="issue-name"  class="form-element select-style" name="issue-type" class="form-element" required>
-                    <option selected disabled hidden>-- Select Office Name --</option>
-                    <option value="president">President</option>
-                    <option value="vice president">Vice President</option>
-                    <option value="senate">Senate President</option>
-                    <option value="house of representative">House Of Representative</option>
-                    <option value="local government chairman">Local Government Chairman</option>
-                    <option value="governor">Governor</option>
-                    <option value="deputy senate">Deputy Senate</option>
-                    <option value="deputy governor">Deputy Governor</option>
-                    <option value="minister">Minister of finance</option>
-                </select>
+                <input type="text" id="issue-name" name="issue-type" class="form-element" required>
                 <button type="submit" class="btn btn-primary-btn">Create Office</button>
                 <div id="error"></div>
             </form>

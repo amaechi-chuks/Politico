@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:60002/api/v1';
+const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
 const token = localStorage.getItem('token');
 const editParty = document.querySelector('#edit-party');
 
