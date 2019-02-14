@@ -4,8 +4,8 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable func-names */
 /* eslint-disable arrow-parens */
-// const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
-const baseUrl = 'http://localhost:60008/api/v1';
+const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+// const baseUrl = 'http://localhost:60008/api/v1';
 const token = localStorage.getItem('token');
 
 setTimeout(() => {
