@@ -1,10 +1,7 @@
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 import bcryptjs from 'bcryptjs';
 import databaseConnection from '../model/databaseConnection';
 
-dotenv.config();
-process.env.SECRET_KEY = 'andela21';
 class HelperUtils {
   static validate() {
     return {

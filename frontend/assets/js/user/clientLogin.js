@@ -1,4 +1,5 @@
 const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+// const baseUrl = 'http://localhost:60008/api/v1';
 const signupForm = document.querySelector('#signup-form');
 const loginForm = document.querySelector('#login-form');
 
@@ -9,32 +10,11 @@ const loginForm = document.querySelector('#login-form');
  * @param {object} e - The event parameter
  */
 const authLogin = () => {
-  fetch(`${baseUrl}/parties`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json, text/plain, */*',
-      'Content-type': 'application/json',
-      authorization: localStorage.token,
-    },
-  }).then(res => res.json()).then((data) => {
-    if (data.status !== 200 || data.status !== 201) window.location.replace('user-profile.html');
-    if (data.status === 200 || data.status === 201) {
-      if (sessionStorage.getItem('parties') === null || sessionStorage.getItem('parties') !== data) {
-        const parties = [];
-        parties.push(data);
-        sessionStorage.setItem('parties', JSON.stringify(parties));
-      } else {
-        const parties = JSON.parse(sessionStorage.getItem('parties'));
-        parties.push(data);
-        sessionStorage.setItem('parties', JSON.stringify(parties));
-      }
-      window.location.replace('admin-profile.html');
-    }
-  }).catch((error) => {
-    document.querySelector('#error')
-      .innerHTML = `<h2>server error<h2/>
-        <h3>${error}<h3/>`;
-  });
+  if (window.localStorage.admin === 'true') {
+    window.location.replace('admin-profile.html');
+  } else {
+    window.location.replace('user-profile.html');
+  }
 };
 
 /**
@@ -109,6 +89,8 @@ if (loginForm) {
       .then((data) => {
         if (data.status === 200) {
           window.localStorage.token = data.data[0].token;
+          window.localStorage.admin = data.data[0].user.isadmin;
+          window.localStorage.user = data.data[0].user.id;
           document.querySelector('#login-form')
             .innerHTML = `
             <h2 class='welcome-success'>Login Successful<h2/>

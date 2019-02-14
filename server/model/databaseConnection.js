@@ -1,8 +1,10 @@
+import dotenv from 'dotenv';
 import winston from '../config/winston';
 import createTables from './createTable';
 
 const { Pool } = require('pg');
 
+dotenv.config();
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
