@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-param-reassign */
 import HelperUtils from '../utility/helperUltis';
 import databaseConnection from '../model/databaseConnection';
 
@@ -16,7 +18,6 @@ class UserController {
   * @param {object} res - The Response Object
   * @returns {object} JSON API Response
   */
-  // eslint-disable-next-line consistent-return
   static async registerUser(req, res) {
     const {
       firstName, lastName, otherName,
@@ -32,7 +33,6 @@ class UserController {
         const user = dbRes.rows[0];
         const { id, isadmin } = user;
         const token = HelperUtils.generateToken({ isadmin, id, email });
-        // eslint-disable-next-line no-param-reassign
         delete dbRes.rows[0].password;
         return res.status(201).json({
           status: 201,
@@ -59,7 +59,6 @@ class UserController {
     const userQuery = 'SELECT * FROM users WHERE email = $1 LIMIT 1;';
     const params = [email];
     databaseConnection.query(userQuery, params)
-      // eslint-disable-next-line consistent-return
       .then((dbRes) => {
         if (dbRes.rows[0]) {
           const getPassword = HelperUtils.verifyPassword(password, dbRes.rows[0].password);
@@ -69,7 +68,6 @@ class UserController {
             const token = HelperUtils.generateToken({
               id, firstName, isadmin, email,
             });
-            // eslint-disable-next-line no-param-reassign
             delete dbRes.rows[0].password;
             return res.status(200).json({
               status: 200,
@@ -84,6 +82,38 @@ class UserController {
         status: 404,
         error: 'User does not exist',
       }));
+  }
+
+  /**
+   * @description Get a user by id
+   * @param {object} req - The request object
+   * @param {object} res - The response object
+   * @returns {object} {object} JSON object representing data object
+   * @memberof fetchUser
+   */
+  static async fetchUser(req, res) {
+    const { id: postId } = req.params;
+    const query = 'SELECT * FROM users WHERE id = $1';
+    try {
+      await databaseConnection.query(query, [postId], (err, dbRes) => {
+        if (dbRes.rowCount > 0) {
+          delete dbRes.rows[0].password;
+          return res.status(200).json({
+            status: 200,
+            data: dbRes.rows[0],
+          });
+        }
+        return res.status(404).json({
+          status: 404,
+          error: 'User does not exist',
+        });
+      });
+    } catch (err) {
+      return res.status(500).json({
+        status: 500,
+        error: 'sorry, something went wrong with the database',
+      });
+    }
   }
 }
 export default UserController;
