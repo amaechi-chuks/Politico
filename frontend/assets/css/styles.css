@@ -289,7 +289,7 @@ element.style {
   /* Safari */
   position: sticky;
   top: 0;
-  background: #fffffa;
+  /* background: #fffffa; */
   z-index: 1;
 }
 
