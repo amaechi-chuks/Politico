@@ -1,5 +1,5 @@
-const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
-// const baseUrl = 'http://localhost:60008/api/v1';
+// const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+const baseUrl = 'http://localhost:60008/api/v1';
 const signupForm = document.querySelector('#signup-form');
 const loginForm = document.querySelector('#login-form');
 
@@ -44,13 +44,15 @@ if (signupForm) {
     }).then(res => res.json())
       .then((data) => {
         if (data.status === 201) {
-          window.localStorage.token = data.token;
+          window.localStorage.token = data.data[0].token;
+          window.localStorage.admin = data.data[0].user.isadmin;
+          window.localStorage.user = data.data[0].user.id;
           const { user } = data.data[0];
           document.querySelector('#signup-form')
             .innerHTML = `<h2>Signup successful<h2/>
           <h3>Welcome<h3/> <p>${user.firstname}<p/> ${user.lastname}`;
           setTimeout(() => {
-            window.location.replace('user-profile.html');
+            authLogin();
           }, 5000);
         } else {
           let output = '<h3>Error<h3/>';
@@ -102,6 +104,9 @@ if (loginForm) {
           document.querySelector('#login-form')
             .innerHTML = `<h2  class='welcome-success'>${data.error}<h2/>
           <h3  class='welcome-success'>Please check your login details<h3/>`;
+          setTimeout(() => {
+            window.location.replace('login.html');
+          }, 5000);
         }
       }).catch((error) => {
         document.querySelector('#error')

@@ -1,5 +1,5 @@
-const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
-// const baseUrl = 'http://localhost:60008/api/v1';
+// const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
+const baseUrl = 'http://localhost:60008/api/v1';
 let title;
 /**
  * @description Admin Get all political parties
@@ -32,7 +32,7 @@ fetch(`${baseUrl}/parties`, {
       <td>16-02-2011</td>
       <td>Amaechi Chuks Ebele</td>
       <td><a href="./admin-editParty.html" class="btn btn-primary" id="${id}">Edit</a></td>
-      <td><button class="btn btn-warning delete-report">Delete</button></td>
+      <td><button class="btn btn-warning delete-report" id="${id}">Delete</button></td>
       </tr>`;
       title = id;
       localStorage.setItem('idKey', title);
