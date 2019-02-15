@@ -16,7 +16,6 @@ class PartyController {
     let {
       name, hqAddress, logoUrl,
     } = req.body;
-    const registerdAt = new Date().toString();
     name = name.trim().toLowerCase();
     hqAddress = hqAddress.trim().toLowerCase();
     logoUrl = logoUrl.trim().toLowerCase();
@@ -25,16 +24,15 @@ class PartyController {
     const params = [name, hqAddress, logoUrl];
     try {
       await databaseConnection.query(query, params, (err, dbRes) => {
-        const postId = dbRes.rows[0].id;
+        if (dbRes.rows > 0) {
+          return res.status(409).json({
+            status: 409,
+            message: 'party already exist',
+          });
+        }
         return res.status(201).json({
           status: 201,
-          data: [{
-            id: postId,
-            name,
-            hqAddress,
-            logoUrl,
-            registerdAt,
-          }],
+          data: dbRes.rows,
         });
       });
     } catch (err) {

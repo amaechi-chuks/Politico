@@ -21,18 +21,18 @@ fetch(`${baseUrl}/parties`, {
     let parties = '';
     data.forEach((party) => {
       // eslint-disable-next-line prefer-destructuring
-      id = party.id;
+      const id = party.id;
       parties += `<tr>
       <td>${party.id}</td>
       <td>${party.name}</td>
       <td>${party.hqaddress}</td>
       <td class="col3 first">
-          <img class="party-logo" src="./assets/img/PDP-logo.png" alt="APC logo">
+          <img class="party-logo" <img  src="${baseUrl}/images/${party.logourl}" style="width:50px;" alt="APC logo">
       </td>
-      <td>16-02-2011</td>
+      <td>${new Date().toLocaleString()}</td>
       <td>Amaechi Chuks Ebele</td>
       <td><a href="./admin-editParty.html" class="btn btn-primary" id="${id}">Edit</a></td>
-      <td><button class="btn btn-warning delete-report" id="${id}">Delete</button></td>
+      <td><button class="btn btn-warning" id="delete-report">Delete</></td>
       </tr>`;
       title = id;
       localStorage.setItem('idKey', title);

@@ -33,8 +33,7 @@ function adminCreateOffice(e) {
         setTimeout(() => {
           window.location.replace('admin-profile-page.html');
         }, 5000);
-      }
-      else {
+      } else {
         formBody.innerHTML = `<h2  class='welcome-success'>${error}<h2/>
         <h3  class='welcome-success'>office type sample: federal, state legislative or local government
         Please try again!<h3/>`;

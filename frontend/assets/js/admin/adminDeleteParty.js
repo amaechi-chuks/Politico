@@ -7,33 +7,36 @@
 const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
 // const baseUrl = 'http://localhost:60008/api/v1';
 const token = localStorage.getItem('token');
+let id = localStorage.getItem('idKey');
+console.log(id);
 
-setTimeout(() => {
-    const displayDeleteModal = document.querySelectorAll('.modal');
-    const deleteModal = document.querySelector('.delete');
-    const closeDeleteModal = document.querySelector('.modal-close');
-    const confirmDelete = document.getElementById('.delete');
-
-
-    let id;
-    displayDeleteModal.forEach((modal) => {
-      modal.addEventListener('click', (e) => {
-      id = e.target.attributes.key.value;
-      deleteModal.style.display = 'block';
-      });
-    });
-
-    closeDeleteModal.addEventListener('click', () => {
-      deleteModal.style.display = 'none';
-    });
-
-      window.onclick = function (event) {
-        if (event.target === deleteModal) {
-          deleteModal.style.display = 'none';
-        }
+    const toggleModal = (evt) => {
+        evt.preventDefault();
+        const modalToggle = document.querySelector('.modal-toggle');
+        const modal = document.querySelector('.modal');
+        document.body.classList.toggle('modal-open');
+        modalToggle.classList.toggle('modal-open');
+        modal.classList.toggle('modal-open');
       };
+      
+      const deleteReportBtns = Array.from(document.getElementById('.delete-report'));
+      deleteReportBtns.forEach(deleteReportBtn => deleteReportBtn.addEventListener('click', (evt) => {
+        toggleModal(evt);
+      }));
+      
+      const modalActionBtns = Array.from(document.querySelectorAll('.modal-btn'));
+      modalActionBtns.forEach(modalActionBtn => modalActionBtn.addEventListener('click', (evt) => {
+        evt.preventDefault();
+        if (evt.target.id === 'delete') {
+          const modalMessage = document.querySelector('.modal-message');
+          modalMessage.textContent = 'Record Deleted Successfully';
+          document.querySelector('.modal-group').remove();
+        } else {
+          toggleModal(evt);
+        }
+      }));
 
-      confirmDelete.addEventListener('click', () => {
+      modalActionBtns.addEventListener('click', () => {
           fetch(`${baseUrl}/parties/${id}`, {
               method: 'DELETE',
               mode: 'cors',
@@ -45,7 +48,6 @@ setTimeout(() => {
           })
           .then((res) => res.json())
           .then((data) => {
-              redirect('admin-profile.html');
+            redirect('admin-profile.html');
           });
       });
-      }, 1000);

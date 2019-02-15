@@ -27,7 +27,10 @@ const createVote = `
 INSERT INTO vote(createdBy, office, body) VALUES('2', '1', 
 'hello chuks') RETURNING *`;
 
-const queries = `${dropTablesQuery}${createTablesQuery}${createUserQuery}${createParty}${createOffice}${createCandidate}${createVote}`;
+const declareInterest = `
+INSERT INTO interest(type, name, party, candidate) VALUES('federal', 'president', 'people party', '1' ) RETURNING *`;
+
+const queries = `${dropTablesQuery}${createTablesQuery}${createUserQuery}${createParty}${createOffice}${createCandidate}${createVote}${declareInterest}`;
 
 databaseConnection.query(queries, (err) => {
   if (err) {

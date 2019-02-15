@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import HelperUtils from '../utility/helperUltis';
 import databaseConnection from '../model/databaseConnection';
 
@@ -147,7 +148,7 @@ class Validate {
     if (!validate.type.test(type)) {
       error = 'Invalid office type';
     }
-    if (!type || type === undefined) {
+    if (!type.trim() || type === '') {
       error = 'Type must be specified';
     }
     if (error) {
@@ -159,33 +160,51 @@ class Validate {
   }
 
   /**
-   * @method validateIfExist
+   * @method validateIfOfficeExist
    * @description Validates already existing party
    * @param {object} req - The Request Object
    * @param {object} res - The Response Object
    * @returns {object} JSON API Response
    */
-  static validateIfExist(req, res, next) {
-    let url = req.url.split('/')[1];
-    if (url.includes('offices')) {
-      url = 'office';
-    } else {
-      url = 'party';
-    }
+  static validateIfOfficeExist(req, res, next) {
     const query = {
-      text: `SELECT * FROM ${url} WHERE name = $1;`,
+      text: 'SELECT * FROM office WHERE name = $1;',
       values: [req.body.name],
     };
     return databaseConnection.query(query, (error, dbRes) => {
       if (dbRes.rows[0]) {
         return res.status(409).json({
           status: 409,
-          error: `${url} name already exist`,
+          error: 'office name already exist',
         });
       }
       return next();
     });
   }
+
+  /**
+   * @method validateIfPartyExist
+   * @description Validates already existing party
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static validateIfPartyExist(req, res, next) {
+    const query = {
+      text: 'SELECT * FROM party WHERE name = $1;',
+      values: [req.body.name],
+    };
+    return databaseConnection.query(query, (error, dbRes) => {
+      if (dbRes >= 1) {
+        return res.status(409).json({
+          status: 409,
+          error: 'party name already existed',
+        });
+      }
+      return next();
+    });
+  }
+
 
   /**
    * @method validateExistingVote
@@ -227,6 +246,52 @@ class Validate {
         return res.status(409).json({
           status: 409,
           error: 'Candidate with Id already exist',
+        });
+      }
+      return next();
+    });
+  }
+
+  /**
+   * @method validateExistingInterest
+   * @description Validates candidates
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static validateExistingInterest(req, res, next) {
+    const interest = {
+      text: 'SELECT * FROM interest WHERE party = $1 AND candidate = $2;',
+      values: [req.body.party, req.user.id],
+    };
+    return databaseConnection.query(interest, (error, dbRes) => {
+      if (dbRes.rows[0]) {
+        return res.status(409).json({
+          status: 409,
+          error: 'Candidate has already showed an interest',
+        });
+      }
+      return next();
+    });
+  }
+
+  /**
+   * @method doesCandidateShowInterest
+   * @description Validates candidates
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static doesCandidateShowInterest(req, res, next) {
+    const interest = {
+      text: 'SELECT * FROM interest WHERE candidate = $1;',
+      values: [req.user],
+    };
+    return databaseConnection.query(interest, (error, dbRes) => {
+      if (dbRes.rows[0]) {
+        return res.status(409).json({
+          status: 409,
+          error: 'Candidate has already showed an interest',
         });
       }
       return next();

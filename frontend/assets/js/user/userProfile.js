@@ -5,7 +5,6 @@ const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
  */
 const token = localStorage.getItem('token');
 const id = localStorage.getItem('user');
-console.log(token);
 
 fetch(`${baseUrl}/auth/user/${id}`, {
   method: 'GET',
