@@ -1,6 +1,5 @@
 import databaseConnection from '../model/databaseConnection';
 import HelperUtils from '../utility/helperUltis';
-import sendMail from '../utility/email';
 
 /**
  * @class CandidateController
@@ -8,7 +7,7 @@ import sendMail from '../utility/email';
  *
  */
 
-class CandidateController {
+class DeclareInterest {
   /**
          * @description Create a new political candidate
          * @param {object} req - The request object
@@ -16,26 +15,24 @@ class CandidateController {
          * @return {object} JSON representing data object
          * @memberof createCandidate
          */
-  static async createCandidate(req, res) {
-    const { office } = req.body;
-    const { id: candidate } = req.params;
-    const query1check = await HelperUtils.duplicateCandidateCheck(candidate);
+  static async declareInterest(req, res) {
+    let { type, name, party } = req.body;
+    type = type.trim().toLowerCase();
+    name = name.trim().toLowerCase();
+    party = party.trim().toLowerCase();
+    const { id: candidate } = req.user;
+    const query1check = await HelperUtils.doesPartyExist(party);
     try {
       if (query1check.rowCount > 0) {
         return res.status(400).json({
           status: 400,
-          error: 'Candidate already running for another office',
+          error: 'Party does not exist',
         });
       }
       const query2 = `
-  INSERT INTO candidate(office, candidate) VALUES($1, $2) RETURNING *`;
-      const params = [office, candidate];
+  INSERT INTO interest(type, name, party, candidate) VALUES($1, $2, $3, $4) RETURNING *`;
+      const params = [type, name, party, candidate];
       const { rows } = await databaseConnection.query(query2, params);
-      const emailPayload = {
-        email: req.body.email,
-        firstName: req.body.firstName,
-      };
-      sendMail(emailPayload);
       return res.status(201).json({
         status: 201,
         data: [rows[0]],
@@ -48,5 +45,4 @@ class CandidateController {
     }
   }
 }
-
-export default CandidateController;
+export default DeclareInterest;

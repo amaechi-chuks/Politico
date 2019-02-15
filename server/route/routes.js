@@ -7,6 +7,7 @@ import AuthenticateUser from '../middleware/AuthenticateUser';
 import ValidateUser from '../middleware/ValidateUser';
 import CandidateController from '../controller/CandidateController';
 import VoteController from '../controller/VoteController';
+import DeclareInterest from '../controller/DeclareInterest';
 
 
 const router = express.Router();
@@ -14,7 +15,7 @@ const router = express.Router();
 // Handle all Post request
 router.post('/parties',
   AuthenticateUser.verifyAdmin,
-  Validate.validateIfExist,
+  Validate.validateIfPartyExist,
   Validate.validateHqAddress,
   Validate.validateLogoUrl,
   Validate.validateName,
@@ -22,7 +23,7 @@ router.post('/parties',
 
 router.post('/offices',
   AuthenticateUser.verifyAdmin,
-  Validate.validateIfExist,
+  Validate.validateIfOfficeExist,
   Validate.validateOfficeType,
   Validate.validateName,
   OfficeController.createOffice);
@@ -36,9 +37,16 @@ router.post('/auth/signup',
 router.post('/auth/login', ValidateUser.validateLoginDetails,
   UserController.loginUser);
 
+router.post('/interest', AuthenticateUser.verifyUser,
+  Validate.validateExistingInterest, Validate.validateOfficeType,
+  Validate.validateName,
+  ValidateUser.validateExistingUser,
+  DeclareInterest.declareInterest);
+
 router.post('/office/:id/register',
   AuthenticateUser.verifyAdmin,
   Validate.validateExistingCandidate,
+  Validate.doesCandidateShowInterest,
   CandidateController.createCandidate);
 
 router.post('/votes', AuthenticateUser.verifyUser, Validate.validateCandidacy, VoteController.createVote);

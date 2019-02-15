@@ -46,6 +46,10 @@ class HelperUtils {
   static doesCandidateExist(candidate, office) {
     return databaseConnection.query('SELECT * FROM candidate WHERE candidate = $1 AND office = $2', [candidate, office]);
   }
+
+  static doesPartyExist(party) {
+    return databaseConnection.query('SELECT * FROM party WHERE name = $1', [party]);
+  }
 }
 
 
