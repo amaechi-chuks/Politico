@@ -9,11 +9,18 @@ const loginForm = document.querySelector('#login-form');
  *
  * @param {object} e - The event parameter
  */
-const authLogin = () => {
+const authSignUp = () => {
   if (window.localStorage.admin === 'true') {
     window.location.replace('admin-profile.html');
   } else {
     window.location.replace('login.html');
+  }
+};
+const authLogin = () => {
+  if (window.localStorage.admin === 'true') {
+    window.location.replace('admin-profile.html');
+  } else {
+    window.location.replace('user-profile.html');
   }
 };
 
@@ -52,7 +59,7 @@ if (signupForm) {
             .innerHTML = `<h2>Signup successful<h2/>
           <h3>Welcome<h3/> <p>${user.firstname}<p/> ${user.lastname}`;
           setTimeout(() => {
-            authLogin();
+            authSignUp();
           }, 5000);
         } else {
           let output = '<h3>Error<h3/>';
