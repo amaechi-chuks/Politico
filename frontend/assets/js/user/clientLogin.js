@@ -13,7 +13,7 @@ const authLogin = () => {
   if (window.localStorage.admin === 'true') {
     window.location.replace('admin-profile.html');
   } else {
-    window.location.replace('user-profile.html');
+    window.location.replace('login.html');
   }
 };
 
@@ -61,11 +61,17 @@ if (signupForm) {
           });
           document.querySelector('#signup-form')
             .innerHTML = output;
+          setTimeout(() => {
+            window.location.replace('signup.html');
+          }, 5000);
         }
       }).catch((error) => {
         document.querySelector('#error')
           .innerHTML = `<h2>server error<h2/>
           <h3>${error}<h3/>`;
+        setTimeout(() => {
+          window.location.replace('signup.html');
+        }, 5000);
       });
   });
 }
@@ -89,6 +95,7 @@ if (loginForm) {
       body: JSON.stringify({ email, password }),
     }).then(res => res.json())
       .then((data) => {
+        console.log(data);
         if (data.status === 200) {
           window.localStorage.token = data.data[0].token;
           window.localStorage.admin = data.data[0].user.isadmin;
@@ -112,6 +119,9 @@ if (loginForm) {
         document.querySelector('#error')
           .innerHTML = `<h2  class='welcome-success'> Sorry, something went wrong with the server error<h2/>
             <h3  class='welcome-success'>${error}<h3/>`;
+        setTimeout(() => {
+          window.location.replace('login.html');
+        }, 5000);
       });
   });
 }

@@ -7,7 +7,7 @@ import AuthenticateUser from '../middleware/AuthenticateUser';
 import ValidateUser from '../middleware/ValidateUser';
 import CandidateController from '../controller/CandidateController';
 import VoteController from '../controller/VoteController';
-import DeclareInterest from '../controller/DeclareInterest';
+import InterestController from '../controller/InterestController';
 
 
 const router = express.Router();
@@ -37,27 +37,24 @@ router.post('/auth/signup',
 router.post('/auth/login', ValidateUser.validateLoginDetails,
   UserController.loginUser);
 
-router.post('/interest', AuthenticateUser.verifyUser,
-  Validate.validateExistingInterest, Validate.validateOfficeType,
-  Validate.validateName,
-  ValidateUser.validateExistingUser,
-  DeclareInterest.declareInterest);
+router.post('/interest/:id', AuthenticateUser.verifyUser, InterestController.indicateInterest);
 
 router.post('/office/:id/register',
   AuthenticateUser.verifyAdmin,
   Validate.validateExistingCandidate,
-  Validate.doesCandidateShowInterest,
   CandidateController.createCandidate);
 
 router.post('/votes', AuthenticateUser.verifyUser, Validate.validateCandidacy, VoteController.createVote);
 
 //  Handle all Get request
-router.get('/auth/user/:id', AuthenticateUser.verifyUser, UserController.fetchUser);
 router.get('/parties', AuthenticateUser.verifyUser, PartyController.getAllParty);
 router.get('/parties/:id', AuthenticateUser.verifyUser, Validate.findById, PartyController.getPartyById);
 router.get('/offices', AuthenticateUser.verifyUser, OfficeController.getAllOffice);
 router.get('/offices/:id', AuthenticateUser.verifyUser, Validate.findById, OfficeController.getOfficeById);
-router.get('/office/:id/result', AuthenticateUser.verifyUser, OfficeController.getOfficeResultById, OfficeController.getOfficeResultById);
+router.get('/office/:id/result', AuthenticateUser.verifyUser, OfficeController.getOfficeResultById);
+router.get('/auth/user/:id', AuthenticateUser.verifyUser, UserController.fetchUser);
+router.get('/interest', AuthenticateUser.verifyUser, InterestController.fetchAllInterestedUsers);
+router.get('/interest/:id', AuthenticateUser.verifyUser, InterestController.fetchInterestedUserById);
 
 //  Handle all Patch request
 router.patch('/parties/:id/name', Validate.validateName, AuthenticateUser.verifyAdmin,

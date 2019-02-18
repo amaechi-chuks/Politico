@@ -30,8 +30,8 @@ fetch(`${baseUrl}/parties`, {
                       </div>
                   </div>
               </div>
-              <div class="participant"><strong>Party name:<br />${party.name} </strong></div>
-              <br /> <br/>
+              <div class="participant"><strong style="width:20px;">Party name:<br />${party.name} </strong> </div>
+              <br />
               <strong>HqAddress: <br />${party.hqaddress} </strong> 
           </div>
         `;
