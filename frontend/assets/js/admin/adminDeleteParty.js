@@ -4,11 +4,10 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable func-names */
 /* eslint-disable arrow-parens */
-const baseUrl = 'https://politico-software.herokuapp.com/api/v1';
-// const baseUrl = 'http://localhost:60008/api/v1';
-const token = localStorage.getItem('token');
+const baseUrl1 = 'https://politico-software.herokuapp.com/api/v1';
+// const baseUrl1 = 'http://localhost:60008/api/v1';
+const token1 = localStorage.getItem('token');
 let id = localStorage.getItem('idKey');
-console.log(id);
 
     const toggleModal = (evt) => {
         evt.preventDefault();
@@ -37,17 +36,20 @@ console.log(id);
       }));
 
       modalActionBtns.addEventListener('click', () => {
-          fetch(`${baseUrl}/parties/${id}`, {
+          fetch(`${baseUrl1}/parties/${id}`, {
               method: 'DELETE',
               mode: 'cors',
               headers: {
                   Accept: 'application/json, text/plain, */*',
                   'Content-Type': 'application/json',
-                  authorization: token,
+                  authorization: token1,
               },
           })
           .then((res) => res.json())
-          .then((data) => {
-            redirect('admin-profile.html');
+          .then((response) => {
+            const { error, data } = response;
+            if (data) {
+              window.location.replace('admin-profile.html');
+            }
           });
       });

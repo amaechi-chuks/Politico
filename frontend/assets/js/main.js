@@ -26,7 +26,7 @@ modalActionBtns.forEach(modalActionBtn => modalActionBtn.addEventListener('click
   evt.preventDefault();
   if (evt.target.id === 'delete') {
     const modalMessage = document.querySelector('.modal-message');
-    modalMessage.textContent = 'Record Deleted Successfully';
+    modalMessage.textContent = 'Updated Successfully';
     document.querySelector('.modal-group').remove();
   } else {
     toggleModal(evt);
@@ -108,3 +108,39 @@ function submitFormAdminProfile() {
   window.location.href = './admin-profile-page.html';
   return false;
 }
+
+// Get the modal
+const modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+
+
+// Get the <span> element that closes the modal
+
+const btn = document.getElementById('myBtn')
+
+// When the user clicks on the button, open the modal
+btn.onclick = () => {
+  modal.style.display = 'block';
+};
+
+// When the user clicks on <span> (x), close the modal
+const close = document.querySelector('.modal-close');
+close.onclick = (evt) => {
+  modal.style.display = 'none';
+  toggleModal(evt);
+};
+
+const cancel = document.getElementById('cancel');
+cancel.onclick = (evt) => {
+  modal.style.display = 'none';
+  toggleModal(evt);
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = (event) => {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+    toggleModal();
+  }
+};

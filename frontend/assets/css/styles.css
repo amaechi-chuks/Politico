@@ -673,23 +673,50 @@ footer {
   word-spacing: 5px;
 }
 
-/* Modals */
-
-.modal {
-  background: #fffffa;
-  position: absolute;
-  width: 520px;
-  padding: 10px 25px 20px;
-  bottom: 50%;
-  right: 50%;
-  transform: translate(50%, 50%);
-  z-index: -20;
-  opacity: 0;
-  transition: opacity .5s ease-in;
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  background-color: #0facf3;
 }
 
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.drop-me {
+  cursor: pointer;
+  background: #0facf3;
+  padding: 8px;
+}
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+  margin: 0px -32px 36px;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
 .modal-toggle.modal-open {
-  background: rgba(50, 41, 47, 0.76);
+  /* background: rgba(50, 41, 47, 0.76); */
   position: fixed;
   top: 0;
   bottom: 0;
@@ -709,6 +736,55 @@ footer {
   color: #0facf3
 }
 
+
+/**************************************************
+***************************************************
+*****************************************************/
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  /* left: 0; 
+  top: 0; */
+  /* margin: 45px 286px 24px; */
+  width: 520px;
+  padding: 10px 25px 20px;
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%);
+  overflow: auto;
+   background-color: rgb(0,0,0);
+  background: rgba(0,0,0,0.4); 
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/***************************************************
+****************************************************
+****************************************************/
 .modal-header {
   font-weight: 600;
   font-size: 1.5em;
@@ -846,7 +922,7 @@ p.stat-value {
 .profile-table {
   /* z-index: 100; */
   flex-basis: 73%;
-  border-bottom: 3px #0facf3 solid;
+  /* border-bottom: 3px #0facf3 solid; */
 }
 
 .admin-table {
