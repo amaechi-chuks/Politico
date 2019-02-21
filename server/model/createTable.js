@@ -46,6 +46,7 @@ VALUES
 ('All Progressive Grand Alliance (APGA)', '234 Upper Iweka Rd Anambra', 'apga.jpg'),
 ('All Progressive Congress (APC)', '298 Bourdillion  str EKo Lagos', 'apc.png');
 
+
 DROP TABLE IF EXISTS office CASCADE;
 CREATE TABLE office (
 id SERIAL primary key,

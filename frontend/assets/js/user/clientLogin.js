@@ -102,6 +102,7 @@ if (loginForm) {
       body: JSON.stringify({ email, password }),
     }).then(res => res.json())
       .then((data) => {
+        console.log(data);
         if (data.status === 200) {
           window.localStorage.token = data.data[0].token;
           window.localStorage.admin = data.data[0].user.isadmin;
