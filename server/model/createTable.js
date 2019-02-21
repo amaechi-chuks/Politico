@@ -9,58 +9,62 @@ CREATE TABLE users (
   password varchar (65) NOT NULL,
   phoneNumber varchar (14) UNIQUE NOT NULL,
   isadmin boolean DEFAULT FALSE,
-  createdAt TIMESTAMP WITH TIME ZONE DEFAULT now(),
+  registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now(),
   updatedAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
-INSERT INTO users (firstName, lastName, otherName, email, password, phoneNumber, isadmin) VALUES ('chuks', 'amaechi', 'patrick', 'amaechichuks2000@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989898', TRUE
-);
+INSERT INTO users 
+(firstName, lastName, otherName, email, password, phoneNumber, isadmin) 
+VALUES 
+('chuks', 'amaechi', 'patrick', 'amaechichuks2000@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989898', TRUE), 
+('Onyinyechi', 'Ibeh', 'Nelly', 'onyibeh2015@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '07031599965', FALSE),
+('Chinedu', 'Ibeh', 'Kingsley', 'kingsbig2001@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '07030996964', TRUE),
+('Ebube', 'Ibeh', 'Micheal', 'chimdibig@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08189051069', FALSE),
+('Chima', 'Iheoma', 'patrick', 'chimaiheaoma@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989877', FALSE), 
+('Ugonna', 'Orgazi', 'Simeon', 'orgaziug@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '07031599909', FALSE),
+('Nonye', 'Orgazi', 'Chinonye', 'orgazicp@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '07030996966', FALSE),
+('Chijioke', 'Iheagwam', 'Patrick', 'cypo@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08189051061', FALSE);
 
 DROP TABLE IF EXISTS party CASCADE;
 CREATE TABLE party (
 id SERIAL primary key,
-name varchar (40) NOT NULL,
+name varchar (40) UNIQUE NOT NULL,
 hqAddress varchar (70) NOT NULL,
 logoUrl varchar (50) NOT NULL,
-createdAt TIMESTAMP WITH TIME ZONE DEFAULT now()
+registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
+INSERT INTO party
+(name, hqAddress, logoUrl)
+VALUES
+('People Democratic Party (PDP)', '230 Badia Rd Abuja', 'power.jpg');
 
 DROP TABLE IF EXISTS office CASCADE;
 CREATE TABLE office (
 id SERIAL primary key,
 type varchar (20) NOT NULL,
-name varchar (40) NOT NULL,
+name varchar (40) UNIQUE NOT NULL,
 createdAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
-INSERT INTO office (type, name) VALUES ('federal', 'senate');
+INSERT INTO office (type, name) 
+VALUES 
+('Legislative', 'State House of Representative');
+
 
 DROP TABLE IF EXISTS interest CASCADE;
 CREATE TABLE interest (
-id SERIAL ,
-type varchar (20) NOT NULL,
-name varchar (40) NOT NULL,
-party varchar (20) NOT NULL,
-Candidate int references users(id),
-createdAt TIMESTAMP WITH TIME ZONE DEFAULT now()
-);
-
-
-DROP TABLE IF EXISTS candidate CASCADE;
-CREATE TABLE candidate (
-id SERIAL ,
+id int references users(id) PRIMARY KEY ,
+party int references party(id),
 office int references office(id),
-candidate int references users(id),
-createdAt TIMESTAMP WITH TIME ZONE DEFAULT now(),
-PRIMARY KEY (candidate, office)
+status boolean default false,
+createdOn TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
-
 
 DROP TABLE IF EXISTS vote CASCADE;
 CREATE TABLE vote (
 id SERIAL ,
-candidate int references users(id),
+createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
+candidate int references interest(id),
 office int references office(id),
 voter int references users(id),
-createdAt TIMESTAMP WITH TIME ZONE DEFAULT now(),
 primary key (office, voter)
 );
 

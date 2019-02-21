@@ -39,6 +39,10 @@ class HelperUtils {
     return databaseConnection.query('SELECT * FROM candidate WHERE candidate = $1', [candidate]);
   }
 
+  static candidateStatus(id) {
+    return databaseConnection.query('SELECT * FROM interest WHERE id = $1', [id]);
+  }
+
   static duplicateVoteCheck(candidate, voter) {
     return databaseConnection.query('SELECT * FROM vote WHERE candidate = $1 AND voter = $2', [candidate, voter]);
   }

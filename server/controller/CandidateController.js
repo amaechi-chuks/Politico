@@ -1,6 +1,5 @@
 import databaseConnection from '../model/databaseConnection';
 import HelperUtils from '../utility/helperUltis';
-import sendMail from '../utility/email';
 
 /**
  * @class CandidateController
@@ -17,25 +16,18 @@ class CandidateController {
          * @memberof createCandidate
          */
   static async createCandidate(req, res) {
-    const { office } = req.body;
-    const { id: candidate } = req.params;
-    const query1check = await HelperUtils.duplicateCandidateCheck(candidate);
+    const { id } = req.params;
+    const query1check = await HelperUtils.candidateStatus(id);
     try {
-      if (query1check.rowCount > 0) {
+      if (query1check.rows[0].status === true) {
         return res.status(400).json({
           status: 400,
-          error: 'Candidate already running for another office',
+          error: 'Candidate status already approved',
         });
       }
       const query2 = `
-  INSERT INTO candidate(office, candidate) VALUES($1, $2) RETURNING *`;
-      const params = [office, candidate];
-      const { rows } = await databaseConnection.query(query2, params);
-      const emailPayload = {
-        email: req.body.email,
-        firstName: req.body.firstName,
-      };
-      sendMail(emailPayload);
+  UPDATE interest SET status = true where id = $1  RETURNING *`;
+      const { rows } = await databaseConnection.query(query2, [id]);
       return res.status(201).json({
         status: 201,
         data: [rows[0]],

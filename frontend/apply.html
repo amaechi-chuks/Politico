@@ -39,47 +39,35 @@
     <main>
         <section class="container form-container">
             <h2 class="section-title">Apply To Be A Candidate</h2>
-            <form class="form-card" method="post" onsubmit="submitModals(); return false;">
+            <form class="form-card" method="post" action="" id="apply-form"">
                     <div class="message-box"></div>
-                    <label for="issue-type">Office Type<span>*</span></label>
-                    <select type="text" id="issue-type" name="issue-type" class="form-element" required/>
-                        <option selected disabled hidden>-- Select Office Type --</option>
-                        <option value="atitku">Federal</option>
-                        <option value="yemi">Legislative</option>
-                        <option value="Peter">State</option>
-                        <option value="rotimi">Local Goverment</option>
-                    </select>
-                    <label for="issue-type">Office Name<span>*</span></label>
-                    <select type="text" id="issue-type" name="issue-type" class="form-element" required/>
+                    <label for="office">Office<span>*</span></label>
+                    <select type="number" id="office" name="office" class="form-element" required/>
                         <option selected disabled hidden>-- Select Office Name --</option>
-                        <option value="atitku">President</option>
-                        <option value="yemi">Vice President</option>
-                        <option value="Peter">Senate President</option>
-                        <option value="rotimi">House Of Representative</option>
-                        <option value="fashola">Local Government Chairman</option>
-                        <option value="lamido">Governor</option>
-                        <option value="ebele">Deputy Senate</option>
-                        <option value="okonji">Deputy Governor</option>
-                        <option value="chuks">Minister of finance</option>
+                        <option value="3">President</option>
+                        <option value="4">Governor</option>
+                        <option value="1">Senate</option>
+                        <option value="2">Federal House Of Representative</option>
+                        <option value="5">Local Government Chairman</option>
+                        <option value="6">Councillor</option>
+                        <option value="7">State House of Representative</option>
                     </select>
-                    <label for="issue-type">Select Political Party<span>*</span></label>
-                    <select type="text" id="issue-type" name="issue-type" class="form-element" required/>
+                    <label for="party">Select Political Party<span>*</span></label>
+                    <select type="number" id="party" name="party" class="form-element" required/>
                         <option selected disabled hidden>-- Select Political Party --</option>
-                        <option value="APC">All Progressives Congress (APC)</option>
-                        <option value="pdp">People's Democratic Party (PDP)</option>
-                        <option value="ACC">African Action Congress (AAC)</option>
-                        <option value="intervention">Abundant Nigeria Renewal Party (ANRP)</option>
-                        <option value="AD">Alliance for Democracy (AD)</option>
-                        <option value="ADP">Action Democratic Party (ADP)</option>
-                        <option value="ADC">African Democratic Congress (ADC)</option>
-                        <option value="APP">All People's Party (APP)</option>
-                        <option value="DA">Democratic Alternative (DA)</option>
-                        <option value="CPN">Communist Party of Nigeria (CPN)</option>
+                        <option value="10">All Progressive Congress (APC)</option>
+                        <option value="1">People's Democratic Party (PDP)</option>
+                        <option value="4">African Action Congress (AAC)</option>
+                        <option value="9">All Progressive Grand Alliance (APGA)</option>
+                        <option value="6">Alliance for Democracy (AD)</option>
+                        <option value="2">Action Democratic Party (ADP)</option>
+                        <option value="3">African Democratic Congress (ADC)</option>
+                        <option value="5">All People's Party (APP)</option>
+                        <option value="7">Democratic Alternative (DA)</option>
+                        <option value="8">Communist Party of Nigeria (CPN)</option>
                     </select>
-
-                <label for="Location">Reg Number<span>*</span></label>
-                <input type="text" class="form-element" name="reg" id="reg" required>
                 <button type="submit" id="apply" class="btn btn-primary2 update">Apply</button>
+                <div id="error"></div>
             </form>
         </section>
     </main>
@@ -88,5 +76,5 @@
     </footer>
 </body>
 <script src="./assets/js/main.js"></script>
-
+<script src="./assets/js/user/userApplyToContest.js"></script>
 </html>

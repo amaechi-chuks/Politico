@@ -148,7 +148,7 @@ class Validate {
     if (!validate.type.test(type)) {
       error = 'Invalid office type';
     }
-    if (!type.trim() || type === '') {
+    if (type === undefined) {
       error = 'Type must be specified';
     }
     if (error) {
