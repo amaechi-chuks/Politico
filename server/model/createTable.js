@@ -35,7 +35,17 @@ registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 INSERT INTO party
 (name, hqAddress, logoUrl)
 VALUES
-('People Democratic Party (PDP)', '230 Badia Rd Abuja', 'power.jpg');
+('People Democratic Party (PDP)', '230 Badia Rd Abuja', 'power.jpg'),
+('Action Democratic Party (ADP)', '23 Aromire Rd Lagos', 'acdempa.jpg'),
+('African Democratic Congress (ADC)', '134 Ekulobia ORlu Rd Anambra', 'adc.jpg'),
+('African Action Congress (AAC)', '230 Badia Rd Abuja', 'african.jpg'),
+('All Peoples Party (APP)', '230 Badia Rd Abuja', 'people.jpg'),
+('Alliance for Democracy (AD)', '110 Ikoyi Crescent Abuja', 'alliance.jpg'),
+('Democratic Alternative (DA)', '90 Ensia Rd Rivers', 'democratic.jpg'),
+('Communist Party of Nigeria (CPN)', '230 Umuani Rd Rivers', 'communist.jpg'),
+('All Progressive Grand Alliance (APGA)', '234 Upper Iweka Rd Anambra', 'apga.jpg'),
+('All Progressive Congress (APC)', '298 Bourdillion  str EKo Lagos', 'apc.png');
+
 
 DROP TABLE IF EXISTS office CASCADE;
 CREATE TABLE office (
@@ -46,8 +56,13 @@ createdAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
 INSERT INTO office (type, name) 
 VALUES 
+('Legislative', 'Senate'),
+('Legislative', 'Federal House of Representative'),
+('Federal', 'President'),
+('State', 'Governor'),
+('Local Government', 'Local Government Chairman'),
+('Local Government', 'Councilors'),
 ('Legislative', 'State House of Representative');
-
 
 DROP TABLE IF EXISTS interest CASCADE;
 CREATE TABLE interest (
@@ -67,6 +82,7 @@ office int references office(id),
 voter int references users(id),
 primary key (office, voter)
 );
+
 
 `;
 export default createTables;
