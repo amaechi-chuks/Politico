@@ -31,20 +31,25 @@ class AuthenticateUser {
    * @param {object} res - The Response Object
    * @returns {object} - JSON response object
    */
+
   static verifyUser(req, res, next) {
-    const payload = AuthenticateUser.verifyAuthHeader(req);
+    const payload = HelperUtils.verifyAuthHeader(req);
     let error;
     let status;
-    if (!payload || payload.error === 'auth' || payload.error === 'error') {
+    if (!payload || payload.error === 'error') {
       status = 401;
       error = 'You are not authorized';
     }
-    if (payload.error === 'token') {
+    if (payload.error === 'Invalid token') {
       status = 403;
       error = 'Forbidden';
     }
     if (error) {
-      return res.status(status).json({ status, error });
+      return res.status(status).json({
+        errors: {
+          body: [error],
+        },
+      });
     }
     req.user = payload;
     return next();
@@ -53,19 +58,22 @@ class AuthenticateUser {
   /**
    * @method verifyAdmin
    * @description Verifies the token provided by the Admin
-   * @param {object} req - The Request Object
-   * @param {object} res - The Response Object
-   * @returns {object} - JSON response object
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   * @returns {*} - JSON response object
    */
   static verifyAdmin(req, res, next) {
-    const payload = AuthenticateUser.verifyAuthHeader(req);
-    const { isadmin } = payload;
-    if (isadmin !== true) {
-      return res.status(401).json({
-        status: 401,
-        error: 'You are not authorized to access this endpoint.',
+    const payload = HelperUtils.verifyAuthHeader(req);
+    const { isAdmin } = payload.userObj;
+    if (!isAdmin) {
+      return res.status(403).json({
+        errors: {
+          body: ['You are not authorized to access this endpoint.'],
+        },
       });
     }
+    req.user = payload;
     return next();
   }
 }
