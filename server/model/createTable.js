@@ -83,6 +83,5 @@ voter int references users(id),
 primary key (office, voter)
 );
 
-
 `;
 export default createTables;

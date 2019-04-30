@@ -8,6 +8,7 @@ import ValidateUser from '../middleware/ValidateUser';
 import CandidateController from '../controller/CandidateController';
 import VoteController from '../controller/VoteController';
 import InterestController from '../controller/InterestController';
+import middleware from '../middleware/upload';
 
 
 const router = express.Router();
@@ -20,6 +21,9 @@ router.post('/parties',
   Validate.validateLogoUrl,
   Validate.validateName,
   PartyController.createParty);
+
+router.post('/profile_pic',
+  AuthenticateUser.verifyUser, middleware.validateUpload, middleware.updateUserPic);
 
 router.post('/offices',
   AuthenticateUser.verifyAdmin,

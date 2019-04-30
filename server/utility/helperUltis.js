@@ -54,6 +54,11 @@ class HelperUtils {
   static doesPartyExist(party) {
     return databaseConnection.query('SELECT * FROM party WHERE name = $1', [party]);
   }
+
+  static updateProfilePic(passporturl, id) {
+    return databaseConnection.query('UPDATE users SET passporturl = $1 WHERE id = $2 RETURNING *',
+      [passporturl, id]);
+  }
 }
 
 
