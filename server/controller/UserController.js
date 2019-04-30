@@ -31,8 +31,10 @@ class UserController {
         hashedPassword];
       await databaseConnection.query(query, values, (err, dbRes) => {
         const user = dbRes.rows[0];
-        const { id, isadmin } = user;
-        const token = HelperUtils.generateToken({ isadmin, id, email });
+        const { id, isadmin, passporturl } = user;
+        const token = HelperUtils.generateToken({
+          isadmin, id, email, passporturl,
+        });
         delete dbRes.rows[0].password;
         return res.status(201).json({
           status: 201,
@@ -64,9 +66,11 @@ class UserController {
           const getPassword = HelperUtils.verifyPassword(password, dbRes.rows[0].password);
           if (getPassword) {
             const user = dbRes.rows[0];
-            const { id, firstName, isadmin } = user;
+            const {
+              id, firstName, isadmin, passporturl,
+            } = user;
             const token = HelperUtils.generateToken({
-              id, firstName, isadmin, email,
+              id, firstName, isadmin, email, passporturl,
             });
             delete dbRes.rows[0].password;
             return res.status(200).json({
