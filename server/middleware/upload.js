@@ -46,7 +46,7 @@ const middleware = {
 
     res.status(200).json({
       status: 200,
-      data: rows,
+      data: [rows[0]],
       message: 'upload successful',
     });
   },
