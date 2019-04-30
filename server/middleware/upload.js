@@ -42,11 +42,11 @@ const middleware = {
       }
     }
 
-    const { dbRes } = await HelperUtils.updateProfilePic(req.body.passporturl.trim(), req.user.id);
-
+    const { rows } = await HelperUtils.updateProfilePic(req.body.passporturl.trim(), req.user.id);
+    console.log(req.user);
     res.status(200).json({
       status: 200,
-      data: dbRes,
+      data: rows,
       message: 'upload successful',
     });
   },

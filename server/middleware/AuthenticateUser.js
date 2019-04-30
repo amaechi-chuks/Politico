@@ -39,7 +39,7 @@ class AuthenticateUser {
       status = 401;
       error = 'You are not authorized';
     }
-    if (payload.error === 'Invalid token') {
+    if (payload.error === 'token') {
       status = 403;
       error = 'Forbidden';
     }

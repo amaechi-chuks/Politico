@@ -33,9 +33,9 @@ router.post('/offices',
   OfficeController.createOffice);
 
 router.post('/auth/signup',
-  ValidateUser.validateProfileDetails,
-  ValidateUser.validateExistingUser,
-  ValidateUser.validateExistingNumber,
+  // ValidateUser.validateProfileDetails,
+  // ValidateUser.validateExistingUser,
+  // ValidateUser.validateExistingNumber,
   UserController.registerUser);
 
 router.post('/auth/login', ValidateUser.validateLoginDetails,

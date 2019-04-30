@@ -29,9 +29,6 @@ class ValidateUser {
     if (!firstName.trim() || firstName === '') {
       error = 'firstname must not be empty';
     }
-    if (!validate.userName.test(lastName)) {
-      error = 'You need to include a valid lastname';
-    }
     if (!lastName || lastName === undefined) {
       error = 'lastname must be specified';
     } if (!lastName.trim() || lastName === '') {
