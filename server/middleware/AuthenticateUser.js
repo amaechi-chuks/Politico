@@ -31,9 +31,8 @@ class AuthenticateUser {
    * @param {object} res - The Response Object
    * @returns {object} - JSON response object
    */
-
   static verifyUser(req, res, next) {
-    const payload = HelperUtils.verifyAuthHeader(req);
+    const payload = AuthenticateUser.verifyAuthHeader(req);
     let error;
     let status;
     if (!payload || payload.error === 'error') {
@@ -64,7 +63,7 @@ class AuthenticateUser {
    * @returns {*} - JSON response object
    */
   static verifyAdmin(req, res, next) {
-    const payload = HelperUtils.verifyAuthHeader(req);
+    const payload = AuthenticateUser.verifyAuthHeader(req);
     const { isAdmin } = payload.userObj;
     if (!isAdmin) {
       return res.status(403).json({
