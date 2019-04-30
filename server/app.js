@@ -14,7 +14,7 @@ const app = express();
 
 
 // set port for server to listen on
-const port = process.env.PORT || 6003;
+const port = process.env.PORT || 3000;
 
 // support parsing of application/json type post data
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -42,7 +42,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 // invalid route
 app.all('*', (req, res) => res.status(404).json({
   status: 404,
-  error: 'check documentation, "/docs"',
+  error: 'This route does not exist',
 }));
 
 app.listen(port, () => winston.info(`Application started on port👍 ${port}, ${process.cwd()}, ${__dirname}`));
