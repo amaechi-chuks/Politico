@@ -5,6 +5,7 @@ CREATE TABLE users (
   firstName varchar (30) NOT NULL,
   lastName varchar (30) NOT NULL,
   otherName varchar (30),
+  passporturl VARCHAR(200),
   email varchar (30) UNIQUE NOT NULL,
   password varchar (65) NOT NULL,
   phoneNumber varchar (14) UNIQUE NOT NULL,
@@ -13,16 +14,16 @@ CREATE TABLE users (
   updatedAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
 INSERT INTO users 
-(firstName, lastName, otherName, email, password, phoneNumber, isadmin) 
+(firstName, lastName, otherName, passporturl, email, password, phoneNumber, isadmin) 
 VALUES 
-('chuks', 'amaechi', 'patrick', 'amaechichuks2000@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989898', TRUE), 
-('Onyinyechi', 'Ibeh', 'Nelly', 'onyibeh2015@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '07031599965', FALSE),
-('Chinedu', 'Ibeh', 'Kingsley', 'kingsbig2001@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '07030996964', TRUE),
-('Ebube', 'Ibeh', 'Micheal', 'chimdibig@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08189051069', FALSE),
-('Chima', 'Iheoma', 'patrick', 'chimaiheaoma@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989877', FALSE), 
-('Ugonna', 'Orgazi', 'Simeon', 'orgaziug@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '07031599909', FALSE),
-('Nonye', 'Orgazi', 'Chinonye', 'orgazicp@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '07030996966', FALSE),
-('Chijioke', 'Iheagwam', 'Patrick', 'cypo@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08189051061', FALSE);
+('chuks', 'amaechi', 'patrick', 'chukcjkdsk', 'amaechichuks2000@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989898', TRUE), 
+('Onyinyechi', 'Ibeh', 'Nelly', 'chukcjkdsk', 'onyibeh2015@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '07031599965', FALSE),
+('Chinedu', 'Ibeh', 'Kingsley', 'chukcjkdsk', 'kingsbig2001@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '07030996964', TRUE),
+('Ebube', 'Ibeh', 'Micheal', 'chukcjkdsk', 'chimdibig@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08189051069', FALSE),
+('Chima', 'Iheoma', 'patrick', 'chukcjkdsk', 'chimaiheaoma@yahoo.com', '$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08098989877', FALSE), 
+('Ugonna', 'Orgazi', 'Simeon', 'chukcjkdsk', 'orgaziug@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '07031599909', FALSE),
+('Nonye', 'Orgazi', 'Chinonye', 'chukcjkdsk', 'orgazicp@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '07030996966', FALSE),
+('Chijioke', 'Iheagwam', 'Patrick', 'chukcjkdsk', 'cypo@gmail.com','$2y$12$5vGNy.VWcS8wuR3wDsCpauEb1xotpRfMO53kxEwDqKE0YRI.kb2a.', '08189051061', FALSE);
 
 DROP TABLE IF EXISTS party CASCADE;
 CREATE TABLE party (
