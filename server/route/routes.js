@@ -23,7 +23,7 @@ router.post('/parties',
   PartyController.createParty);
 
 router.post('/profile_pic',
-  AuthenticateUser.verifyUser, middleware.validateUpload, middleware.updateUserPic);
+  AuthenticateUser.verifyUser, middleware.updateUserPic);
 
 router.post('/offices',
   AuthenticateUser.verifyAdmin,

@@ -5,7 +5,7 @@ CREATE TABLE users (
   firstName varchar (30) NOT NULL,
   lastName varchar (30) NOT NULL,
   otherName varchar (30),
-  passporturl VARCHAR(200),
+  passporturl VARCHAR,
   email varchar (30) UNIQUE NOT NULL,
   password varchar (65) NOT NULL,
   phoneNumber varchar (14) UNIQUE NOT NULL,

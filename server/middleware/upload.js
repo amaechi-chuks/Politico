@@ -15,7 +15,7 @@ const middleware = {
 
 
     if (passporturl) {
-      if ((!(/\.(gif|jpg|jpeg|tiff|png)$/i).test(passporturl))) {
+      if ((!(/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/).test(passporturl))) {
         verified = false;
         error.push({ passporturl: 'invalid format' });
       }
@@ -43,7 +43,6 @@ const middleware = {
     }
 
     const { rows } = await HelperUtils.updateProfilePic(req.body.passporturl.trim(), req.user.id);
-    console.log(req.user);
     res.status(200).json({
       status: 200,
       data: rows,
