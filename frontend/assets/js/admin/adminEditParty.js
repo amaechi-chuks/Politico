@@ -11,7 +11,7 @@ const editPartyName = (e) => {
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < id; i++) {
     if (i > 0) {
-      fetch(`${baseUrl}/parties/${id}/name`, {
+      fetch(`${baseUrl}/parties/${id}`, {
         method: 'PATCH',
         mode: 'cors',
         headers: {
