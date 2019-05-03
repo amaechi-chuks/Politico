@@ -61,7 +61,7 @@ router.get('/interest', AuthenticateUser.verifyUser, InterestController.fetchAll
 router.get('/interest/:id', AuthenticateUser.verifyUser, InterestController.fetchInterestedUserById);
 
 //  Handle all Patch request
-router.patch('/parties/:id/name', Validate.validateName, AuthenticateUser.verifyAdmin,
+router.patch('/parties/:id', Validate.validateName, AuthenticateUser.verifyAdmin,
   AuthenticateUser.verifyUser, Validate.findById, PartyController.updateName);
 
 //  Handles all delete request

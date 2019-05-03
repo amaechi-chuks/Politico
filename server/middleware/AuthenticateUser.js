@@ -64,8 +64,8 @@ class AuthenticateUser {
    */
   static verifyAdmin(req, res, next) {
     const payload = AuthenticateUser.verifyAuthHeader(req);
-    const { isAdmin } = payload.userObj;
-    if (!isAdmin) {
+    const { isadmin } = payload;
+    if (!isadmin) {
       return res.status(403).json({
         errors: {
           body: ['You are not authorized to access this endpoint.'],

@@ -24,18 +24,16 @@ class PartyController {
     const params = [name, hqAddress, logoUrl];
     try {
       await databaseConnection.query(query, params, (err, dbRes) => {
-        if (dbRes.rows) {
-          return res.status(201).json({
-            status: 201,
-            data: dbRes.rows,
-          });
-        }
-        if (dbRes.rows > 0) {
+        if (dbRes.rows[0] > 0) {
           return res.status(409).json({
             status: 409,
             message: 'party already exist',
           });
         }
+        return res.status(201).json({
+          status: 201,
+          data: dbRes.rows,
+        });
       });
     } catch (err) {
       return res.status(500).json({
