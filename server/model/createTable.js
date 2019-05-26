@@ -30,22 +30,14 @@ CREATE TABLE party (
 id SERIAL primary key,
 name varchar (40) UNIQUE NOT NULL,
 hqAddress varchar (70) NOT NULL,
-logoUrl varchar (50) NOT NULL,
+logoUrl varchar (500) NOT NULL,
 registeredAt TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
 INSERT INTO party
 (name, hqAddress, logoUrl)
 VALUES
-('People Democratic Party (PDP)', '230 Badia Rd Abuja', 'power.jpg'),
-('Action Democratic Party (ADP)', '23 Aromire Rd Lagos', 'acdempa.jpg'),
-('African Democratic Congress (ADC)', '134 Ekulobia ORlu Rd Anambra', 'adc.jpg'),
-('African Action Congress (AAC)', '230 Badia Rd Abuja', 'african.jpg'),
-('All Peoples Party (APP)', '230 Badia Rd Abuja', 'people.jpg'),
-('Alliance for Democracy (AD)', '110 Ikoyi Crescent Abuja', 'alliance.jpg'),
-('Democratic Alternative (DA)', '90 Ensia Rd Rivers', 'democratic.jpg'),
-('Communist Party of Nigeria (CPN)', '230 Umuani Rd Rivers', 'communist.jpg'),
-('All Progressive Grand Alliance (APGA)', '234 Upper Iweka Rd Anambra', 'apga.jpg'),
-('All Progressive Congress (APC)', '298 Bourdillion  str EKo Lagos', 'apc.png');
+('People Democratic Party (PDP)', '230 Badia Rd Abuja', 'https://res.cloudinary.com/duzpmyphv/image/upload/v1549534542/PDP-logo.png'),
+('Action Democratic Party (ADP)', '23 Aromire Rd Lagos', 'https://res.cloudinary.com/duzpmyphv/image/upload/v1558910856/All_Progressives_Congress_logo.png');
 
 
 DROP TABLE IF EXISTS office CASCADE;

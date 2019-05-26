@@ -51,7 +51,7 @@ router.post('/office/:id/register',
 router.post('/votes', AuthenticateUser.verifyUser, Validate.validateCandidacy, VoteController.createVote);
 
 //  Handle all Get request
-router.get('/parties', AuthenticateUser.verifyUser, PartyController.getAllParty);
+router.get('/parties', PartyController.getAllParty);
 router.get('/parties/:id', AuthenticateUser.verifyUser, Validate.findById, PartyController.getPartyById);
 router.get('/offices', AuthenticateUser.verifyUser, OfficeController.getAllOffice);
 router.get('/offices/:id', AuthenticateUser.verifyUser, Validate.findById, OfficeController.getOfficeById);
