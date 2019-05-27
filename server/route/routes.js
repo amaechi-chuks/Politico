@@ -33,15 +33,15 @@ router.post('/offices',
   OfficeController.createOffice);
 
 router.post('/auth/signup',
-  // ValidateUser.validateProfileDetails,
-  // ValidateUser.validateExistingUser,
-  // ValidateUser.validateExistingNumber,
+  ValidateUser.validateProfileDetails,
+  ValidateUser.validateExistingUser,
+  ValidateUser.validateExistingNumber,
   UserController.registerUser);
 
 router.post('/auth/login', ValidateUser.validateLoginDetails,
   UserController.loginUser);
 
-router.post('/interest/:id', AuthenticateUser.verifyUser, InterestController.indicateInterest);
+router.post('/interest/:id', InterestController.indicateInterest);
 
 router.post('/office/:id/register',
   AuthenticateUser.verifyAdmin,
