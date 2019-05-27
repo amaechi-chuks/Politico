@@ -53,7 +53,7 @@ router.post('/votes', AuthenticateUser.verifyUser, Validate.validateCandidacy, V
 //  Handle all Get request
 router.get('/parties', PartyController.getAllParty);
 router.get('/parties/:id', AuthenticateUser.verifyUser, Validate.findById, PartyController.getPartyById);
-router.get('/offices', AuthenticateUser.verifyUser, OfficeController.getAllOffice);
+router.get('/offices', OfficeController.getAllOffice);
 router.get('/offices/:id', AuthenticateUser.verifyUser, Validate.findById, OfficeController.getOfficeById);
 router.get('/office/:id/result', AuthenticateUser.verifyUser, OfficeController.getOfficeResultById);
 router.get('/auth/user/:id', AuthenticateUser.verifyUser, UserController.fetchUser);
