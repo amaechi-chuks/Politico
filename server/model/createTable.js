@@ -59,7 +59,8 @@ VALUES
 
 DROP TABLE IF EXISTS interest CASCADE;
 CREATE TABLE interest (
-id int references users(id) PRIMARY KEY ,
+id serial primary key,
+candidate int references users(id),
 party int references party(id),
 office int references office(id),
 status boolean default false,

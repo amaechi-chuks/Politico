@@ -20,8 +20,9 @@ class InterestController {
     // const query1check = await HelperUtils.duplicateCandidateCheck(candidate);
     try {
       const query = `
-  INSERT INTO interest(id, office, party) VALUES($1, $2, $3) RETURNING *`;
+  INSERT INTO interest(candidate, office, party) VALUES($1, $2, $3) RETURNING *`;
       const params = [id, office, party];
+      console.log(params, 'params');
       const { rows } = await databaseConnection.query(query, params);
       return res.status(201).json({
         status: 201,
@@ -45,8 +46,14 @@ class InterestController {
    * @memberof fetchAllInterestedUsers
    */
   static async fetchAllInterestedUsers(req, res) {
-    const query = 'SELECT * FROM interest';
-    databaseConnection.query(query, (err, dbRes) => res.status(200).json({
+    const query = `select interest.id, interest.party, party.name as partyname, interest.office, office.name as officename, interest.candidate, users.firstname, users.lastname
+    from interest, party, office, users
+    where 
+    interest.party = party.id and
+    interest.office = office.id and
+    interest.candidate = users.id
+    group by interest.id, interest.party, party.name, interest.office, office.name, interest.candidate, users.firstname, users.lastname`;
+    await databaseConnection.query(query, (err, dbRes) => res.status(200).json({
       status: 200,
       data: dbRes.rows,
     }));

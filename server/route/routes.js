@@ -57,7 +57,7 @@ router.get('/offices', OfficeController.getAllOffice);
 router.get('/offices/:id', AuthenticateUser.verifyUser, Validate.findById, OfficeController.getOfficeById);
 router.get('/office/:id/result', AuthenticateUser.verifyUser, OfficeController.getOfficeResultById);
 router.get('/auth/user/:id', AuthenticateUser.verifyUser, UserController.fetchUser);
-router.get('/interest', AuthenticateUser.verifyUser, InterestController.fetchAllInterestedUsers);
+router.get('/interest', InterestController.fetchAllInterestedUsers);
 router.get('/interest/:id', AuthenticateUser.verifyUser, InterestController.fetchInterestedUserById);
 
 //  Handle all Patch request
