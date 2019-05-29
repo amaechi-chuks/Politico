@@ -37,9 +37,9 @@ class ValidateUser {
       error = 'You need to include a valid phone number';
     }
     if (!phoneNumber || phoneNumber.length < 5) {
-      error = 'phoneNumber must be digit lenght from 5 to 15';
+      error = 'Phonenumber must be digit length from 5 to 15';
     } if (!phoneNumber.trim() || phoneNumber === '') {
-      error = 'PhoneNumber must not be empty';
+      error = 'Phonenumber must not be empty';
     }
     if (!email || !validate.email.test(email)) {
       error = 'You need to include a valid email';
