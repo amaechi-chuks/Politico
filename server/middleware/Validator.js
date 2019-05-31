@@ -62,14 +62,6 @@ class Validate {
     if (!validate.name.test(name)) {
       error = `Invalid ${urlPath} name`;
     }
-    if (!name || name === undefined) {
-      error = `${urlPath} name must be specified`;
-    }
-    if (!name || name === ' ') {
-      error = `${urlPath} name must not be empty`;
-    } if (!name.trim().toLowerCase() || name === '') {
-      error = `${urlPath} must not be empty`;
-    }
     if (error) {
       return res.status(404).json({
         status: 404, error,
