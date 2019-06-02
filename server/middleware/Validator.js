@@ -113,8 +113,6 @@ class Validate {
     }
     if (!logoUrl || logoUrl === undefined) {
       error = 'Party Logo must be specified';
-    } if (!logoUrl.trim().toLowerCase() || logoUrl === '') {
-      error = 'logoUrl must not be empty';
     }
     if (error) {
       return res.status(400).json({
@@ -187,10 +185,33 @@ class Validate {
       values: [req.body.name],
     };
     return databaseConnection.query(query, (error, dbRes) => {
-      if (dbRes >= 1) {
+      if (dbRes.rows[0]) {
         return res.status(409).json({
           status: 409,
-          error: 'party name already existed',
+          error: 'party name already exist',
+        });
+      }
+      return next();
+    });
+  }
+
+  /**
+   * @method validateIfPartyLogoExist
+   * @description Validates already existing party
+   * @param {object} req - The Request Object
+   * @param {object} res - The Response Object
+   * @returns {object} JSON API Response
+   */
+  static validateIfPartyLogoExist(req, res, next) {
+    const query = {
+      text: 'SELECT * FROM party WHERE logourl = $1;',
+      values: [req.body.logoUrl],
+    };
+    return databaseConnection.query(query, (error, dbRes) => {
+      if (dbRes.rows[0]) {
+        return res.status(409).json({
+          status: 409,
+          error: 'party Logo already exist',
         });
       }
       return next();

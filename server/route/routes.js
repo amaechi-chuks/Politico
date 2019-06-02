@@ -15,8 +15,9 @@ const router = express.Router();
 
 // Handle all Post request
 router.post('/parties',
-  AuthenticateUser.verifyAdmin,
+  // AuthenticateUser.verifyAdmin,
   Validate.validateIfPartyExist,
+  Validate.validateIfPartyLogoExist,
   Validate.validateHqAddress,
   Validate.validateLogoUrl,
   Validate.validateName,
